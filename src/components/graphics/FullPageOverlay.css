@@ -1,0 +1,17 @@
+.top-FullPageOverlay {
+	position: fixed;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	opacity: 0.35;
+    mix-blend-mode: soft-light;
+}
+
+.top-FullPageOverlay .overlayImage {
+    height: 100vh;
+    width: 100%;
+    object-fit: cover;
+
+}

@@ -1,0 +1,47 @@
+{
+  "name": "vr_library_interface",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.17.1",
+    "jquery": "^3.2.1",
+    "js-cookie": "^2.2.0",
+    "react": "^16.1.1",
+    "react-bootstrap": "^0.31.5",
+    "react-dom": "^16.1.1",
+    "react-fontawesome": "^1.6.1",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.17",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
+    "three": "^0.86.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/petrovicstefanrs/vr_library_interface.git"
+  },
+  "keywords": [
+    "vr",
+    "react",
+    "library",
+    "reactvr",
+    "books"
+  ],
+  "author": "Stefan Petrovic",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/petrovicstefanrs/vr_library_interface/issues"
+  },
+  "homepage": "https://github.com/petrovicstefanrs/vr_library_interface#readme"
+}

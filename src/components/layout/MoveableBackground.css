@@ -1,0 +1,32 @@
+.top-MoveableBackground {
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
+}
+
+.top-MoveableBackground .backgroundImageMoveable {
+	position: absolute;
+    top: -30px;
+    left: -10%;
+    height: 115vh;
+    width: 120%;
+    object-fit: cover;
+}
+
+.top-MoveableBackground .floating {
+	animation-name: floating;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.top-MoveableBackground .tossing {
+	animation-name: tossing;
+	-webkit-animation-name: tossing;
+    -webkit-animation-duration: 3s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    animation-direction : alternate-reverse;
+    -webkit-animation-direction : alternate-reverse;
+}

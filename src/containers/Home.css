@@ -1,0 +1,110 @@
+.top-Home .background-Home {
+	z-index: -1;
+	width: 100vw;
+    height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+.top-Home .interactive-Home {
+	z-index: 0;
+	width: 100vw;
+    height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+.top-Home .interactive-Home .buttonLink {
+	color: white;
+	text-decoration: none;
+}
+
+.top-Home .interactive-Home .presentation-text {
+	color: white;
+	text-decoration: none;
+	position: absolute;
+	left: 50%;
+	width: 80%;
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 12px;
+	transform: translateX(-50%);
+	bottom: 110px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.top-Home .interactive-Home>.buttonLink>.top-IconButton {
+	bottom: 50px;
+	border-radius: 3px;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    width: 200px;
+    height: 40px;
+    left: 50%;
+    font-weight: 800;
+    font-size: 14px;
+    position: absolute;
+    transform: translateX(-50%);
+  	overflow: hidden;
+  	-webkit-transition-property: all;
+  	transition-property: all;
+    -webkit-transition-duration: .6s;
+    transition-duration: .6s;
+    -webkit-transition-timing-function: ease;
+  	transition-timing-function: ease;
+  	box-shadow: 0 0 0 rgba(255,255,255, 0.4);
+  	animation: pulse 2s infinite;
+}
+
+.top-Home .interactive-Home>.buttonLink>.top-IconButton:after {
+	background: #fff;
+	content: "";
+	height: 155px;
+	left: -75px;
+	opacity: .2;
+	position: absolute;
+	top: -50px;
+	-webkit-transform: rotate(35deg);
+	transform: rotate(35deg);
+	-webkit-transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+	transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+	width: 50px;
+	z-index: -10;
+}
+
+
+.top-Home .interactive-Home>.buttonLink>.top-IconButton:hover {
+	animation: none;
+}
+
+.top-Home .interactive-Home>.buttonLink>.top-IconButton:hover:after {
+	left: 120%;
+	-webkit-transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+	transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.top-Home .interactive-Home>.buttonLink>.top-IconButton:focus {
+	outline: 0;
+}
+
+.top-Home .rotatingStars {
+	z-index: 4;
+	position: absolute;
+	width: 400vw;
+	height: 400vh;
+	top: 50%;
+	left: 50%;
+	margin-top: -200vh;
+	margin-left: -200vw;
+	animation: spin 240s linear infinite;
+	background-size: 240px;
+	backface-visibility: visible;
+	background-image: url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI0MCAyNDAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDI0MCAyNDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxyZWN0IHg9IjEwNiIgeT0iOTAiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIyIiBoZWlnaHQ9IjIiLz48cmVjdCB4PSI3NCIgeT0iNjMiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiLz48cmVjdCB4PSIyMyIgeT0iNjYiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiLz48cmVjdCB4PSI1MCIgeT0iMTEwIiBmaWxsPSIjRkZGRkZGIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIi8+PHJlY3QgeD0iNjMiIHk9IjEyOCIgZmlsbD0iI0ZGRkZGRiIgd2lkdGg9IjEiIGhlaWdodD0iMSIvPjxyZWN0IHg9IjQ1IiB5PSIxNDkiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiLz48cmVjdCB4PSI5MiIgeT0iMTUxIiBmaWxsPSIjRkZGRkZGIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIi8+PHJlY3QgeD0iNTgiIHk9IjgiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiLz48cmVjdCB4PSIxNDciIHk9IjMzIiBmaWxsPSIjRkZGRkZGIiB3aWR0aD0iMiIgaGVpZ2h0PSIyIi8+PHJlY3QgeD0iOTEiIHk9IjQzIiBmaWxsPSIjRkZGRkZGIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIi8+PHJlY3QgeD0iMTY5IiB5PSIyOSIgZmlsbD0iI0ZGRkZGRiIgd2lkdGg9IjEiIGhlaWdodD0iMSIvPjxyZWN0IHg9IjE4MiIgeT0iMTkiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiLz48cmVjdCB4PSIxNjEiIHk9IjU5IiBmaWxsPSIjRkZGRkZGIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIi8+PHJlY3QgeD0iMTM4IiB5PSI5NSIgZmlsbD0iI0ZGRkZGRiIgd2lkdGg9IjEiIGhlaWdodD0iMSIvPjxyZWN0IHg9IjE5OSIgeT0iNzEiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIzIiBoZWlnaHQ9IjMiLz48cmVjdCB4PSIyMTMiIHk9IjE1MyIgZmlsbD0iI0ZGRkZGRiIgd2lkdGg9IjIiIGhlaWdodD0iMiIvPjxyZWN0IHg9IjEyOCIgeT0iMTYzIiBmaWxsPSIjRkZGRkZGIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIi8+PHJlY3QgeD0iMjA1IiB5PSIxNzQiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiLz48cmVjdCB4PSIxNTIiIHk9IjIwMCIgZmlsbD0iI0ZGRkZGRiIgd2lkdGg9IjEiIGhlaWdodD0iMSIvPjxyZWN0IHg9IjUyIiB5PSIyMTEiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIyIiBoZWlnaHQ9IjIiLz48cmVjdCB5PSIxOTEiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiLz48cmVjdCB4PSIxMTAiIHk9IjE4NCIgZmlsbD0iI0ZGRkZGRiIgd2lkdGg9IjEiIGhlaWdodD0iMSIvPjwvc3ZnPg==);
+}

@@ -1,0 +1,34 @@
+.top-MoveableLogo {
+	position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+
+    max-width: 550px;
+    min-width: 250px;
+
+    z-index: 1;
+}
+
+.top-MoveableLogo .logoImageMoveable {
+
+	width: 100%;
+}
+
+.top-MoveableLogo .floating {
+	animation-name: floating;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.top-MoveableLogo .tossing {
+	animation-name: tossing;
+	-webkit-animation-name: tossing;
+    -webkit-animation-duration: 4s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    animation-direction : alternate-reverse;
+    -webkit-animation-direction : alternate-reverse;
+}
