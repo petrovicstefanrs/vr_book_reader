@@ -1,35 +1,51 @@
 // Node Modules
 
-import React from 'react';
+import React, {Component} from 'react';
 import {Redirect, Route} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 // Enviroment Settings
 
 import * as routes from '../lib/routes';
+import {isLoggedIn} from '../redux/selectors/auth';
 
 // Component Code
 
-const AuthRoute = ({component, isPrivate, ...props}) => {
-  let isLoggedIn=false;
+class AuthRoute extends Component {
+  static propTypes = {
+    component: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func
+    ]),
+    isPrivate: PropTypes.bool
+  };
 
-  if (isLoggedIn) {
-    return isPrivate
-      ? <Route {...props} component={component} />
-      : <Redirect to={routes.DASHBOARD} />;
-  }
-  else {
-    return isPrivate
+  render() {
+    let {isPrivate, logedIn, component, ...props} = this.props;
+    let authRoute = null;
+
+    if (logedIn) {
+      authRoute = this.props.isPrivate
+        ? <Route {...props} component={this.props.component} />
+        : <Redirect to={routes.DASHBOARD_PROFILE} />;
+    }
+    else {
+      authRoute = this.props.isPrivate
         ? <Redirect to={routes.AUTH_LOGIN} />
-        : <Route {...props} component={component} />;
+        : <Route {...props} component={this.props.component} />;
+    }
+    return(
+      authRoute
+    );
   }
-};
+}
 
-export default AuthRoute;
+const mapStateToProps = state => ({
+  logedIn: isLoggedIn(state)
+});
 
-AuthRoute.propTypes = {
-  component: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.func
-  ])
-};
+const mapDispatchToProps = dispatch => ({
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(AuthRoute);

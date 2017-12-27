@@ -425,7 +425,6 @@ const FA = {
 	list_ol: 'list-ol',
 	list_ul: 'list-ul',
 	location_arrow: 'location-arrow',
-	lock: 'lock',
 	long_arrow_down: 'long-arrow-down',
 	long_arrow_left: 'long-arrow-left',
 	long_arrow_right: 'long-arrow-right',

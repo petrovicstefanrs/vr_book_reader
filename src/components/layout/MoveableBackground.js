@@ -17,7 +17,7 @@ class MoveableBackground extends Component {
 			<div className={CLASS}>
 				<div className="floating">
 					<div className="tossing">
-						<img className="backgroundImageMoveable" src={bgImage}/>
+						<img className="backgroundImageMoveable" src={bgImage} alt="Background"/>
 					</div>
 				</div>
 			</div>

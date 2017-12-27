@@ -13,7 +13,7 @@ class FullPageOverlay extends Component {
 	render() {
 		return (
 			<div className={CLASS}>
-				<img className="overlayImage" src={overlayImage}/>
+				<img className="overlayImage" src={overlayImage} alt=""/>
 			</div>
 		);
 	}

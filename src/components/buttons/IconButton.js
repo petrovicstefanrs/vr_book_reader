@@ -15,7 +15,9 @@ import './IconButton.css';
 // Component Code
 
 const toFa = (icon, spin, className) => {
-	return <FontAwesome className={className} key={icon} name={icon} spin={spin} />;
+	return icon
+		? (<FontAwesome className={className} key={icon} name={icon} spin={spin} />)
+		: null;
 };
 
 const IconButton = ({icon, className, children, spin, loading, disabled, ...props}) => {
@@ -40,7 +42,7 @@ const IconButton = ({icon, className, children, spin, loading, disabled, ...prop
 };
 
 IconButton.propTypes = {
-	icon: PropTypes.string.isRequired,
+	icon: PropTypes.string,
 	className: PropTypes.string,
 	spin: PropTypes.bool,
 	disabled: PropTypes.bool,

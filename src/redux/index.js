@@ -1,11 +1,9 @@
-// NODE MODULES
-
-import {combineReducers} from 'redux';
-
 // REDUCERS
 
 import application from './reducers/application';
-
+import auth from './reducers/auth';
+import menu from './reducers/menu';
+import {routerReducer} from 'react-router-redux';
 /**
  * Create Reducer Handlers
  * This is going to create a root reducer to apply to createStore function
@@ -14,7 +12,7 @@ import application from './reducers/application';
 const INITIAL_STATE = {};
 const HANDLERS = {};
 
-[application].forEach(handlers => {
+[routerReducer, application, auth, menu].forEach(handlers => {
 	if (handlers.INITIAL_STATE) {
 		Object.assign(INITIAL_STATE, handlers.INITIAL_STATE);
 		delete handlers.INITIAL_STATE;

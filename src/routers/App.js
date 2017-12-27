@@ -9,6 +9,7 @@ import {withRouter} from 'react-router';
 
 import * as routes from '../lib/routes';
 import {initialize} from '../redux/actions/application';
+import {isLoggedIn} from '../redux/selectors/auth';
 
 // Containers
 
@@ -16,36 +17,60 @@ import NotFound from '../containers/NotFound';
 import Home from '../containers/Home';
 import LogIn from '../containers/LogIn';
 import Register from '../containers/Register';
+import Profile from '../containers/Profile';
+import MainMenu from '../components/layout/MainMenu';
 
 // Components
 
 import AuthRoute from '../hoc/AuthRoute';
+import StretchableSpinner from '../containers/StretchableSpinner';
 
 const CLASS = 'top-App';
 
 class App extends Component {
-
 	constructor(props) {
 		super(props);
+
+		this.initializeApp = this.initializeApp.bind(this);
+		this.renderAppOrSpinner = this.renderAppOrSpinner.bind(this);
 	}
 
-  	render() {
-  		this.props.initialize();
-  		return (
-		  	<div className={CLASS}>
-		  		<Switch>
+	initializeApp() {
+		if (!this.props.initialized) {
+			this.props.initialize();
+		}
+	}
+
+	renderAppOrSpinner() {
+		return this.props.initialized
+			? (<Switch>
 				  	<AuthRoute exact name="Home" path={routes.HOME} component={Home}/>
 				  	<AuthRoute exact name="Login" path={routes.AUTH_LOGIN} component={LogIn}/>
 				  	<AuthRoute exact name="Register" path={routes.AUTH_REGISTER} component={Register}/>
-				    <AuthRoute name="Not found" path="*" component={NotFound}/>
-			    </Switch>
+				  	<AuthRoute exact name="Dashboard" path={routes.DASHBOARD_PROFILE} component={Profile} isPrivate={true}/>
+				    <AuthRoute name="Not found" path="*" component={NotFound} isPrivate={true}/>
+			    </Switch>)
+			: <StretchableSpinner/>;
+	}
+
+	renderMainMenu() {
+		return this.props.isLoggedIn ? <MainMenu/> : null;
+	}
+
+  	render() {
+  		this.initializeApp();
+  		return (
+		  	<div className={CLASS}>
+		  		{this.renderMainMenu()}
+		  		{this.renderAppOrSpinner()}
 			</div>
 		);
   	}
 }
 
 const mapStateToProps = state => ({
-	initialized: state.initialized
+	initialized: state.initialized && !state.loading,
+	isLoggedIn: isLoggedIn(state)
 });
 
 const mapDispatchToProps = dispatch => {

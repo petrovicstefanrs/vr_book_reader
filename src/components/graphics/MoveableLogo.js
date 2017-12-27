@@ -15,7 +15,7 @@ class MoveableLogo extends Component {
 			<div className={CLASS}>
 				<div className="floating">
 					<div className="tossing">
-						<img className="logoImageMoveable" src={logoImage}/>
+						<img className="logoImageMoveable" src={logoImage} alt="Logo"/>
 					</div>
 				</div>
 			</div>

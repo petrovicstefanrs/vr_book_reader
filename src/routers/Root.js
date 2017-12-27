@@ -6,8 +6,6 @@ import {BrowserRouter as Router} from 'react-router-dom';
 
 // Enviroment settings
 
-import * as routes from '../lib/routes';
-// import store from '../store';
 
 // Containers
 
@@ -17,18 +15,19 @@ import App from './App';
 
 // Init store
 
-import store from '../store';
+import {history, store} from '../store';
+
 
 class Root extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-          	<Router basename="/">
-        		<App />
-          	</Router>
-      </Provider>
-    );
-  }
+	render() {
+	    return (
+			<Provider store={store} history={history}>
+				<Router basename="/">
+					<App />
+				</Router>
+			</Provider>
+	    );
+  	}
 }
 
 export default Root;

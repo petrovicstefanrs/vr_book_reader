@@ -1,25 +1,37 @@
-import {combineReducers} from 'redux';
-
 import * as TYPES from '../types';
 
 const INITIAL_STATE = {
-	// We don't render anything until this is true
 	initialized: false,
-
-	// We show full screen error and user is forced to reload
 	fatalError: null,
-
-	// Used for testing
 	loading: false,
 };
 
-const initialized = (state) => {
+const initialize_start = (state) => {
 	return Object.assign({}, state, {
-		initialized: true
+		loading: true,
+		initialized: false,
+		fatalError: null
+	});
+};
+
+const initialize_err = (state, action) => {
+	return Object.assign({}, state, {
+		loading: true,
+		fatalError: action.error
+	});
+};
+
+const initialize_end = (state) => {
+	return Object.assign({}, state, {
+		loading: false,
+		initialized: true,
+		fatalError: null
 	});
 };
 
 export default {
 	INITIAL_STATE,
-	[TYPES.INITIALIZED]: initialized,
-}
+	[TYPES.INITIALIZE_START]: initialize_start,
+	[TYPES.INITIALIZE_END]: initialize_end,
+	[TYPES.INITIALIZE_ERROR]: initialize_err,
+};

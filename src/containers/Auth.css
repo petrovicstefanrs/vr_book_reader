@@ -89,6 +89,10 @@
     transition: all 0.5s ease-in;
 }
 
+.interactive-Auth .top-AuthForm>form>.messageAuth {
+    margin-top: 20px;
+}
+
 .interactive-Auth .top-AuthForm>form>.buttonSubmit:hover {
     background: #232323;
     color: white;
