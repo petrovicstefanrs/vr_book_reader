@@ -1,0 +1,8 @@
+.DropZone {
+	width: initial;
+	height: initial;
+    border-width: 0;
+    border-color: transparent;
+    border-style: none;
+    border-radius: 0;
+}

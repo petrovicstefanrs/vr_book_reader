@@ -62,6 +62,10 @@ class InputField extends Component {
 			controlType = 'number';
 			rows = this.props.rows || null;
 		}
+		else if (this.props.type === InputField.TYPES.file) {
+			controlType = 'file';
+			rows = this.props.rows || null;
+		}
 
 		const feedback = this.props.showFeedbackIcon ? <FormControl.Feedback /> : null;
 		const helpBlock = this.props.helpBlock ? <HelpBlock>{this.props.helpBlock}</HelpBlock> : null;
@@ -145,6 +149,7 @@ InputField.propTypes = {
 
 InputField.TYPES = {
 	text: 'text',
+	file: 'file',
 	password: 'password',
 	textarea: 'textarea',
 	number: 'number',

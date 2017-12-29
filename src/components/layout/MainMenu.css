@@ -33,8 +33,7 @@
 }
 
 .bm-menu-wrap {
-	background: #272727;
-	box-shadow: inset 0 0 150px 0px rgb(39, 39, 39);
+	background: #292933;
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -44,7 +43,7 @@
 
 /* Wrapper for item list */
 .bm-item-list {
-	color: #b8b7ad;
+	color: white;
 	width: 250px;
 }
 
@@ -134,9 +133,12 @@
 }
 
 .top-MainMenu .TopBar {
+	position: fixed;
+	top: 0;
+	left: 0;
 	height: 50px;
 	width: 100%;
-	background: #272727;
+	background: #292933;
 }
 
 .top-MainMenu .MenuBottom {

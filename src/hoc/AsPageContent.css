@@ -1,0 +1,11 @@
+.top-AsPageContent {
+	position: absolute;
+	top: 0;
+	left: 0;
+	box-sizing: border-box;
+	min-height: 100%;
+	padding: 0;
+	padding-top: 50px;
+	z-index: -1;
+	margin: 0;
+}
