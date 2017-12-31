@@ -1,10 +1,14 @@
 // Node Modules
 
 import React, {Component} from 'react';
-import {PageHeader, Alert} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-// import lodash from 'lodash';
+import FontAwesome from 'react-fontawesome';
+
+import Snackbar from 'material-ui/Snackbar';
+import Divider from 'material-ui/Divider';
+import Paper from 'material-ui/Paper';
+
 
 // Enviroment Settings
 
@@ -81,8 +85,16 @@ class Profile extends Component {
 
 	renderUserInfo() {
 		let userProfileImage = this.renderUserProfileImage();
+
+		const snackbarAction = (<FontAwesome icon={FA.times} name={FA.times}/>);
 		const profileErrorMessage = this.state.image_message
-			? (<Alert className="messageProfileImage" bsStyle={this.state.image_error ? "danger" : "warning"}>{this.state.image_message}</Alert>)
+			?	(<Snackbar
+	  				open={!!this.state.image_message}
+	  				action={snackbarAction}
+	  				onActionClick={() => this.setState({image_message: null})}
+	  				onRequestClose={() => this.setState({image_message: null})}
+	  				message={this.state.image_message || ""}
+	  				autoHideDuration={5000}/>)
 			: null;
 		let username = this.state.user.name;
 		let email = this.state.user.email;
@@ -117,7 +129,10 @@ class Profile extends Component {
 		return (
 			<AsPageContent>
 				<div className={CLASS}>
-					<PageHeader>Profile</PageHeader>
+					<div>
+						<h1>Profile</h1>
+						<Divider/>
+					</div>
 					{this.renderUserInfo()}
 				</div>
 			</AsPageContent>

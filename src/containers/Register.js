@@ -11,7 +11,6 @@ import * as routes from '../lib/routes';
 
 // Components
 
-import ContentHolder from '../components/layout/ContentHolder';
 import MoveableBackground from '../components/layout/MoveableBackground';
 import FullPageOverlay from '../components/graphics/FullPageOverlay';
 import IconButton from '../components/buttons/IconButton';
@@ -25,7 +24,7 @@ class Home extends Component {
 
   	render() {
     	return (
-    		<ContentHolder className={CLASS}>
+    		<div className={CLASS}>
                 <div className="content-Auth gradientToTransparent">
                     <div className="interactive-Auth">
                         <RegisterForm />
@@ -37,7 +36,7 @@ class Home extends Component {
 	    			<FullPageOverlay/>
 	    			<MoveableBackground/>
     			</div>
-    		</ContentHolder>
+    		</div>
     	);
   	}
 }

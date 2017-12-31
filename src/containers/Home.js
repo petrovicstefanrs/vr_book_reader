@@ -11,7 +11,6 @@ import * as routes from '../lib/routes';
 
 // Components
 
-import ContentHolder from '../components/layout/ContentHolder';
 import MoveableBackground from '../components/layout/MoveableBackground';
 import MoveableLogo from '../components/graphics/MoveableLogo';
 import FullPageOverlay from '../components/graphics/FullPageOverlay';
@@ -25,7 +24,7 @@ class Home extends Component {
 
   	render() {
     	return (
-    		<ContentHolder className={CLASS}>
+    		<div className={CLASS}>
     			<div className="interactive-Home">
     				<div className="presentation-text">
 	    				<span>Create your perfect reading atmosphere!</span>
@@ -39,7 +38,7 @@ class Home extends Component {
 	    			<MoveableLogo/>
 	    			<MoveableBackground/>
     			</div>
-    		</ContentHolder>
+    		</div>
     	);
   	}
 }
