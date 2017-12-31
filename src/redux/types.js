@@ -23,6 +23,7 @@ export const REGISTER_END = 'REGISTER_END';
 export const REGISTER_ERROR = 'REGISTER_ERROR';
 
 export const AUTH_GOT_SESSION = 'AUTH_GOT_SESSION';
+export const AUTH_CLEAR_MESSAGE = 'AUTH_CLEAR_MESSAGE';
 
 // MENU
 

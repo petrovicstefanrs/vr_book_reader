@@ -1,144 +1,7 @@
-/* Position and sizing of burger button */
-.bm-burger-button {
-    position: fixed;
-    font-size: 21px;
-    width: 24px;
-    height: 24px;
-    left: 20px;
-    top: 10px;
-    color: white;
-}
-
-/* Color/shape of burger icon bars */
-.bm-burger-bars {
-  	background: #373a47;
-}
-
-/* Position and sizing of clickable cross button */
-.bm-cross-button {
-  	height: 24px;
-  	width: 24px;
-}
-
-/* Color/shape of close button cross */
-.bm-cross {
-  	background: #bdc3c7;
-}
-
-/* General sidebar styles */
-.bm-menu {
-	font-size: 14px;
-	font-weight: 400;
-	text-transform: capitalize;
-}
-
-.bm-menu-wrap {
-	background: #292933;
-}
-
-/* Morph shape necessary with bubble or elastic */
-.bm-morph-shape {
-  	fill: #373a47;
-}
-
-/* Wrapper for item list */
-.bm-item-list {
-	color: white;
-	width: 250px;
-}
-
-/* Styling of overlay */
-.bm-overlay {
-	background: rgba(0, 0, 0, 0.3);
-}
-
-.bm-item-list li{
-	list-style: none;
-}
-
-.bm-item-list li a {
-	width: 100%;
-	height: 100%;
-	display: flex;
-	color: #aaa;
-	align-items: center;
-	justify-content: flex-start;
-    text-transform: capitalize;
-    transition: background 0.3s, box-shadow 0.3s;
-    box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2);
-}
-
-.bm-item-list li a:hover {
-	background: rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 -1px rgba(0, 0, 0, 0);
-    color: #fff;
-}
-
-.top-NavItemWithRouter {
-	width: 100%;
-	height: 50px;
-}
-
-.top-NavItemWithRouter.LogOutButton a {
-	box-shadow: inset 0 1px rgba(0, 0, 0, 0.2);
-}
-
 .top-NavItemWithRouter.active a{
 	background: rgba(0, 0, 0, 0.2);
     box-shadow: inset 0 -1px rgba(0, 0, 0, 0);
     color: #fff;
-}
-
-.top-MainMenu .ProfileDetails {
-	color: white;
-	height: 125px;
-	width: 250px;
-	box-sizing: border-box;
-	box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2);
-	background: rgba(0, 0, 0, 0.2);
-	display: flex !important;
-	align-items: center;
-	justify-content: space-between;
-	padding: 0 25px;
-}
-
-.top-MainMenu .ProfileDetails>.UserInfo {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	width: 100px;
-	height: 100px;
-}
-
-.top-MainMenu .ProfileDetails>.UserInfo>span {
-	white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.top-MainMenu .ProfileDetails>.UserInfo>.InfoEmail {
-	font-size: 10px;
-	font-weight: 400;
-	text-transform: lowercase;
-}
-
-.top-MainMenu .ProfileDetails>.top-ImageWithFallback {
-	background-color: white;
-	border-radius: 50%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 24px;
-	color: #373a47;
-}
-
-.top-MainMenu .TopBar {
-	position: fixed;
-	top: 0;
-	left: 0;
-	height: 50px;
-	width: 100%;
-	background: #292933;
 }
 
 .top-MainMenu .MenuBottom {
@@ -146,27 +9,25 @@
 	bottom: 0;
 	left: 0;
 	width: 100%;
-	box-shadow: inset 0 1px rgba(0, 0, 0, 0.2);
 }
 
-.top-MainMenu .MenuBottom .SocialButtons>a{
+.top-MainMenu .MenuBottom .MenuFooter>a{
 	transform: scale(0.7);
 	transition: all 0.5s;
 }
 
-.top-MainMenu .MenuBottom .SocialButtons>span{
+.top-MainMenu .MenuBottom .MenuFooter>span{
 	margin-right: 5px;
 }
 
-.top-MainMenu .MenuBottom .SocialButtons>a:hover{
+.top-MainMenu .MenuBottom .MenuFooter>a:hover{
 	transform: scale(0.9);
 }
 
-.top-MainMenu .MenuBottom .SocialButtons {
+.top-MainMenu .MenuBottom .MenuFooter {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-bottom: 10px;
-	margin-top: 10px;
+	padding: 10px 0;
 	text-transform: initial;
 }

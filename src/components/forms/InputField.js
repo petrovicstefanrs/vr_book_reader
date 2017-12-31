@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import * as lodash from 'lodash';
-import {FormGroup, ControlLabel, FormControl, HelpBlock, InputGroup} from 'react-bootstrap';
-import FontAwesome from 'react-fontawesome';
+import TextField from 'material-ui/TextField';
 import PropTypes from 'prop-types';
 
 class InputField extends Component {
@@ -10,11 +8,13 @@ class InputField extends Component {
 
 		this.state = {
 			id: props.id || ('text_input_' + Math.random()),
-			value: props.initialValue || ''
+			value: props.defaultValue || ''
 		};
+
+		this.onChange=this.onChange.bind(this);
 	}
 
-	handleChange(e) {
+	onChange(e) {
 		this.setState({
 			value: e.target.value
 		});
@@ -23,137 +23,50 @@ class InputField extends Component {
 		}
 	}
 
-	handleKeyDown(e) {
-		if (this.props.onKeyDown) {
-			this.props.onKeyDown(e);
-		}
-	}
-
-	getValidationState() {
-		let currentValue = this.state.value.toString();
-		if (this.props.validator) {
-			return this.props.validator(currentValue);
-		}
-
-		return null;
-	}
-
-	setInputValue(value = '') {
-		this.setState({value});
-
-		if (this.props.onChange) {
-			this.props.onChange(value, this.state.id);
-		}
-	}
-
 	render() {
-		let controlType = 'text';
-		let componentClass = 'input';
-		let rows = null;
-
+		let controlType = InputField.TYPES.text;
+		let isMultiline = "false";
+		let underlineShow = this.props.underlineShow || true;
 		if (this.props.type === InputField.TYPES.password) {
-			controlType = 'password';
+			controlType = InputField.TYPES.password;
 		}
-		else if (this.props.type === InputField.TYPES.textarea) {
-			componentClass = 'textarea';
-			rows = this.props.rows || null;
-		}
-		else if (this.props.type === InputField.TYPES.number) {
-			controlType = 'number';
-			rows = this.props.rows || null;
-		}
-		else if (this.props.type === InputField.TYPES.file) {
-			controlType = 'file';
-			rows = this.props.rows || null;
+		if (this.props.multiline) {
+			isMultiline = "true";
 		}
 
-		const feedback = this.props.showFeedbackIcon ? <FormControl.Feedback /> : null;
-		const helpBlock = this.props.helpBlock ? <HelpBlock>{this.props.helpBlock}</HelpBlock> : null;
-
-		let className = this.props.className || '';
-		if (this.props.hasError) {
-			className += ' has-error';
-		}
-
-		const childProps = {};
-		lodash.forEach(this.props, (prop, name) => {
-			if (!InputField.propTypes[name]) {
-				childProps[name] = prop;
-			}
-		});
-
-		const inputField = (
-			<FormControl
-				disabled={this.props.disabled}
-				name={this.state.id}
-				type={controlType}
-				rows={rows}
-				componentClass={componentClass}
-				value={this.state.value}
-				placeholder={this.props.placeholder}
-				onChange={e => this.handleChange(e)}
-				onKeyDown={e => this.handleKeyDown(e)}
-				{...childProps}/>
-		);
-
-		const inputFieldGroup = this.props.icon
-			? <InputGroup>
-					<InputGroup.Addon>{this.props.icon && <FontAwesome iey={this.props.icon} name={this.props.icon} />}</InputGroup.Addon>
-					{inputField}
-			  </InputGroup>
-			: {inputField};
-
-		const inputFieldLabel = this.props.label ? (<ControlLabel>{this.props.label}</ControlLabel>) : null;
 		return (
-			<FormGroup
-				controlId={this.state.id}
-				validationState={this.getValidationState()}
-				className={className}
-				bsSize={this.props.bsSize}>
-				{this.props.beforeElement}
-				{inputFieldLabel}
-				{inputFieldGroup}
-				{feedback}
-				{helpBlock}
-				{this.props.children}
-			</FormGroup>
+			<TextField
+				disabled={this.props.disabled}
+				id={this.state.id}
+				className={this.props.className}
+				type={controlType}
+				name={this.props.name || "InputField"}
+				onChange={this.onChange}
+				multiline={isMultiline}
+				floatingLabelText={this.props.floatingLabelText}
+				hintText={this.props.hintText}
+				underlineShow={underlineShow}/>
 		);
 	}
 }
 
 InputField.propTypes = {
+	floatingLabelText: PropTypes.string,
+	hintText: PropTypes.string,
+	underlineShow: PropTypes.bool,
+	multiline: PropTypes.bool,
 	onChange: PropTypes.func,
-	onKeyDown: PropTypes.func,
-	initialValue: PropTypes.oneOfType([
-		PropTypes.string,
-		PropTypes.number]),
+	name: PropTypes.string,
 	id: PropTypes.string,
-	validator: PropTypes.func,
-	label: PropTypes.oneOfType([
-		PropTypes.string,
-		PropTypes.element
-	]),
-	rows: PropTypes.number,
-	type: PropTypes.string,
-	showFeedbackIcon: PropTypes.bool,
-	placeholder: PropTypes.string,
-	helpBlock: PropTypes.oneOfType([
-		PropTypes.string,
-		PropTypes.object]),
+	type: PropTypes.string.isRequired,
 	className: PropTypes.string,
-	bsSize: PropTypes.string,
-	disabled: PropTypes.bool,
-	hasError: PropTypes.bool,
-	beforeElement: PropTypes.any
+	disabled: PropTypes.bool
 };
 
 InputField.TYPES = {
 	text: 'text',
-	file: 'file',
 	password: 'password',
 	textarea: 'textarea',
-	number: 'number',
-	email: 'email'
 };
 
 export default InputField;

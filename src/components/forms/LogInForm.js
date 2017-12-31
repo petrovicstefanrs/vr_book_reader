@@ -1,22 +1,26 @@
 // Node Modules
 
 import React, {Component} from 'react';
-import {Alert} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import FontAwesome from 'react-fontawesome';
+
+import Snackbar from 'material-ui/Snackbar';
+import {Card, CardActions, CardMedia} from 'material-ui/Card';
+import RaisedButton from 'material-ui/RaisedButton';
+import AppBar from 'material-ui/AppBar';
 
 // Enviroment settings
 
-import FA from '../../lib/font_awesome';
 import * as routes from '../../lib/routes';
-import {login} from "../../redux/actions/auth";
+import FA from '../../lib/font_awesome';
+import {login, clearAuthMessage} from "../../redux/actions/auth";
 
 // Containers
 
 // Components
 
-import IconButton from '../buttons/IconButton';
 import InputField from './InputField';
 
 // Component Code
@@ -38,6 +42,7 @@ class LogInForm extends Component {
 
 		this.submit = this.submit.bind(this);
 		this.canSubmit = this.canSubmit.bind(this);
+		this.handleMessageDone = this.handleMessageDone.bind(this);
 	}
 
 	canSubmit() {
@@ -48,36 +53,50 @@ class LogInForm extends Component {
 	 	this.props.login(this.state.email, this.state.password);
 	}
 
+	handleMessageDone() {
+		this.props.clearAuthMessage();
+	}
+
   	render() {
-  		const message = this.props.login_message
-  			? (<Alert className="messageAuth" bsStyle={this.props.error ? "danger" : "warning"}>{this.props.login_message}</Alert>)
-  			: null;
   		const disabled = !this.canSubmit();
+  		const snackbarAction = (<FontAwesome icon={FA.times} name={FA.times}/>);
   		return (
 		  	<div className={CLASS}>
-		  		<form>
-				    <InputField
-				    	id='userEmail'
-				    	type='email'
-				    	placeholder='Your email'
-				    	icon={FA.envelope}
-				    	onChange={ (val) => this.setState({email: val})}
-				    />
-				    <InputField
-				    	id='userPassword'
-				    	type='password'
-				    	placeholder='Your password'
-				    	icon={FA.lock}
-				    	onChange={ (val) => this.setState({password: val})}
-				    />
-				    <IconButton disabled={disabled} className="buttonSubmit" pullright="true" onClick={this.submit}>SIGN IN</IconButton>
-				    {message}
-				    <span className="separator"></span>
-				    <span className="formInfoText">
-				    	Don't have an account?<br/>
-				    	<Link className="buttonLink" to={routes.AUTH_REGISTER}>Sign Up</Link>
-				    </span>
-				</form>
+		  		<AppBar
+				    title="Sign in"
+				    showMenuIconButton={false}
+				    zDepth={3}
+				  />
+	  			<Card className="AuthCard">
+					<CardMedia className="AuthCardMedia">
+						<InputField
+					    	id='userEmail'
+					    	type='text'
+					    	floatingLabelText='Email'
+					    	onChange={(val) => this.setState({email: val})}
+					    />
+					    <InputField
+					    	id='userPassword'
+					    	type='password'
+					    	floatingLabelText='Password'
+					    	onChange={(val) => this.setState({password: val})}
+					    />
+					</CardMedia>
+					<CardActions>
+						<RaisedButton disabled={disabled} label={"SIGN IN"} primary={true} fullWidth={true} onClick={this.submit} />
+					    <span className="formInfoText">
+					    	Don't have an account?<br/>
+					    	<Link className="buttonLink" to={routes.AUTH_REGISTER}>Sign Up</Link>
+					    </span>
+					</CardActions>
+				</Card>
+				<Snackbar
+	  				open={!!this.props.login_message}
+	  				action={snackbarAction}
+	  				onActionClick={this.handleMessageDone}
+	  				onRequestClose={this.handleMessageDone}
+	  				message={this.props.login_message || ""}
+	  				autoHideDuration={5000}/>
 			</div>
 		);
   	}
@@ -85,12 +104,12 @@ class LogInForm extends Component {
 
 const mapStateToProps = state => ({
 	login_message: state.auth.message,
-	error: !!state.auth.error,
-	loading: state.auth.loading
+	error: !!state.auth.error
 });
 
 const mapDispatchToProps = dispatch => ({
-	login: (email, password) => dispatch(login(email, password))
+	login: (email, password) => dispatch(login(email, password)),
+	clearAuthMessage: () => dispatch(clearAuthMessage())
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(LogInForm);

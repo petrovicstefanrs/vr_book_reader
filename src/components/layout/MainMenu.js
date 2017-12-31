@@ -1,13 +1,15 @@
 // Node Modules
 
 import React, {Component} from 'react';
-import FontAwesome from 'react-fontawesome';
 import {connect} from 'react-redux';
-// import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import ShareButton from 'react-social-share-buttons';
-import {slide as Menu} from 'react-burger-menu';
 import lodash from 'lodash';
+
+import Drawer from 'material-ui/Drawer';
+import AppBar from 'material-ui/AppBar';
+import {List} from 'material-ui/List';
+import Divider from 'material-ui/Divider';
 
 // Enviroment Settings
 
@@ -17,22 +19,20 @@ import FA from '../../lib/font_awesome';
 import * as routes from '../../lib/routes';
 import {logout} from "../../redux/actions/auth";
 import {setMenuActive} from "../../redux/actions/menu";
-import {getUser} from "../../redux/selectors/users";
 
 // Components
 
 import NavItemWithRouter from './NavItemWithRouter';
-import ImageWithFallback from '../graphics/ImageWithFallback';
 
 // Component Code
 
 const CLASS = 'top-MainMenu';
 
 const MENU_ITEMS = {
-	// home: {route: routes.DASHBOARD, title: 'Home', icon: FA.home},
-	profile: {route: routes.DASHBOARD_PROFILE, title: 'Profile', icon: FA.user},
+	home: {route: routes.DASHBOARD_PROFILE, title: 'Home', icon: FA.home},
 	library: {route: routes.DASHBOARD_LIBRARY, title: 'Library', icon: FA.book},
-	favourites: {route: routes.DASHBOARD_FAVOURITES, title: 'Favourites', icon: FA.heart}
+	favourites: {route: routes.DASHBOARD_FAVOURITES, title: 'Favourites', icon: FA.heart},
+	profile: {route: routes.DASHBOARD_PROFILE, title: 'Profile', icon: FA.user},
 };
 
 class MainMenu extends Component {
@@ -53,41 +53,43 @@ class MainMenu extends Component {
 
 		this.state = {
 			user: props.user,
-			selected: props.selected
+			selected: props.selected,
+			open: false
 		};
 
 		this.logout = this.logout.bind(this);
-		this.renderUserInfo = this.renderUserInfo.bind(this);
 		this.renderMenuItems = this.renderMenuItems.bind(this);
 		this.onMenuItemClick = this.onMenuItemClick.bind(this);
+		this.handleToggle = this.handleToggle.bind(this);
+		this.handleClose = this.handleClose.bind(this);
 	}
+
+	handleToggle() {
+		this.setState({open: !this.state.open});
+	}
+
+  	handleClose() {
+  		this.setState({open: false});
+  	}
 
 	logout() {
 	 	this.props.logout();
 	}
 
-	renderUserInfo() {
-		let username = this.state.user.name || null;
-		let email = this.state.user.email || null;
-		let img = this.state.user.profile_img || null;
-
-		return (
-			<div className="ProfileDetails">
-				<ImageWithFallback image={img} width={75} height={75}/>
-				<div className="UserInfo">
-					<span className="InfoUsername">{username}</span>
-					<span className="InfoEmail">{email}</span>
-				</div>
-			</div>
-		);
+	onMenuItemClick(item) {
+		if (this.props.setMenuActive) {
+			this.props.setMenuActive(item);
+			this.handleClose();
+		}
+		return;
 	}
 
-	renderSocialButtons() {
+	renderMenuFooter() {
 		let fb_url = "";
 		let tw_url = "";
 		const shareText = 'Read all your favourite EBooks and Comics in VR.';
 		return (
-			<div className="SocialButtons">
+			<div className="MenuFooter">
 				<span>Share the love: </span>
 				<ShareButton
 	                compact
@@ -107,44 +109,54 @@ class MainMenu extends Component {
 		);
 	}
 
-	onMenuItemClick(item) {
-		if (this.props.setMenuActive) {
-			this.props.setMenuActive(item);
-		}
-		return;
-	}
-
 	renderMenuItems() {
 		return lodash.map(MENU_ITEMS, (item) => {
 			let active = this.props.selected === item.title ? 'active' : null;
-			return <NavItemWithRouter onClick={() => this.onMenuItemClick(item.title)} className={active} key={item.title} to={item.route} label={item.title} icon={item.icon}/>;
+			return <NavItemWithRouter
+						onClick={() => this.onMenuItemClick(item.title)}
+						className={active}
+						key={item.title}
+						to={item.route}
+						label={item.title}
+						icon={item.icon}/>;
 		});
 	}
 
 	render() {
-		let burgerIcon = (<FontAwesome icon={FA.bars} name={FA.bars}/>);
 		return (
 			<div className={CLASS}>
-				<Menu
+				<AppBar
+					onLeftIconButtonClick={this.handleToggle}/>
+				<Drawer
+					docked={false}
 					width={250}
-					customCrossIcon={false}
-					customBurgerIcon={burgerIcon}>
-					{this.renderUserInfo()}
-		        	{this.renderMenuItems()}
-			    	<div className="MenuBottom">
-						{this.renderSocialButtons()}
-		        		<NavItemWithRouter onClick={this.logout} className={"LogOutButton"} to={'/'} label={'Log out'} icon={FA.sign_out}/>
-			    	</div>
-			    </Menu>
-			    <div className="TopBar">
-			    </div>
+					open={this.state.open}
+					onRequestChange={(open) => this.setState({open})}>
+					<List>
+			        	{this.renderMenuItems()}
+					</List>
+		        	<Divider/>
+		        	<div className="MenuBottom">
+						<List>
+			        		<NavItemWithRouter
+			        			onClick={this.logout}
+			        			className="LogOutButton"
+			        			to={'/'}
+			        			label={'Log out'}
+			        			icon={FA.sign_out}/>
+						</List>
+						<Divider/>
+						<List>
+							{this.renderMenuFooter()}
+						</List>
+					</div>
+				</Drawer>
 			</div>
 		);
 	}
 }
 
 const mapStateToProps = state => ({
-	user: getUser(state),
 	selected: state.menu.selected
 });
 

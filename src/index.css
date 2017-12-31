@@ -1,11 +1,10 @@
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700');
-@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900');
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #292933;
 }
 
@@ -61,7 +60,7 @@ body {
 /*** Button Link ***/
 
 .buttonLink {
-	color: white;
+	color: #FC4482;
 	text-decoration: none;
 	background-color: transparent;
     font-size: 14px;

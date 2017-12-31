@@ -15,7 +15,7 @@ const NotFound = () => {
 	const homeLink = <Link to={routes.HOME}>Go back home</Link>;
 
 	return (
-			<div className="jumbotron top-NotFound">
+			<div className="top-NotFound">
 				<h1>404</h1>
 				<h3>Oops it seems there's nothing here</h3>
 				{homeLink}

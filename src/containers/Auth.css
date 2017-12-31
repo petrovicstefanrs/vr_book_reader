@@ -13,14 +13,12 @@
     width: 100%;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
 }
-.top-Auth .interactive-Auth, .info-Auth {
+.top-Auth .interactive-Auth{
     z-index: 0;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-grow: 1;
     min-height: 100vh;
@@ -40,99 +38,6 @@
     background-size: 240px;
     backface-visibility: visible;
     background-image: url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI0MCAyNDAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDI0MCAyNDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxyZWN0IHg9IjEwNiIgeT0iOTAiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIyIiBoZWlnaHQ9IjIiLz48cmVjdCB4PSI3NCIgeT0iNjMiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiLz48cmVjdCB4PSIyMyIgeT0iNjYiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiLz48cmVjdCB4PSI1MCIgeT0iMTEwIiBmaWxsPSIjRkZGRkZGIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIi8+PHJlY3QgeD0iNjMiIHk9IjEyOCIgZmlsbD0iI0ZGRkZGRiIgd2lkdGg9IjEiIGhlaWdodD0iMSIvPjxyZWN0IHg9IjQ1IiB5PSIxNDkiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiLz48cmVjdCB4PSI5MiIgeT0iMTUxIiBmaWxsPSIjRkZGRkZGIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIi8+PHJlY3QgeD0iNTgiIHk9IjgiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiLz48cmVjdCB4PSIxNDciIHk9IjMzIiBmaWxsPSIjRkZGRkZGIiB3aWR0aD0iMiIgaGVpZ2h0PSIyIi8+PHJlY3QgeD0iOTEiIHk9IjQzIiBmaWxsPSIjRkZGRkZGIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIi8+PHJlY3QgeD0iMTY5IiB5PSIyOSIgZmlsbD0iI0ZGRkZGRiIgd2lkdGg9IjEiIGhlaWdodD0iMSIvPjxyZWN0IHg9IjE4MiIgeT0iMTkiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiLz48cmVjdCB4PSIxNjEiIHk9IjU5IiBmaWxsPSIjRkZGRkZGIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIi8+PHJlY3QgeD0iMTM4IiB5PSI5NSIgZmlsbD0iI0ZGRkZGRiIgd2lkdGg9IjEiIGhlaWdodD0iMSIvPjxyZWN0IHg9IjE5OSIgeT0iNzEiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIzIiBoZWlnaHQ9IjMiLz48cmVjdCB4PSIyMTMiIHk9IjE1MyIgZmlsbD0iI0ZGRkZGRiIgd2lkdGg9IjIiIGhlaWdodD0iMiIvPjxyZWN0IHg9IjEyOCIgeT0iMTYzIiBmaWxsPSIjRkZGRkZGIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIi8+PHJlY3QgeD0iMjA1IiB5PSIxNzQiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiLz48cmVjdCB4PSIxNTIiIHk9IjIwMCIgZmlsbD0iI0ZGRkZGRiIgd2lkdGg9IjEiIGhlaWdodD0iMSIvPjxyZWN0IHg9IjUyIiB5PSIyMTEiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIyIiBoZWlnaHQ9IjIiLz48cmVjdCB5PSIxOTEiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiLz48cmVjdCB4PSIxMTAiIHk9IjE4NCIgZmlsbD0iI0ZGRkZGRiIgd2lkdGg9IjEiIGhlaWdodD0iMSIvPjwvc3ZnPg==);
-}
-
-.top-Auth .interactive-Auth .top-AuthForm {
-    padding: 30px;
-    margin: 30px;
-    margin-bottom: 80px;
-    color: black;
-    min-width: 200px;
-    max-width: 300px;
-    max-height: 500px;
-    background-color: white;
-    font-weight: 100;
-
-    -moz-box-shadow: 1px 1px 30px 2px rgba(39,39,39,1);
-    -webkit-box-shadow: 1px 1px 30px 2px rgba(39,39,39,1);
-    box-shadow: 1px 1px 30px 2px rgba(39,39,39,1);
-}
-
-.interactive-Auth .top-AuthForm>form>.separator {
-    height: 1px;
-    background-color: #d9d9d9;
-    width: 100%;
-    display: block;
-    margin-top: 30px;
-}
-
-.interactive-Auth .top-AuthForm>form>.formInfoText {
-    margin-top: 10px;
-    text-align: right;
-    color: #999999;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-.interactive-Auth .top-AuthForm>form>.formInfoText>a {
-    color: #232323;
-    text-decoration: none;
-}
-
-.interactive-Auth .top-AuthForm>form>.buttonSubmit {
-    border-radius: 3px;
-    border: 1px solid #232323;
-    width: 100%;
-    height: 40px;
-    color: #232323;
-    transition: all 0.5s ease-in;
-}
-
-.interactive-Auth .top-AuthForm>form>.messageAuth {
-    margin-top: 20px;
-}
-
-.interactive-Auth .top-AuthForm>form>.buttonSubmit:hover {
-    background: #232323;
-    color: white;
-}
-
-.interactive-Auth .top-AuthForm>form>.buttonSubmit:focus {
-    outline: none;
-}
-
-.interactive-Auth .top-AuthForm>form>.form-group {
-    margin-bottom: 30px;
-}
-
-.interactive-Auth .top-AuthForm>form>.form-group>.input-group {
-    width: 100%;
-    border: 1px solid #d9d9d9;
-    border-radius: 3px;
-    height: 40px;
-}
-
-.interactive-Auth .top-AuthForm>form>.form-group>label {
-    color: #d9d9d9;
-    font-weight: 100;
-}
-
-.interactive-Auth .top-AuthForm>form>.form-group>.input-group>.input-group-addon {
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    background-color: white;
-    color: black;
-    border: 0;
-    border-radius: 0;
-    border-right: 1px solid #d9d9d9;
-}
-
-.interactive-Auth .top-AuthForm>form>.form-group>.input-group>input {
-    border-radius: 0;
-    border: 0;
-    height: 100%;
 }
 
 /* Back Button */
@@ -195,7 +100,37 @@
     color: white;
 }
 
+/* Forms */
 
+.top-AuthForm {
+    padding-top: 64px;
+}
 
+.interactive-Auth .top-AuthForm>.AuthCard {
+    min-width: 200px;
+    max-width: 300px;
+    max-height: 500px;
+    padding: 16px;
+    border-top-right-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+}
 
+.interactive-Auth .top-AuthForm .AuthCardMedia {
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 32px;
+}
 
+.formInfoText {
+    margin-right: 0 !important;
+    margin: 16px 0 0 0;
+    font-size: 12px;
+    text-align: right;
+    display: block;
+}
+
+.formInfoText>.buttonLink {
+    font-size: 12px;
+}

@@ -1,7 +1,6 @@
 // Node Modules
 
 import React, {Component} from 'react';
-import {} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
 // Enviroment Settings

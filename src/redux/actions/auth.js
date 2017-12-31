@@ -48,6 +48,10 @@ export const register = (username, email, password) => (dispatch, getState, cont
 		});
 };
 
+export const clearAuthMessage = () => (dispatch, getState, container) => {
+	dispatch(withType(TYPES.AUTH_CLEAR_MESSAGE));
+};
+
 export const logout = () => (dispatch, getState, container) => {
 	dispatch(withType(TYPES.LOGOUT_START));
 	container.cookie.remove(ENV.api.session_cookie);

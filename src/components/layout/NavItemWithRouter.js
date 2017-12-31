@@ -5,6 +5,8 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 
+import MenuItem from 'material-ui/MenuItem';
+
 // Enviroment settings
 
 import './NavItemWithRouter.css';
@@ -19,10 +21,9 @@ const NavItemWithRouter = ({to, label, icon, onClick, className, ...props}) => {
 		? (<FontAwesome className={"NavItemIcon"} key={icon} name={icon}/>)
 		: null;
 	return (
-
-		<li className={CLASS+customClass}>
-			<Link onClick={onClick} to={to}>{linkIcon}{label}</Link>
-		</li>
+		<Link className={CLASS+customClass} onClick={onClick} to={to}>
+			<MenuItem primaryText={label} leftIcon={linkIcon}/>
+		</Link>
 	);
 };
 

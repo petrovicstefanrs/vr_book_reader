@@ -1,7 +1,7 @@
 // Node Modules
 
 import React, {Component} from 'react';
-import {Jumbotron} from 'react-bootstrap';
+import Paper from 'material-ui/Paper';
 // import PropTypes from 'prop-types';
 
 // Enviroment Settings
@@ -13,9 +13,9 @@ import './AsPageContent.css';
 class AsPageContent extends Component {
   render() {
     return(
-      <Jumbotron className="top-AsPageContent">
+      <Paper className="top-AsPageContent">
         {this.props.children}
-      </Jumbotron>
+      </Paper>
     );
   }
 }

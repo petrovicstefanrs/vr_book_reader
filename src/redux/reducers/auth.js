@@ -47,7 +47,6 @@ const loginEnd = (state, action) => {
 };
 
 const loginError = (state, action) => {
-
 	const message = action.data
 		? action.data.message
 		: action.error
@@ -162,6 +161,17 @@ const logoutEnd = (state) => {
 	return updateAuth(state, INITIAL_STATE.auth);
 };
 
+// MISC
+
+const clearMessage = (state) => {
+	const op = {
+		error: null,
+		message: null
+	};
+
+	return updateAuth(state, op);
+};
+
 
 export default {
 	INITIAL_STATE,
@@ -179,4 +189,5 @@ export default {
 
 	[TYPES.LOGOUT_START]: logoutStart,
 	[TYPES.LOGOUT_END]: logoutEnd,
+	[TYPES.AUTH_CLEAR_MESSAGE]: clearMessage,
 };

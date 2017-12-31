@@ -14,7 +14,7 @@ import FA from '../../lib/font_awesome';
 
 const CLASS = 'top-ImageWithFallback';
 
-const ImageWithFallback = ({image, alt, width, height, onClick, onMouseEnter, onMouseLeave}) => {
+const ImageWithFallback = ({image, alt, width, height}) => {
 	let style = {
 		minWidth: width,
 		minHeight: height,
@@ -26,7 +26,7 @@ const ImageWithFallback = ({image, alt, width, height, onClick, onMouseEnter, on
 		const src = image;
 		return (
 			<div style={style} className={`${CLASS} ${CLASS}-image-wrapper`}>
-				<img src={src} alt={alt} title={alt} onClick={onClick} onMouseEnter={onMouseEnter}/>
+				<img src={src} alt={alt} title={alt}/>
 			</div>
 		);
 	}
@@ -35,10 +35,7 @@ const ImageWithFallback = ({image, alt, width, height, onClick, onMouseEnter, on
 		<div
 			style={style}
 			className={`${CLASS} ${CLASS}-fallback`}
-			title={alt}
-			onClick={onClick}
-			onMouseEnter={onMouseEnter}
-			onMouseLeave={onMouseLeave}>
+			title={alt}>
 			<div className={`${CLASS}-fallback-wrapper`}>
 				<FontAwesome name={FA.image}/>
 			</div>
