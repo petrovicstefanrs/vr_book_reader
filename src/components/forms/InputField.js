@@ -25,13 +25,12 @@ class InputField extends Component {
 
 	render() {
 		let controlType = InputField.TYPES.text;
-		let isMultiline = "false";
-		let underlineShow = this.props.underlineShow || true;
+		let isMultiline = false;
 		if (this.props.type === InputField.TYPES.password) {
 			controlType = InputField.TYPES.password;
 		}
 		if (this.props.multiline) {
-			isMultiline = "true";
+			isMultiline = true;
 		}
 
 		return (
@@ -43,17 +42,13 @@ class InputField extends Component {
 				name={this.props.name || "InputField"}
 				onChange={this.onChange}
 				multiline={isMultiline}
-				floatingLabelText={this.props.floatingLabelText}
-				hintText={this.props.hintText}
-				underlineShow={underlineShow}/>
+				label={this.props.label}/>
 		);
 	}
 }
 
 InputField.propTypes = {
-	floatingLabelText: PropTypes.string,
-	hintText: PropTypes.string,
-	underlineShow: PropTypes.bool,
+	label: PropTypes.string,
 	multiline: PropTypes.bool,
 	onChange: PropTypes.func,
 	name: PropTypes.string,

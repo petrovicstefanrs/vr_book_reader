@@ -3,10 +3,11 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
+import Button from 'material-ui/Button';
+
 // Enviroment Settings
 
 import './Home.css';
-import FA from '../lib/font_awesome';
 import * as routes from '../lib/routes';
 
 // Components
@@ -14,23 +15,21 @@ import * as routes from '../lib/routes';
 import MoveableBackground from '../components/layout/MoveableBackground';
 import MoveableLogo from '../components/graphics/MoveableLogo';
 import FullPageOverlay from '../components/graphics/FullPageOverlay';
-import IconButton from '../components/buttons/IconButton';
 
 // Component Code
 
 const CLASS = 'top-Home';
 
 class Home extends Component {
-
   	render() {
     	return (
     		<div className={CLASS}>
-    			<div className="interactive-Home">
+    			<div className="interactive-Home gradientToTransparent">
     				<div className="presentation-text">
 	    				<span>Create your perfect reading atmosphere!</span>
 	    				<span>Read your eBooks inside beautifull VR Enviroments</span>
     				</div>
-    				<Link className="buttonLink" to={routes.AUTH_LOGIN}><IconButton icon={FA.arrow_right} pullright="true">DIVE IN</IconButton></Link>
+                    <Link to={routes.AUTH_LOGIN}><Button className="homeButton" raised color="primary"> DIVE IN </Button></Link>
     			</div>
     			<div className="background-Home">
     				<div className="rotatingStars"></div>

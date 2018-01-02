@@ -7,9 +7,10 @@ import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 
 import Snackbar from 'material-ui/Snackbar';
-import {Card, CardActions, CardMedia} from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
-import AppBar from 'material-ui/AppBar';
+import Card, {CardActions, CardContent, CardHeader} from 'material-ui/Card';
+import { withStyles } from 'material-ui/styles';
+import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
 
 // Enviroment settings
 
@@ -27,9 +28,35 @@ import InputField from './InputField';
 
 const CLASS = 'top-AuthForm';
 
+const styles = theme => ({
+	card: {
+		width: '256px'
+	},
+	cardContent: {
+		display: 'flex',
+		flexDirection: 'column',
+		marginBottom: '16px'
+	},
+	inputField: {
+		marginTop: '16px'
+	},
+	cardHeader: {
+		backgroundColor: theme.palette.primary[500]
+	},
+	cardFooter: {
+		flexDirection: 'column',
+		height: 'auto',
+		alignItems: 'initial'
+	},
+	whiteText: {
+		color: 'white'
+	}
+});
+
 class LogInForm extends Component {
 	static propTypes = {
-		login: PropTypes.func.isRequired
+		login: PropTypes.func.isRequired,
+		classes: PropTypes.object.isRequired,
 	};
 
 	constructor(props) {
@@ -58,43 +85,62 @@ class LogInForm extends Component {
 	}
 
   	render() {
+  		const classes = this.props.classes;
   		const disabled = !this.canSubmit();
-  		const snackbarAction = (<FontAwesome icon={FA.times} name={FA.times}/>);
+  		const snackbarAction = (
+  			<Button color="accent" onClick={this.handleMessageDone}>
+  				<FontAwesome icon={FA.times} name={FA.times}/>
+  			</Button>
+  		);
+
   		return (
 		  	<div className={CLASS}>
-		  		<AppBar
-				    title="Sign in"
-				    showMenuIconButton={false}
-				    zDepth={3}
-				  />
-	  			<Card className="AuthCard">
-					<CardMedia className="AuthCardMedia">
+	  			<Card className={classes.card}>
+	  				<CardHeader
+	  					className={classes.cardHeader}
+	  					title="Sign In"
+	  					subheader="Welcome back"
+	  					classes={{
+	  						title: classes.whiteText,
+	  						subheader: classes.whiteText
+	  					}}
+	  					/>
+					<CardContent className={classes.cardContent}>
 						<InputField
 					    	id='userEmail'
 					    	type='text'
-					    	floatingLabelText='Email'
+					    	label='Email'
 					    	onChange={(val) => this.setState({email: val})}
 					    />
 					    <InputField
+					    	className={classes.inputField}
 					    	id='userPassword'
 					    	type='password'
-					    	floatingLabelText='Password'
+					    	label='Password'
 					    	onChange={(val) => this.setState({password: val})}
 					    />
-					</CardMedia>
-					<CardActions>
-						<RaisedButton disabled={disabled} label={"SIGN IN"} primary={true} fullWidth={true} onClick={this.submit} />
-					    <span className="formInfoText">
+					</CardContent>
+					<CardActions className={classes.cardFooter}>
+						<Button raised disabled={disabled} color="primary" onClick={this.submit}>
+							SIGN IN
+						</Button>
+					    <Typography
+					    	style={{
+					    		padding: '8px 0',
+					    		textAlign: 'right'
+					    	}}
+					    	type="subheading">
 					    	Don't have an account?<br/>
-					    	<Link className="buttonLink" to={routes.AUTH_REGISTER}>Sign Up</Link>
-					    </span>
+					    	<Link to={routes.AUTH_REGISTER}>Sign Up</Link>
+					    </Typography>
 					</CardActions>
 				</Card>
+
 				<Snackbar
+					anchorOrigin={{ vertical: 'bottom', 'horizontal': 'right' }}
 	  				open={!!this.props.login_message}
 	  				action={snackbarAction}
-	  				onActionClick={this.handleMessageDone}
-	  				onRequestClose={this.handleMessageDone}
+	  				onClose={this.handleMessageDone}
 	  				message={this.props.login_message || ""}
 	  				autoHideDuration={5000}/>
 			</div>
@@ -112,4 +158,4 @@ const mapDispatchToProps = dispatch => ({
 	clearAuthMessage: () => dispatch(clearAuthMessage())
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(LogInForm);
+export default withStyles(styles)(connect(mapStateToProps,mapDispatchToProps)(LogInForm));

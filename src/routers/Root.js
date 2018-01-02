@@ -3,9 +3,7 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
 import {BrowserRouter as Router} from 'react-router-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 // Enviroment settings
 
 
@@ -19,19 +17,14 @@ import App from './App';
 
 import {history, store} from '../store';
 
-const muiTheme = getMuiTheme({
-    "palette": {
-        "primary1Color": "#673ab7",
-        "primary2Color": "#512da8",
-        "pickerHeaderColor": "#673ab7"
-    }
+const muiTheme = createMuiTheme({
 });
 
 class Root extends Component {
 	render() {
 	    return (
 			<Provider store={store} history={history}>
-				<MuiThemeProvider muiTheme={muiTheme}>
+				<MuiThemeProvider theme={muiTheme}>
 					<Router basename="/">
 						<App />
 					</Router>

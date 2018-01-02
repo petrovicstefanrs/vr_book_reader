@@ -28,7 +28,7 @@ class AuthRoute extends Component {
     if (logedIn) {
       authRoute = this.props.isPrivate
         ? <Route {...props} component={this.props.component} />
-        : <Redirect to={routes.DASHBOARD_PROFILE} />;
+        : <Redirect to={routes.DASHBOARD_HOME} />;
     }
     else {
       authRoute = this.props.isPrivate

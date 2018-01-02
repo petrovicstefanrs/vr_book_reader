@@ -2,6 +2,11 @@
 
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import FontAwesome from 'react-fontawesome';
+import PropTypes from 'prop-types';
+
+import Button from 'material-ui/Button';
+import { withStyles } from 'material-ui/styles';
 
 // Enviroment Settings
 
@@ -13,22 +18,38 @@ import * as routes from '../lib/routes';
 
 import MoveableBackground from '../components/layout/MoveableBackground';
 import FullPageOverlay from '../components/graphics/FullPageOverlay';
-import IconButton from '../components/buttons/IconButton';
 import RegisterForm from '../components/forms/RegisterForm';
 
 // Component Code
 
 const CLASS = 'top-Auth';
 
+const styles = theme => ({
+    leftIcon: {
+        marginRight: theme.spacing.unit,
+    }
+});
+
 class Home extends Component {
 
+    static propTypes = {
+        classes: PropTypes.object.isRequired,
+    };
+
   	render() {
+        const classes = this.props.classes;
+
     	return (
     		<div className={CLASS}>
                 <div className="content-Auth gradientToTransparent">
                     <div className="interactive-Auth">
                         <RegisterForm />
-                        <Link className="buttonLink" to={routes.HOME}><IconButton icon={FA.home} className="authBackButton" pullright="true">Travel Home</IconButton></Link>
+                        <Link to={routes.HOME}>
+                            <Button className="homeButton" raised color="primary">
+                                <FontAwesome className={classes.leftIcon} icon={FA.home} name={FA.home} />
+                                Travel Home
+                            </Button>
+                        </Link>
                     </div>
                 </div>
     			<div className="background-Auth">
@@ -41,4 +62,4 @@ class Home extends Component {
   	}
 }
 
-export default Home;
+export default withStyles(styles)(Home);

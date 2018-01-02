@@ -1,7 +1,7 @@
 // Node Modules
 
 import React, {Component} from 'react';
-import RefreshIndicator from 'material-ui/RefreshIndicator';
+import {CircularProgress} from 'material-ui/Progress';
 
 // Enviroment settings
 
@@ -28,7 +28,7 @@ class StretchableSpinner extends Component {
   render() {
     return (
 		<div style={style.container}>
-			<RefreshIndicator
+			<CircularProgress
 				size={100}
 				left={0}
 				top={0}

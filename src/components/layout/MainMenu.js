@@ -3,13 +3,18 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import ShareButton from 'react-social-share-buttons';
+import {Link} from 'react-router-dom';
 import lodash from 'lodash';
+import FontAwesome from 'react-fontawesome';
+import classNames from 'classnames';
 
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
-import {List} from 'material-ui/List';
+import Toolbar from 'material-ui/Toolbar';
+import List, {ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
+import IconButton from 'material-ui/IconButton';
+import { withStyles } from 'material-ui/styles';
 
 // Enviroment Settings
 
@@ -22,17 +27,85 @@ import {setMenuActive} from "../../redux/actions/menu";
 
 // Components
 
-import NavItemWithRouter from './NavItemWithRouter';
 
 // Component Code
 
 const CLASS = 'top-MainMenu';
 
+const drawerWidth = 256;
+
+const styles = theme => ({
+	drawerInner: {
+	    width: drawerWidth,
+	},
+	drawerHeader: {
+	    display: 'flex',
+	    alignItems: 'center',
+	    justifyContent: 'flex-end',
+	    padding: '0 8px',
+	    ...theme.mixins.toolbar,
+	},
+	hide: {
+	    display: 'none',
+	},
+	appBar: {
+	    position: 'absolute',
+	    zIndex: theme.zIndex.drawer + 1,
+	    transition: theme.transitions.create(['width', 'margin'], {
+			easing: theme.transitions.easing.sharp,
+			duration: theme.transitions.duration.leavingScreen,
+	    }),
+	},
+	appBarShift: {
+	    marginLeft: drawerWidth,
+	    width: `calc(100% - ${drawerWidth}px)`,
+	    transition: theme.transitions.create(['width', 'margin'], {
+			easing: theme.transitions.easing.sharp,
+			duration: theme.transitions.duration.enteringScreen,
+	    }),
+	},
+	menuButton: {
+	    marginLeft: 6,
+	    marginRight: 32,
+	},
+	menuIcon:{
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	drawerPaper: {
+	    position: 'relative',
+	    overflowX: 'hidden',
+	    minHeight: '100%',
+	    width: drawerWidth,
+	    transition: theme.transitions.create('width', {
+			easing: theme.transitions.easing.sharp,
+			duration: theme.transitions.duration.enteringScreen,
+	    }),
+	},
+	drawerPaperClose: {
+	    width: 58,
+	    overflowX: 'hidden',
+	    transition: theme.transitions.create('width', {
+			easing: theme.transitions.easing.sharp,
+			duration: theme.transitions.duration.leavingScreen,
+	    }),
+	},
+	menuFooter: {
+		bottom: 0,
+		position: 'absolute',
+		width: drawerWidth
+	},
+	activeItem: {
+		backgroundColor: theme.palette.common.faintBlack
+	}
+});
+
 const MENU_ITEMS = {
-	home: {route: routes.DASHBOARD_PROFILE, title: 'Home', icon: FA.home},
+	home: {route: routes.DASHBOARD_HOME, title: 'Home', icon: FA.home},
 	library: {route: routes.DASHBOARD_LIBRARY, title: 'Library', icon: FA.book},
 	favourites: {route: routes.DASHBOARD_FAVOURITES, title: 'Favourites', icon: FA.heart},
-	profile: {route: routes.DASHBOARD_PROFILE, title: 'Profile', icon: FA.user},
+	profile: {route: routes.DASHBOARD_SETTINGS, title: 'Profile', icon: FA.cog},
 };
 
 class MainMenu extends Component {
@@ -60,16 +133,16 @@ class MainMenu extends Component {
 		this.logout = this.logout.bind(this);
 		this.renderMenuItems = this.renderMenuItems.bind(this);
 		this.onMenuItemClick = this.onMenuItemClick.bind(this);
-		this.handleToggle = this.handleToggle.bind(this);
-		this.handleClose = this.handleClose.bind(this);
+		this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
+		this.handleDrawerClose = this.handleDrawerClose.bind(this);
 	}
 
-	handleToggle() {
-		this.setState({open: !this.state.open});
+	handleDrawerOpen() {
+    	this.setState({ open: true });
 	}
 
-  	handleClose() {
-  		this.setState({open: false});
+  	handleDrawerClose() {
+    	this.setState({ open: false });
   	}
 
 	logout() {
@@ -79,77 +152,76 @@ class MainMenu extends Component {
 	onMenuItemClick(item) {
 		if (this.props.setMenuActive) {
 			this.props.setMenuActive(item);
-			this.handleClose();
+			this.handleDrawerClose();
 		}
 		return;
 	}
 
-	renderMenuFooter() {
-		let fb_url = "";
-		let tw_url = "";
-		const shareText = 'Read all your favourite EBooks and Comics in VR.';
-		return (
-			<div className="MenuFooter">
-				<span>Share the love: </span>
-				<ShareButton
-	                compact
-	                socialMedia={'facebook'}
-	                url={fb_url}
-	                media={"https://imgs.xkcd.com/comics/error_code.png"}
-	                text={shareText}
-	            />
-	            <ShareButton
-	                compact
-	                socialMedia={'twitter'}
-	                url={tw_url}
-	                media={"https://imgs.xkcd.com/comics/error_code.png"}
-	                text={shareText}
-	            />
-			</div>
-		);
-	}
-
 	renderMenuItems() {
+		const classes = this.props.classes;
 		return lodash.map(MENU_ITEMS, (item) => {
 			let active = this.props.selected === item.title ? 'active' : null;
-			return <NavItemWithRouter
+			return (<Link to={item.route} key={item.title}>
+						<ListItem
+						button
 						onClick={() => this.onMenuItemClick(item.title)}
-						className={active}
-						key={item.title}
-						to={item.route}
-						label={item.title}
-						icon={item.icon}/>;
+						className={active && classes.activeItem}>
+							<ListItemIcon className={classes.menuIcon}>
+								<FontAwesome icon={item.icon} name={item.icon} />
+							</ListItemIcon>
+							<ListItemText primary={item.title} />
+						</ListItem>
+					</Link>);
 		});
 	}
 
 	render() {
+		const classes = this.props.classes;
 		return (
 			<div className={CLASS}>
 				<AppBar
-					onLeftIconButtonClick={this.handleToggle}/>
+					elevation={3}
+					className={classNames(classes.appBar, this.state.open && classes.appBarShift)}>
+
+					<Toolbar disableGutters={!this.state.open}>
+						<IconButton
+							color="contrast"
+							className={classNames(classes.menuButton, this.state.open && classes.hide)}
+							onClick={this.handleDrawerOpen}>
+							<FontAwesome icon={FA.bars} name={FA.bars} />
+						</IconButton>
+					</Toolbar>
+				</AppBar>
 				<Drawer
-					docked={false}
-					width={250}
-					open={this.state.open}
-					onRequestChange={(open) => this.setState({open})}>
-					<List>
-			        	{this.renderMenuItems()}
-					</List>
-		        	<Divider/>
-		        	<div className="MenuBottom">
-						<List>
-			        		<NavItemWithRouter
-			        			onClick={this.logout}
-			        			className="LogOutButton"
-			        			to={'/'}
-			        			label={'Log out'}
-			        			icon={FA.sign_out}/>
-						</List>
+					type="permanent"
+					classes={{
+						paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+		            }}
+		            open={this.state.open}>
+
+		            <div className={classes.drawerInner}>
+		            	<div className={classes.drawerHeader}>
+							<IconButton onClick={this.handleDrawerClose}>
+								<FontAwesome icon={FA.chevron_left} name={FA.chevron_left} />
+							</IconButton>
+						</div>
 						<Divider/>
 						<List>
-							{this.renderMenuFooter()}
+				        	{this.renderMenuItems()}
 						</List>
-					</div>
+			        	<Divider/>
+						<List className={classes.menuFooter}>
+							<Divider style={{marginBottom: 8}}/>
+							<ListItem
+								button
+								onClick={this.logout}>
+								<ListItemIcon className={classes.menuIcon}>
+									<FontAwesome icon={FA.sign_out} name={FA.sign_out} />
+								</ListItemIcon>
+								<ListItemText primary="Log out" />
+							</ListItem>
+						</List>
+		            </div>
 				</Drawer>
 			</div>
 		);
@@ -165,4 +237,4 @@ const mapDispatchToProps = dispatch => ({
 	setMenuActive: (item) => dispatch(setMenuActive(item))
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(MainMenu);
+export default withStyles(styles, { withTheme: true })(connect(mapStateToProps,mapDispatchToProps)(MainMenu));

@@ -7,9 +7,10 @@ import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 
 import Snackbar from 'material-ui/Snackbar';
-import {Card, CardActions, CardMedia} from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
-import AppBar from 'material-ui/AppBar';
+import Card, {CardActions, CardContent, CardHeader} from 'material-ui/Card';
+import { withStyles } from 'material-ui/styles';
+import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
 
 // Enviroment settings
 
@@ -26,6 +27,31 @@ import InputField from './InputField';
 // Component Code
 
 const CLASS = 'top-AuthForm';
+
+const styles = theme => ({
+	card: {
+		width: '256px'
+	},
+	cardContent: {
+		display: 'flex',
+		flexDirection: 'column',
+		marginBottom: '16px'
+	},
+	inputField: {
+		marginTop: '16px'
+	},
+	cardHeader: {
+		backgroundColor: theme.palette.primary[500]
+	},
+	cardFooter: {
+		flexDirection: 'column',
+		height: 'auto',
+		alignItems: 'initial'
+	},
+	whiteText: {
+		color: 'white'
+	}
+});
 
 class RegisterForm extends Component {
 	static propTypes = {
@@ -59,49 +85,68 @@ class RegisterForm extends Component {
 	}
 
   	render() {
+  		const classes = this.props.classes;
   		const disabled = !this.canSubmit();
-  		const snackbarAction = (<FontAwesome icon={FA.times} name={FA.times}/>);
+  		const snackbarAction = (
+  			<Button color="accent" onClick={this.handleMessageDone}>
+  				<FontAwesome icon={FA.times} name={FA.times}/>
+  			</Button>
+  		);
+
   		return (
 		  	<div className={CLASS}>
-		  		<AppBar
-				    title="Sign up"
-				    showMenuIconButton={false}
-				    zDepth={3}
-				  />
-				<Card className="AuthCard">
-					<CardMedia className="AuthCardMedia">
+				<Card className={classes.card}>
+					<CardHeader
+						className={classes.cardHeader}
+						title="Sign Up"
+	  					subheader="Well Hello There!"
+	  					classes={{
+	  						title: classes.whiteText,
+	  						subheader: classes.whiteText
+	  					}}>
+					</CardHeader>
+					<CardContent className={classes.cardContent}>
 					    <InputField
 					    	id='userName'
 					    	type='text'
-					    	floatingLabelText='Username'
+					    	label='Username'
 					    	onChange={ (val) => this.setState({username: val})}
 					    />
 					    <InputField
+					    	className={classes.inputField}
 					    	id='userEmail'
 					    	type='email'
-					    	floatingLabelText='Email'
+					    	label='Email'
 					    	onChange={ (val) => this.setState({email: val})}
 					    />
 					    <InputField
+					    	className={classes.inputField}
 					    	id='userPassword'
 					    	type='password'
-					    	floatingLabelText='Password'
+					    	label='Password'
 					    	onChange={ (val) => this.setState({password: val})}
 					    />
-					</CardMedia>
-					<CardActions>
-						<RaisedButton disabled={disabled} label={"SIGN UP"} primary={true} fullWidth={true} onClick={this.submit} />
-					    <span className="formInfoText">
+					</CardContent>
+					<CardActions className={classes.cardFooter}>
+						<Button raised disabled={disabled} color="primary" onClick={this.submit}>
+							SIGN UP
+						</Button>
+					    <Typography
+					    	style={{
+					    		padding: '8px 0',
+					    		textAlign: 'right'
+					    	}}
+					    	type="subheading">
 					    	Already have an account?<br/>
 					    	<Link className="buttonLink" to={routes.AUTH_LOGIN}>Sign In</Link>
-					    </span>
+					    </Typography>
 					</CardActions>
 				</Card>
 				<Snackbar
+					anchorOrigin={{ vertical: 'bottom', 'horizontal': 'right' }}
 	  				open={!!this.props.register_message}
 	  				action={snackbarAction}
-	  				onActionClick={this.handleMessageDone}
-	  				onRequestClose={this.handleMessageDone}
+	  				onClose={this.handleMessageDone}
 	  				message={this.props.register_message || ""}
 	  				autoHideDuration={5000}/>
 			</div>
@@ -119,4 +164,4 @@ const mapDispatchToProps = dispatch => ({
 	clearAuthMessage: () => dispatch(clearAuthMessage())
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(RegisterForm);
+export default withStyles(styles)(connect(mapStateToProps,mapDispatchToProps)(RegisterForm));

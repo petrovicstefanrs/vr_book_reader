@@ -3,15 +3,12 @@
     top: 30%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-
-    max-width: 550px;
-    min-width: 250px;
-
+    max-width: 400px;
+    min-width: 100px;
     z-index: 1;
 }
 
 .top-MoveableLogo .logoImageMoveable {
-
 	width: 100%;
 }
 
