@@ -41,7 +41,7 @@ const styles = theme => ({
 		marginTop: '16px'
 	},
 	cardHeader: {
-		backgroundColor: theme.palette.primary[500]
+		backgroundColor: theme.palette.primary.main
 	},
 	cardFooter: {
 		flexDirection: 'column',
@@ -49,7 +49,7 @@ const styles = theme => ({
 		alignItems: 'initial'
 	},
 	whiteText: {
-		color: 'white'
+		color: theme.palette.primary.contrastText
 	}
 });
 
@@ -88,7 +88,7 @@ class RegisterForm extends Component {
   		const classes = this.props.classes;
   		const disabled = !this.canSubmit();
   		const snackbarAction = (
-  			<Button color="accent" onClick={this.handleMessageDone}>
+  			<Button primary onClick={this.handleMessageDone}>
   				<FontAwesome icon={FA.times} name={FA.times}/>
   			</Button>
   		);
@@ -128,7 +128,7 @@ class RegisterForm extends Component {
 					    />
 					</CardContent>
 					<CardActions className={classes.cardFooter}>
-						<Button raised disabled={disabled} color="primary" onClick={this.submit}>
+						<Button variant="raised" disabled={disabled} color="primary" onClick={this.submit}>
 							SIGN UP
 						</Button>
 					    <Typography

@@ -29,7 +29,7 @@ class Home extends Component {
 	    				<span>Create your perfect reading atmosphere!</span>
 	    				<span>Read your eBooks inside beautifull VR Enviroments</span>
     				</div>
-                    <Link to={routes.AUTH_LOGIN}><Button className="homeButton" raised color="primary"> DIVE IN </Button></Link>
+                    <Link to={routes.AUTH_LOGIN}><Button className="homeButton" variant="raised" color="primary"> DIVE IN </Button></Link>
     			</div>
     			<div className="background-Home">
     				<div className="rotatingStars"></div>

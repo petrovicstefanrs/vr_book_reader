@@ -36,7 +36,6 @@ const styles = theme => ({
 		fontWeight: 700,
 		lineHeight: '1em'
 	}
-
 });
 
 const NotFound = (props) => {

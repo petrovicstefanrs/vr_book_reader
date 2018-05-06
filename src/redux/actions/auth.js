@@ -14,8 +14,17 @@ export const loginWithToken = (token) => (dispatch, getState, container) => {
 				error: null,
 				data: data
 			}));
+
+			const state = getState();
+			let authRedirect = state.auth.redirect;
+			if (authRedirect) {
+				dispatch(clearAuthRedirect());
+				container.history.push(authRedirect);
+			}
 		})
 		.catch(error => {
+			dispatch(withType(TYPES.INITIALIZE_END));
+			container.cookie.remove(ENV.api.session_cookie);
 			dispatch(withType(TYPES.LOGIN_TOKEN_ERROR, {error: error, data: null}));
 		});
 };
@@ -56,4 +65,19 @@ export const logout = () => (dispatch, getState, container) => {
 	dispatch(withType(TYPES.LOGOUT_START));
 	container.cookie.remove(ENV.api.session_cookie);
 	dispatch(withType(TYPES.LOGOUT_END));
+};
+
+export const setAuthRedirect = (location) => (dispatch, getState, container) => {
+	dispatch(withType(TYPES.AUTH_SET_REDIRECT, {
+		data: {
+			pathname: location.pathname,
+			query: location.query
+		}
+	}));
+};
+
+export const clearAuthRedirect = () => (dispatch, getState, container) => {
+	dispatch(withType(TYPES.AUTH_SET_REDIRECT, {
+		data: null
+	}));
 };

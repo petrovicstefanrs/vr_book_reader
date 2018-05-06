@@ -17,7 +17,8 @@ const routerMid = routerMiddleware(history);
 
 const container = {
 	http,
-	cookie
+	cookie,
+	history
 };
 
 export const store = createStore(

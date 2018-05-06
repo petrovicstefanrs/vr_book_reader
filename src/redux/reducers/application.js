@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 	loading: false,
 };
 
-const initialize_start = (state) => {
+const initializeStart = (state) => {
 	return Object.assign({}, state, {
 		loading: true,
 		initialized: false,
@@ -14,14 +14,14 @@ const initialize_start = (state) => {
 	});
 };
 
-const initialize_err = (state, action) => {
+const initializeErr = (state, action) => {
 	return Object.assign({}, state, {
 		loading: true,
 		fatalError: action.error
 	});
 };
 
-const initialize_end = (state) => {
+const initializeEnd = (state) => {
 	return Object.assign({}, state, {
 		loading: false,
 		initialized: true,
@@ -31,7 +31,7 @@ const initialize_end = (state) => {
 
 export default {
 	INITIAL_STATE,
-	[TYPES.INITIALIZE_START]: initialize_start,
-	[TYPES.INITIALIZE_END]: initialize_end,
-	[TYPES.INITIALIZE_ERROR]: initialize_err,
+	[TYPES.INITIALIZE_START]: initializeStart,
+	[TYPES.INITIALIZE_END]: initializeEnd,
+	[TYPES.INITIALIZE_ERROR]: initializeErr,
 };

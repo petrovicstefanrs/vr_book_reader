@@ -45,7 +45,7 @@ class Home extends Component {
                     <div className="interactive-Auth">
                         <RegisterForm />
                         <Link to={routes.HOME}>
-                            <Button className="homeButton" raised color="primary">
+                            <Button className="homeButton" variant="raised" color="primary">
                                 <FontAwesome className={classes.leftIcon} icon={FA.home} name={FA.home} />
                                 Travel Home
                             </Button>

@@ -7,7 +7,8 @@ const INITIAL_STATE = {
 		error: null,
 		token: null,
 		message: null,
-		loged_in: false
+		loged_in: false,
+		redirect: null
 	},
 };
 
@@ -172,6 +173,13 @@ const clearMessage = (state) => {
 	return updateAuth(state, op);
 };
 
+const setAuthRedirect = (state, action) => {
+	return updateAuth(state, {
+		redirect: action.data
+	});
+};
+
+
 
 export default {
 	INITIAL_STATE,
@@ -190,4 +198,5 @@ export default {
 	[TYPES.LOGOUT_START]: logoutStart,
 	[TYPES.LOGOUT_END]: logoutEnd,
 	[TYPES.AUTH_CLEAR_MESSAGE]: clearMessage,
+	[TYPES.AUTH_SET_REDIRECT]: setAuthRedirect
 };

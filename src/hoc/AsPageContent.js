@@ -18,7 +18,10 @@ const styles = theme => ({
 		paddingTop: 80,
 		boxSizing: 'border-box',
 		minHeight: '100%',
+		maxHeight: '100%',
 		minWidth: '100%',
+		maxWidth: '100%',
+		overflowY: 'auto',
 	    flexGrow: 1,
 	    backgroundColor: theme.palette.background.default,
 	}
