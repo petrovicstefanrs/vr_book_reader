@@ -1,175 +1,175 @@
-import React, { Component } from "react";
-import Dropzone from "react-dropzone";
-import PropTypes from "prop-types";
+import React, {Component} from 'react';
+import Dropzone from 'react-dropzone';
+import PropTypes from 'prop-types';
 
-import "../../styles/WithDropZone.css";
+import '../../styles/WithDropZone.css';
 
-const CLASS = "DropZone";
+const CLASS = 'DropZone';
 
 class WithDropZone extends Component {
-  static propTypes = {
-    // Dropzone speciffic props
-    accept: PropTypes.array,
-    disableClick: PropTypes.bool,
-    disabled: PropTypes.bool,
-    disablePreview: PropTypes.bool,
-    preventDropOnDocument: PropTypes.bool,
-    multiple: PropTypes.bool,
-    name: PropTypes.string,
-    maxSize: PropTypes.number,
-    minSize: PropTypes.number,
-    className: PropTypes.string,
-    activeClassName: PropTypes.string,
-    acceptClassName: PropTypes.string,
-    rejectClassName: PropTypes.string,
-    disabledClassName: PropTypes.string,
-    onClick: PropTypes.func,
-    onDrop: PropTypes.func,
-    onDropAccepted: PropTypes.func,
-    onDropRejected: PropTypes.func,
-    onDragStart: PropTypes.func,
-    onDragEnter: PropTypes.func,
-    onDragOver: PropTypes.func,
-    onDragLeave: PropTypes.func,
-    onFileDialogCancel: PropTypes.func
-  };
+	static propTypes = {
+		// Dropzone speciffic props
+		accept: PropTypes.array,
+		disableClick: PropTypes.bool,
+		disabled: PropTypes.bool,
+		disablePreview: PropTypes.bool,
+		preventDropOnDocument: PropTypes.bool,
+		multiple: PropTypes.bool,
+		name: PropTypes.string,
+		maxSize: PropTypes.number,
+		minSize: PropTypes.number,
+		className: PropTypes.string,
+		activeClassName: PropTypes.string,
+		acceptClassName: PropTypes.string,
+		rejectClassName: PropTypes.string,
+		disabledClassName: PropTypes.string,
+		onClick: PropTypes.func,
+		onDrop: PropTypes.func,
+		onDropAccepted: PropTypes.func,
+		onDropRejected: PropTypes.func,
+		onDragStart: PropTypes.func,
+		onDragEnter: PropTypes.func,
+		onDragOver: PropTypes.func,
+		onDragLeave: PropTypes.func,
+		onFileDialogCancel: PropTypes.func,
+	};
 
-  static defaultProps = {
-    accept: null,
-    disableClick: false,
-    disabled: false,
-    disablePreview: true,
-    preventDropOnDocument: true,
-    multiple: false,
-    name: "FileDropZone",
-    maxSize: null,
-    minSize: 0
-  };
+	static defaultProps = {
+		accept: null,
+		disableClick: false,
+		disabled: false,
+		disablePreview: true,
+		preventDropOnDocument: true,
+		multiple: false,
+		name: 'FileDropZone',
+		maxSize: null,
+		minSize: 0,
+	};
 
-  constructor(props) {
-    super(props);
+	constructor(props) {
+		super(props);
 
-    this.onDrop = this.onDrop.bind(this);
-    this.onClick = this.onClick.bind(this);
-  }
+		this.onDrop = this.onDrop.bind(this);
+		this.onClick = this.onClick.bind(this);
+	}
 
-  componentDidMount() {
-    this._isMounted = true;
-  }
+	componentDidMount() {
+		this._isMounted = true;
+	}
 
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
+	componentWillUnmount() {
+		this._isMounted = false;
+	}
 
-  onClick(event) {
-    if (this.props.onClick) {
-      this.props.onClick(event);
-    }
+	onClick(event) {
+		if (this.props.onClick) {
+			this.props.onClick(event);
+		}
 
-    return;
-  }
+		return;
+	}
 
-  onDrop(acceptedFiles) {
-    if (this.props.onDrop) {
-      this.props.onDrop(acceptedFiles);
-    }
+	onDrop(acceptedFiles) {
+		if (this.props.onDrop) {
+			this.props.onDrop(acceptedFiles);
+		}
 
-    return;
-  }
+		return;
+	}
 
-  onDropAccepted() {
-    if (this.props.onDropAccepted) {
-      this.props.onDropAccepted();
-    }
+	onDropAccepted() {
+		if (this.props.onDropAccepted) {
+			this.props.onDropAccepted();
+		}
 
-    return;
-  }
+		return;
+	}
 
-  onDropRejected() {
-    if (this.props.onDropRejected) {
-      this.props.onDropRejected();
-    }
+	onDropRejected() {
+		if (this.props.onDropRejected) {
+			this.props.onDropRejected();
+		}
 
-    return;
-  }
+		return;
+	}
 
-  onDragStart() {
-    if (this.props.onDragStart) {
-      this.props.onDragStart();
-    }
+	onDragStart() {
+		if (this.props.onDragStart) {
+			this.props.onDragStart();
+		}
 
-    return;
-  }
+		return;
+	}
 
-  onDragEnter() {
-    if (this.props.onDragEnter) {
-      this.props.onDragEnter();
-    }
+	onDragEnter() {
+		if (this.props.onDragEnter) {
+			this.props.onDragEnter();
+		}
 
-    return;
-  }
+		return;
+	}
 
-  onDragOver() {
-    if (this.props.onDragOver) {
-      this.props.onDragOver();
-    }
+	onDragOver() {
+		if (this.props.onDragOver) {
+			this.props.onDragOver();
+		}
 
-    return;
-  }
+		return;
+	}
 
-  onDragLeave() {
-    if (this.props.onDragLeave) {
-      this.props.onDragLeave();
-    }
+	onDragLeave() {
+		if (this.props.onDragLeave) {
+			this.props.onDragLeave();
+		}
 
-    return;
-  }
+		return;
+	}
 
-  onFileDialogCancel() {
-    if (this.props.onFileDialogCancel) {
-      this.props.onFileDialogCancel();
-    }
+	onFileDialogCancel() {
+		if (this.props.onFileDialogCancel) {
+			this.props.onFileDialogCancel();
+		}
 
-    return;
-  }
+		return;
+	}
 
-  render() {
-    const accept = this.props.accept ? this.props.accept.join(", ") : null;
-    let dropZone = (
-      <Dropzone
-        ref={node => {
-          this.dropzone = node;
-        }}
-        accept={accept}
-        disableClick={this.props.disableClick}
-        disabled={this.props.disabled}
-        disablePreview={this.props.disablePreview}
-        preventDropOnDocument={this.props.preventDropOnDocument}
-        multiple={this.props.multiple}
-        name={this.props.name}
-        maxSize={this.props.maxSize}
-        minSize={this.props.minSize}
-        className={CLASS + " " + this.props.className}
-        activeClassName={this.props.activeClassName}
-        acceptClassName={this.props.acceptClassName}
-        rejectClassName={this.props.rejectClassName}
-        disabledClassName={this.props.disabledClassName}
-        onClick={this.props.onClick}
-        onDrop={this.props.onDrop}
-        onDropAccepted={this.props.onDropAccepted}
-        onDropRejected={this.props.onDropRejected}
-        onDragStart={this.props.onDragStart}
-        onDragEnter={this.props.onDragEnter}
-        onDragOver={this.props.onDragOver}
-        onDragLeave={this.props.onDragLeave}
-        onFileDialogCancel={this.props.onFileDialogCancel}
-      >
-        {this.props.children}
-      </Dropzone>
-    );
+	render() {
+		const accept = this.props.accept ? this.props.accept.join(', ') : null;
+		let dropZone = (
+			<Dropzone
+				ref={node => {
+					this.dropzone = node;
+				}}
+				accept={accept}
+				disableClick={this.props.disableClick}
+				disabled={this.props.disabled}
+				disablePreview={this.props.disablePreview}
+				preventDropOnDocument={this.props.preventDropOnDocument}
+				multiple={this.props.multiple}
+				name={this.props.name}
+				maxSize={this.props.maxSize}
+				minSize={this.props.minSize}
+				className={CLASS + ' ' + this.props.className}
+				activeClassName={this.props.activeClassName}
+				acceptClassName={this.props.acceptClassName}
+				rejectClassName={this.props.rejectClassName}
+				disabledClassName={this.props.disabledClassName}
+				onClick={this.props.onClick}
+				onDrop={this.props.onDrop}
+				onDropAccepted={this.props.onDropAccepted}
+				onDropRejected={this.props.onDropRejected}
+				onDragStart={this.props.onDragStart}
+				onDragEnter={this.props.onDragEnter}
+				onDragOver={this.props.onDragOver}
+				onDragLeave={this.props.onDragLeave}
+				onFileDialogCancel={this.props.onFileDialogCancel}
+			>
+				{this.props.children}
+			</Dropzone>
+		);
 
-    return <div className="top-WithDropZone">{dropZone}</div>;
-  }
+		return <div className="top-WithDropZone">{dropZone}</div>;
+	}
 }
 
 export default WithDropZone;

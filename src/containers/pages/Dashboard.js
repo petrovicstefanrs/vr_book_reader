@@ -1,132 +1,126 @@
 // Node Modules
 
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import lodash from "lodash";
-import FontAwesome from "react-fontawesome";
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
+import lodash from 'lodash';
+import FontAwesome from 'react-fontawesome';
 
-import Divider from "material-ui/Divider";
-import Typography from "material-ui/Typography";
-import { withStyles } from "material-ui/styles";
-import Card, { CardActions, CardContent } from "material-ui/Card";
-import Button from "material-ui/Button";
+import Divider from 'material-ui/Divider';
+import Typography from 'material-ui/Typography';
+import {withStyles} from 'material-ui/styles';
+import Card, {CardActions, CardContent} from 'material-ui/Card';
+import Button from 'material-ui/Button';
 
 // Enviroment Settings
 
-import FA from "../../lib/font_awesome";
-import * as routes from "../../lib/routes";
-import { setMenuActive } from "../../redux/actions/menu";
+import FA from '../../lib/font_awesome';
+import * as routes from '../../lib/routes';
+import {setMenuActive} from '../../redux/actions/menu';
 
 // Components
 
-import AsPageContent from "../../hoc/AsPageContent";
+import AsPageContent from '../../hoc/AsPageContent';
 
 // Component Code
 
-import styles from "../../styles/Dashboard";
-const CLASS = "top-Dashboard";
+import styles from '../../styles/Dashboard';
+const CLASS = 'top-Dashboard';
 
 const CARDS = {
-  library: {
-    route: routes.DASHBOARD_LIBRARY,
-    title: "Library",
-    icon: FA.book,
-    description: "All your eBooks and Comics in one place."
-  },
-  favourites: {
-    route: routes.DASHBOARD_FAVOURITES,
-    title: "Favourites",
-    icon: FA.heart,
-    description: "Read your favourite eBooks and Comics again!"
-  },
-  profile: {
-    route: routes.DASHBOARD_SETTINGS,
-    title: "Profile Settings",
-    icon: FA.cog,
-    description: "Full control over your profile!"
-  }
+	library: {
+		route: routes.DASHBOARD_LIBRARY,
+		title: 'Library',
+		icon: FA.book,
+		description: 'All your eBooks and Comics in one place.',
+	},
+	favourites: {
+		route: routes.DASHBOARD_FAVOURITES,
+		title: 'Favourites',
+		icon: FA.heart,
+		description: 'Read your favourite eBooks and Comics again!',
+	},
+	profile: {
+		route: routes.DASHBOARD_SETTINGS,
+		title: 'Profile Settings',
+		icon: FA.cog,
+		description: 'Full control over your profile!',
+	},
 };
 
 class Dashboard extends Component {
-  static propTypes = {
-    classes: PropTypes.object.isRequired
-  };
+	static propTypes = {
+		classes: PropTypes.object.isRequired,
+	};
 
-  static defaultProps = {};
+	static defaultProps = {};
 
-  constructor(props) {
-    super(props);
+	constructor(props) {
+		super(props);
 
-    this.state = {};
+		this.state = {};
 
-    this.renderCards = this.renderCards.bind(this);
-    this.onCardClick = this.onCardClick.bind(this);
-  }
+		this.renderCards = this.renderCards.bind(this);
+		this.onCardClick = this.onCardClick.bind(this);
+	}
 
-  onCardClick(item) {
-    if (this.props.setMenuActive) {
-      this.props.setMenuActive(item);
-    }
-    return;
-  }
+	onCardClick(item) {
+		if (this.props.setMenuActive) {
+			this.props.setMenuActive(item);
+		}
+		return;
+	}
 
-  renderCards() {
-    const classes = this.props.classes;
+	renderCards() {
+		const classes = this.props.classes;
 
-    return lodash.map(CARDS, card => {
-      return (
-        <Link
-          key={"Card_" + card.title}
-          onClick={() => this.onCardClick(card.title)}
-          to={card.route}
-        >
-          <Card className={classes.card}>
-            <CardContent className={classes.withmedia}>
-              <FontAwesome icon={card.icon} name={card.icon} />
-            </CardContent>
-            <CardContent className={classes.content}>
-              <Typography type="headline" component="h2">
-                {card.title}
-              </Typography>
-              <Divider />
-              <Typography
-                className={classes.description}
-                type="subheading"
-                component="p"
-              >
-                {card.description}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Link>
-      );
-    });
-  }
+		return lodash.map(CARDS, card => {
+			return (
+				<Link
+					key={'Card_' + card.title}
+					onClick={() => this.onCardClick(card.title)}
+					to={card.route}
+				>
+					<Card className={classes.card}>
+						<CardContent className={classes.withmedia}>
+							<FontAwesome icon={card.icon} name={card.icon} />
+						</CardContent>
+						<CardContent className={classes.content}>
+							<Typography type="headline" component="h2">
+								{card.title}
+							</Typography>
+							<Divider />
+							<Typography className={classes.description} type="subheading" component="p">
+								{card.description}
+							</Typography>
+						</CardContent>
+					</Card>
+				</Link>
+			);
+		});
+	}
 
-  render() {
-    const classes = this.props.classes;
-    return (
-      <AsPageContent>
-        <div className={CLASS}>
-          <div>
-            <Typography type="display2">Home</Typography>
-            <Divider />
-          </div>
-          <div className={classes.container}>{this.renderCards()}</div>
-        </div>
-      </AsPageContent>
-    );
-  }
+	render() {
+		const classes = this.props.classes;
+		return (
+			<AsPageContent>
+				<div className={CLASS}>
+					<div>
+						<Typography type="display2">Home</Typography>
+						<Divider />
+					</div>
+					<div className={classes.container}>{this.renderCards()}</div>
+				</div>
+			</AsPageContent>
+		);
+	}
 }
 
 const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => ({
-  setMenuActive: item => dispatch(setMenuActive(item))
+	setMenuActive: item => dispatch(setMenuActive(item)),
 });
 
-export default withStyles(styles)(
-  connect(mapStateToProps, mapDispatchToProps)(Dashboard)
-);
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Dashboard));
