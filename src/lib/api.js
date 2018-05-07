@@ -1,24 +1,28 @@
-export const healthCheck = (http) => {
-	return http.get('/health-check');
+export const healthCheck = http => {
+  return http.get("/health-check");
 };
 
 //**********************************************************************************************************************
 // Auth
 
 export const login = (http, email, password) => {
-	return http.post('/auth/signin', null, {email, password});
+  return http.post("/auth/signin", null, { email, password });
 };
 
 export const loginWithToken = (http, token) => {
-	return http.post('/auth/signintoken', null, {token});
+  return http.post("/auth/signintoken", null, { token });
 };
 
-export const logout = (http) => {
-	return http.post('/auth/signout', null, {});
+export const logout = http => {
+  return http.post("/auth/signout", null, {});
 };
 
 export const register = (http, email, password, username) => {
-	return http.post('/auth/signup', null, {email: email, password: password, username: username});
+  return http.post("/auth/signup", null, {
+    email: email,
+    password: password,
+    username: username
+  });
 };
 
 //**********************************************************************************************************************
@@ -49,4 +53,3 @@ export const register = (http, email, password, username) => {
 // export const deleteUser = (http, userId) => {
 // 	return http.del('/users/' + userId);
 // };
-
