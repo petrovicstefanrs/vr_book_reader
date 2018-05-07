@@ -72,7 +72,7 @@ class Library extends Component {
 						<FontAwesome icon={FA.plus} name={FA.plus} />
 					</Button>
 					<div>
-						<Typography type="display2">Library</Typography>
+						<Typography variant="headline">Library</Typography>
 						<Divider />
 					</div>
 					{this.renderEmptyLibrary()}

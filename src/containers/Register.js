@@ -22,8 +22,8 @@ import RegisterForm from '../components/forms/RegisterForm';
 
 // Component Code
 
-const CLASS = 'top-Auth';
 import styles from '../styles/Register';
+const CLASS = 'top-Auth';
 
 class Home extends Component {
 	static propTypes = {

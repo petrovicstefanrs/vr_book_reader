@@ -107,7 +107,7 @@ class Dashboard extends Component {
 			<AsPageContent>
 				<div className={CLASS}>
 					<div>
-						<Typography type="display2">Home</Typography>
+						<Typography variant="headline">Home</Typography>
 						<Divider />
 					</div>
 					<div className={classes.container}>{this.renderCards()}</div>

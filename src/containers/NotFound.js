@@ -20,7 +20,7 @@ const NotFound = props => {
 	const classes = props.classes;
 	const homeLink = (
 		<Link to={routes.HOME}>
-			<Typography type="subheading">Go back home</Typography>
+			<Typography color="secondary" type="subheading">Go back home</Typography>
 		</Link>
 	);
 

@@ -1,6 +1,6 @@
 const styles = theme => ({
 	headline: {
-		fontSize: '10em',
+		fontSize: '8em',
 		fontWeight: 700,
 		lineHeight: '1em',
 	},
