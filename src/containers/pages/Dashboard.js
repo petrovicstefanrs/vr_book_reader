@@ -18,7 +18,9 @@ import Button from 'material-ui/Button';
 import FA from '../../lib/font_awesome';
 import * as routes from '../../lib/routes';
 import {setMenuActive} from '../../redux/actions/menu';
-
+import {getBooks} from '../../redux/actions/books';
+import {getAllBooks} from '../../redux/selectors/books';
+import * as pages from '../../consts/pages';
 // Components
 
 import AsPageContent from '../../hoc/AsPageContent';
@@ -31,19 +33,19 @@ const CLASS = 'top-Dashboard';
 const CARDS = {
 	library: {
 		route: routes.DASHBOARD_LIBRARY,
-		title: 'Library',
+		title: pages.LIBRARY,
 		icon: FA.book,
 		description: 'All your eBooks and Comics in one place.',
 	},
 	favourites: {
 		route: routes.DASHBOARD_FAVOURITES,
-		title: 'Favourites',
+		title: pages.FAVOURITES,
 		icon: FA.heart,
 		description: 'Read your favourite eBooks and Comics again!',
 	},
 	profile: {
 		route: routes.DASHBOARD_SETTINGS,
-		title: 'Profile Settings',
+		title: pages.PROFILE,
 		icon: FA.cog,
 		description: 'Full control over your profile!',
 	},
@@ -87,11 +89,11 @@ class Dashboard extends Component {
 							<FontAwesome icon={card.icon} name={card.icon} />
 						</CardContent>
 						<CardContent className={classes.content}>
-							<Typography type="headline" component="h2">
+							<Typography variant="title" component="h6">
 								{card.title}
 							</Typography>
 							<Divider />
-							<Typography className={classes.description} type="subheading" component="p">
+							<Typography className={classes.description} variant="body1" component="p">
 								{card.description}
 							</Typography>
 						</CardContent>

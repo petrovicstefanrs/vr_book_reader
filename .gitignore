@@ -75,6 +75,7 @@ typings/
 .env.test.local
 .env.production.local
 .eslintrc.json
+.vscode
 
 npm-debug.log*
 yarn-debug.log*

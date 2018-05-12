@@ -13,6 +13,7 @@
     "react-dom": "^16.1.1",
     "react-dropzone": "^4.2.3",
     "react-fontawesome": "^1.6.1",
+    "react-lines-ellipsis": "^0.10.2",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",

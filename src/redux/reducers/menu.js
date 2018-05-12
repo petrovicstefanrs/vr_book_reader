@@ -1,8 +1,9 @@
 import * as TYPES from '../types';
+import {HOME} from '../../consts/pages';
 
 const INITIAL_STATE = {
 	menu: {
-		selected: null,
+		selected: HOME,
 	},
 };
 

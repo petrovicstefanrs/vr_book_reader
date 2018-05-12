@@ -41,7 +41,7 @@ const ImageWithFallback = ({image, alt, width, height}) => {
 };
 
 ImageWithFallback.propTypes = {
-	image: PropTypes.object,
+	image: PropTypes.string,
 	width: PropTypes.number.isRequired,
 	height: PropTypes.number.isRequired,
 	onClick: PropTypes.func,

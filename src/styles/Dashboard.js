@@ -13,7 +13,7 @@ const styles = theme => ({
 		}),
 	},
 	withmedia: {
-		height: 160,
+		height: 200,
 		backgroundColor: theme.palette.primary.main,
 		color: 'white',
 		display: 'flex',
@@ -25,6 +25,7 @@ const styles = theme => ({
 		maxHeight: 124,
 		minHeight: 124,
 		overflow: 'hidden',
+		padding: 16
 	},
 	container: {
 		width: 'calc(100% + 16px)',

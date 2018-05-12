@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import lodash from 'lodash';
 import FontAwesome from 'react-fontawesome';
+import LinesEllipsis from 'react-lines-ellipsis';
 
 import Divider from 'material-ui/Divider';
 import Typography from 'material-ui/Typography';
@@ -19,9 +20,14 @@ import Paper from 'material-ui/Paper';
 import FA from '../../lib/font_awesome';
 import * as routes from '../../lib/routes';
 import {setMenuActive} from '../../redux/actions/menu';
+import {getBooks} from '../../redux/actions/books';
+import {getAllBooks} from '../../redux/selectors/books';
+import {LIBRARY} from '../../consts/pages';
+import {BOOK_THUMBNAIL} from '../../consts/images';
 
 // Components
 
+import ImageWithFallback from '../../components/graphics/ImageWithFallback';
 import AsPageContent from '../../hoc/AsPageContent';
 
 // Component Code
@@ -43,6 +49,12 @@ class Library extends Component {
 		this.renderEmptyLibrary = this.renderEmptyLibrary.bind(this);
 	}
 
+	componentDidMount() {
+		const {getBooks, setMenuActive} = this.props;
+		setMenuActive(LIBRARY);
+		getBooks && getBooks();
+	}
+
 	renderEmptyLibrary() {
 		const classes = this.props.classes;
 		return (
@@ -58,8 +70,70 @@ class Library extends Component {
 		);
 	}
 
+	renderBooks() {
+		const {classes, books} = this.props;
+
+		return lodash.map(books, book => {
+			return (
+				<div key={'Book_' + book.id + '_' + book.name} className={classes.card_wrapper}>
+					<div className={classes.card_action_button_wrapper}>
+						<Button
+							variant="flat"
+							aria-label="But book into favourites"
+							className={classes.card_action_button}
+							onClick={e => {
+								alert('eloooo');
+							}}
+						>
+							<FontAwesome icon={FA.heart_o} name={FA.heart_o} />
+						</Button>
+						<Button variant="flat" aria-label="Edit Book" className={classes.card_action_button}>
+							<FontAwesome icon={FA.pencil} name={FA.pencil} />
+						</Button>
+						<Button variant="flat" aria-label="Delete Book" className={classes.card_action_button}>
+							<FontAwesome icon={FA.trash} name={FA.trash} />
+						</Button>
+					</div>
+					<Link
+						onClick={() => {
+							alert('Book open');
+						}}
+						to={routes.DASHBOARD_LIBRARY}
+					>
+						<Card className={classes.book_card}>
+							<CardContent className={classes.withmedia}>
+								<ImageWithFallback
+									image={book.thumbnail}
+									width={BOOK_THUMBNAIL.width}
+									height={BOOK_THUMBNAIL.height}
+								/>
+							</CardContent>
+							<CardContent className={classes.content}>
+								<Typography className={classes.card_title} variant="title" component="h6">
+									{book.name}
+								</Typography>
+								<Divider />
+								<Typography className={classes.description} variant="body1" component="div">
+									<LinesEllipsis text={book.description} maxLine="3" ellipsis=" ..." trimRight />
+								</Typography>
+							</CardContent>
+						</Card>
+					</Link>
+				</div>
+			);
+		});
+	}
+
+	renderContent = () => {
+		const {classes, books} = this.props;
+
+		const content = books && books.length ? this.renderBooks() : this.renderEmptyLibrary();
+
+		return <div className={classes.container}>{content}</div>;
+	};
+
 	render() {
-		const classes = this.props.classes;
+		const {classes} = this.props;
 		return (
 			<AsPageContent>
 				<div className={CLASS}>
@@ -75,7 +149,7 @@ class Library extends Component {
 						<Typography variant="headline">Library</Typography>
 						<Divider />
 					</div>
-					{this.renderEmptyLibrary()}
+					{this.renderContent()}
 					<div className={classes.container} />
 				</div>
 			</AsPageContent>
@@ -83,8 +157,13 @@ class Library extends Component {
 	}
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+	books: getAllBooks(state),
+});
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+	setMenuActive: item => dispatch(setMenuActive(item)),
+	getBooks: item => dispatch(getBooks()),
+});
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Library));

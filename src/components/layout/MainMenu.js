@@ -22,6 +22,7 @@ import FA from '../../lib/font_awesome';
 import * as routes from '../../lib/routes';
 import {logout} from '../../redux/actions/auth';
 import {setMenuActive} from '../../redux/actions/menu';
+import * as pages from '../../consts/pages';
 
 // Components
 
@@ -34,17 +35,17 @@ const MENU_ITEMS = {
 	home: {route: routes.DASHBOARD_HOME, title: 'Home', icon: FA.home},
 	library: {
 		route: routes.DASHBOARD_LIBRARY,
-		title: 'Library',
+		title: pages.LIBRARY,
 		icon: FA.book,
 	},
 	favourites: {
 		route: routes.DASHBOARD_FAVOURITES,
-		title: 'Favourites',
+		title: pages.FAVOURITES,
 		icon: FA.heart,
 	},
 	profile: {
 		route: routes.DASHBOARD_SETTINGS,
-		title: 'Profile',
+		title: pages.PROFILE,
 		icon: FA.cog,
 	},
 };

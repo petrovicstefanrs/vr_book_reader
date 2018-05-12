@@ -3,6 +3,7 @@
 import application from './reducers/application';
 import auth from './reducers/auth';
 import menu from './reducers/menu';
+import books from './reducers/books';
 import {routerReducer} from 'react-router-redux';
 /**
  * Create Reducer Handlers
@@ -12,7 +13,7 @@ import {routerReducer} from 'react-router-redux';
 const INITIAL_STATE = {};
 const HANDLERS = {};
 
-[routerReducer, application, auth, menu].forEach(handlers => {
+[routerReducer, application, auth, menu, books].forEach(handlers => {
 	if (handlers.INITIAL_STATE) {
 		Object.assign(INITIAL_STATE, handlers.INITIAL_STATE);
 		delete handlers.INITIAL_STATE;

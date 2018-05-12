@@ -29,3 +29,9 @@ export const AUTH_SET_REDIRECT = 'AUTH_SET_REDIRECT';
 // MENU
 
 export const SET_ACTIVE_MENU_ITEM = 'SET_ACTIVE_MENU_ITEM';
+
+// BOOKS
+
+export const GET_BOOKS_START = 'GET_BOOKS_START';
+export const GET_BOOKS_END = 'GET_BOOKS_END';
+export const GET_BOOKS_ERROR = 'GET_BOOKS_ERROR';
