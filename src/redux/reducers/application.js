@@ -4,6 +4,7 @@ const INITIAL_STATE = {
 	initialized: false,
 	fatalError: null,
 	loading: false,
+	toast: null,
 };
 
 const initializeStart = state => {
@@ -29,9 +30,24 @@ const initializeEnd = state => {
 	});
 };
 
+const pushToast = (state, action) => {
+	const {toast} = action;
+	return Object.assign({}, state, {toast});
+};
+
+const dismissToast = (state, action) => {
+	if (state.toast.id === action.id) {
+		return Object.assign({}, state, {toast: null});
+	} else {
+		return state;
+	}
+};
+
 export default {
 	INITIAL_STATE,
 	[TYPES.INITIALIZE_START]: initializeStart,
 	[TYPES.INITIALIZE_END]: initializeEnd,
 	[TYPES.INITIALIZE_ERROR]: initializeErr,
+	[TYPES.TOAST_ADD]: pushToast,
+	[TYPES.TOAST_DISMISS]: dismissToast,
 };

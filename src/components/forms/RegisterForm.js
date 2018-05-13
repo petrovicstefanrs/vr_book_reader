@@ -4,9 +4,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import FontAwesome from 'react-fontawesome';
 
-import Snackbar from 'material-ui/Snackbar';
 import Card, {CardActions, CardContent, CardHeader} from 'material-ui/Card';
 import {withStyles} from 'material-ui/styles';
 import Button from 'material-ui/Button';
@@ -15,8 +13,7 @@ import Typography from 'material-ui/Typography';
 // Enviroment settings
 
 import * as routes from '../../lib/routes';
-import FA from '../../lib/font_awesome';
-import {register, clearAuthMessage} from '../../redux/actions/auth';
+import {register} from '../../redux/actions/auth';
 
 // Containers
 
@@ -45,7 +42,6 @@ class RegisterForm extends Component {
 
 		this.submit = this.submit.bind(this);
 		this.canSubmit = this.canSubmit.bind(this);
-		this.handleMessageDone = this.handleMessageDone.bind(this);
 	}
 
 	canSubmit() {
@@ -56,18 +52,9 @@ class RegisterForm extends Component {
 		this.props.register(this.state.username, this.state.email, this.state.password);
 	}
 
-	handleMessageDone() {
-		this.props.clearAuthMessage();
-	}
-
 	render() {
 		const classes = this.props.classes;
 		const disabled = !this.canSubmit();
-		const snackbarAction = (
-			<Button color="inherit" onClick={this.handleMessageDone}>
-				<FontAwesome icon={FA.times} name={FA.times} />
-			</Button>
-		);
 
 		return (
 			<div className={CLASS}>
@@ -121,27 +108,15 @@ class RegisterForm extends Component {
 						</Typography>
 					</CardActions>
 				</Card>
-				<Snackbar
-					anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
-					open={!!this.props.register_message}
-					action={snackbarAction}
-					onClose={this.handleMessageDone}
-					message={this.props.register_message || ''}
-					autoHideDuration={5000}
-				/>
 			</div>
 		);
 	}
 }
 
-const mapStateToProps = state => ({
-	register_message: state.auth.message,
-	error: !!state.auth.error,
-});
+const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => ({
 	register: (username, email, password) => dispatch(register(username, email, password)),
-	clearAuthMessage: () => dispatch(clearAuthMessage()),
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(RegisterForm));

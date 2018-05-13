@@ -18,8 +18,6 @@ import Button from 'material-ui/Button';
 import FA from '../../lib/font_awesome';
 import * as routes from '../../lib/routes';
 import {setMenuActive} from '../../redux/actions/menu';
-import {getBooks} from '../../redux/actions/books';
-import {getAllBooks} from '../../redux/selectors/books';
 import * as pages from '../../consts/pages';
 // Components
 

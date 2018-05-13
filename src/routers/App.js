@@ -27,6 +27,7 @@ import Library from '../containers/pages/Library';
 
 import AuthRoute from '../hoc/AuthRoute';
 import StretchableSpinner from '../containers/StretchableSpinner';
+import Toast from '../components/notifications/Toast';
 
 const CLASS = 'top-App';
 
@@ -89,6 +90,7 @@ class App extends Component {
 		return (
 			<div className={CLASS}>
 				<CssBaseline />
+				<Toast />
 				{this.renderMainMenu()}
 				{this.renderAppOrSpinner()}
 			</div>

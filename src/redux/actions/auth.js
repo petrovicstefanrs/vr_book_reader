@@ -2,6 +2,8 @@ import ENV from '../../env';
 import * as api from '../../lib/api';
 import * as TYPES from '../types';
 import {withType} from '../../lib/util';
+import { addToast } from './application';
+import { Toast } from '../../consts/toasts';
 
 export const loginWithToken = token => (dispatch, getState, container) => {
 	dispatch(withType(TYPES.LOGIN_TOKEN_START, {error: null, data: {token: token}}));
@@ -26,9 +28,11 @@ export const loginWithToken = token => (dispatch, getState, container) => {
 			}
 		})
 		.catch(error => {
+			const message = error.message || null;
 			dispatch(withType(TYPES.INITIALIZE_END));
 			container.cookie.remove(ENV.api.session_cookie);
-			dispatch(withType(TYPES.LOGIN_TOKEN_ERROR, {error: error, data: null}));
+			dispatch(withType(TYPES.LOGIN_TOKEN_ERROR, {error: error, data: {message}}));
+			dispatch(addToast(new Toast(message)));
 		});
 };
 
@@ -47,7 +51,9 @@ export const login = (email, password) => (dispatch, getState, container) => {
 			container.cookie.set(ENV.api.session_cookie, data.token);
 		})
 		.catch(error => {
-			dispatch(withType(TYPES.LOGIN_ERROR, {error: error, data: null}));
+			const message = error.message || null;
+			dispatch(withType(TYPES.LOGIN_ERROR, {error: error, data: {message}}));
+			dispatch(addToast(new Toast(message)));
 		});
 };
 
@@ -57,19 +63,19 @@ export const register = (username, email, password) => (dispatch, getState, cont
 	return api
 		.register(container.http, email, password, username)
 		.then(data => {
+			const message = 'Registration successful. You can now login.';
 			dispatch(
 				withType(TYPES.REGISTER_END, {
-					data: {message: 'Registration successful. You can now login.'},
+					data: {message},
 				})
 			);
+			dispatch(addToast(new Toast(message)));
 		})
 		.catch(error => {
-			dispatch(withType(TYPES.REGISTER_ERROR, {error: error, data: null}));
+			const message = error.message || null;
+			dispatch(withType(TYPES.REGISTER_ERROR, {error: error, data: {message}}));
+			dispatch(addToast(new Toast(message)));
 		});
-};
-
-export const clearAuthMessage = () => (dispatch, getState, container) => {
-	dispatch(withType(TYPES.AUTH_CLEAR_MESSAGE));
 };
 
 export const logout = () => (dispatch, getState, container) => {

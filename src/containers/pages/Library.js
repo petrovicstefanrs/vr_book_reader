@@ -11,16 +11,16 @@ import LinesEllipsis from 'react-lines-ellipsis';
 import Divider from 'material-ui/Divider';
 import Typography from 'material-ui/Typography';
 import {withStyles} from 'material-ui/styles';
-import Card, {CardActions, CardContent} from 'material-ui/Card';
+import Card, {CardContent} from 'material-ui/Card';
 import Button from 'material-ui/Button';
-import Paper from 'material-ui/Paper';
+import Tooltip from 'material-ui/Tooltip';
 
 // Enviroment Settings
 
 import FA from '../../lib/font_awesome';
 import * as routes from '../../lib/routes';
 import {setMenuActive} from '../../redux/actions/menu';
-import {getBooks} from '../../redux/actions/books';
+import {getBooks, toggleFavouriteBook, deleteBook} from '../../redux/actions/books';
 import {getAllBooks} from '../../redux/selectors/books';
 import {LIBRARY} from '../../consts/pages';
 import {BOOK_THUMBNAIL} from '../../consts/images';
@@ -37,6 +37,10 @@ const CLASS = 'top-Library';
 class Library extends Component {
 	static propTypes = {
 		classes: PropTypes.object.isRequired,
+		getBooks: PropTypes.func.isRequired,
+		toggleFavourite: PropTypes.func.isRequired,
+		deleteBook: PropTypes.func.isRequired,
+		setMenuActive: PropTypes.func,
 	};
 
 	static defaultProps = {};
@@ -74,25 +78,39 @@ class Library extends Component {
 		const {classes, books} = this.props;
 
 		return lodash.map(books, book => {
+			const {isFavourite} = book;
 			return (
 				<div key={'Book_' + book.id + '_' + book.name} className={classes.card_wrapper}>
 					<div className={classes.card_action_button_wrapper}>
-						<Button
-							variant="flat"
-							aria-label="But book into favourites"
-							className={classes.card_action_button}
-							onClick={e => {
-								alert('eloooo');
-							}}
-						>
-							<FontAwesome icon={FA.heart_o} name={FA.heart_o} />
-						</Button>
-						<Button variant="flat" aria-label="Edit Book" className={classes.card_action_button}>
-							<FontAwesome icon={FA.pencil} name={FA.pencil} />
-						</Button>
-						<Button variant="flat" aria-label="Delete Book" className={classes.card_action_button}>
-							<FontAwesome icon={FA.trash} name={FA.trash} />
-						</Button>
+						<Tooltip id="tooltip-favourite" title="Favourite" placement="right">
+							<Button
+								variant="flat"
+								aria-label="But book into favourites"
+								className={classes.card_action_button}
+								onClick={() => this.props.toggleFavourite(book.id)}
+							>
+								<FontAwesome
+									icon={isFavourite ? FA.heart : FA.heart_o}
+									name={isFavourite ? FA.heart : FA.heart_o}
+									className={isFavourite ? classes.is_favourite : null}
+								/>
+							</Button>
+						</Tooltip>
+						<Tooltip id="tooltip-edit" title="Edit" placement="right">
+							<Button variant="flat" aria-label="Edit Book" className={classes.card_action_button}>
+								<FontAwesome icon={FA.pencil} name={FA.pencil} />
+							</Button>
+						</Tooltip>
+						<Tooltip id="tooltip-delete" title="Delete" placement="right">
+							<Button
+								variant="flat"
+								aria-label="Delete Book"
+								onClick={() => this.props.deleteBook(book.id)}
+								className={classes.card_action_button}
+							>
+								<FontAwesome icon={FA.trash} name={FA.trash} />
+							</Button>
+						</Tooltip>
 					</div>
 					<Link
 						onClick={() => {
@@ -164,6 +182,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 	setMenuActive: item => dispatch(setMenuActive(item)),
 	getBooks: item => dispatch(getBooks()),
+	toggleFavourite: id => dispatch(toggleFavouriteBook(id)),
+	deleteBook: id => dispatch(deleteBook(id)),
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Library));

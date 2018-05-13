@@ -4,9 +4,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import FontAwesome from 'react-fontawesome';
 
-import Snackbar from 'material-ui/Snackbar';
 import Card, {CardActions, CardContent, CardHeader} from 'material-ui/Card';
 import {withStyles} from 'material-ui/styles';
 import Button from 'material-ui/Button';
@@ -15,8 +13,7 @@ import Typography from 'material-ui/Typography';
 // Enviroment settings
 
 import * as routes from '../../lib/routes';
-import FA from '../../lib/font_awesome';
-import {login, clearAuthMessage} from '../../redux/actions/auth';
+import {login} from '../../redux/actions/auth';
 
 // Containers
 
@@ -63,11 +60,6 @@ class LogInForm extends Component {
 	render() {
 		const classes = this.props.classes;
 		const disabled = !this.canSubmit();
-		const snackbarAction = (
-			<Button color="inherit" onClick={this.handleMessageDone}>
-				<FontAwesome icon={FA.times} name={FA.times} />
-			</Button>
-		);
 
 		return (
 			<div className={CLASS}>
@@ -112,28 +104,15 @@ class LogInForm extends Component {
 						</Typography>
 					</CardActions>
 				</Card>
-
-				<Snackbar
-					anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
-					open={!!this.props.login_message}
-					action={snackbarAction}
-					onClose={this.handleMessageDone}
-					message={this.props.login_message || ''}
-					autoHideDuration={5000}
-				/>
 			</div>
 		);
 	}
 }
 
-const mapStateToProps = state => ({
-	login_message: state.auth.message,
-	error: !!state.auth.error,
-});
+const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => ({
 	login: (email, password) => dispatch(login(email, password)),
-	clearAuthMessage: () => dispatch(clearAuthMessage()),
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(LogInForm));

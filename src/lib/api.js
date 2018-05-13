@@ -32,6 +32,18 @@ export const getBooks = (http) => {
 	return http.get('/api/books', null, null);
 };
 
+export const toggleFavouriteBook = (http, bookId) => {
+	return http.put('/api/books/favourite', null, {
+		bookId
+	});
+};
+
+export const deleteBook = (http, bookId) => {
+	return http.del('/api/books/delete', null, {
+		bookId
+	});
+};
+
 
 //**********************************************************************************************************************
 // Users

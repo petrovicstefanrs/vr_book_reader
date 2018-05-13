@@ -48,7 +48,7 @@ const loginEnd = (state, action) => {
 };
 
 const loginError = (state, action) => {
-	const message = action.data ? action.data.message : action.error ? action.error.message : null;
+	const message = action.data.message;
 
 	const op = {
 		loading: false,
@@ -83,7 +83,7 @@ const loginTokenEnd = (state, action) => {
 };
 
 const loginTokenError = (state, action) => {
-	const message = action.data ? action.data.message : action.error ? action.error.message : null;
+	const message = action.data.message;
 
 	const op = {
 		loading: false,
@@ -109,7 +109,7 @@ const registerStart = state => {
 };
 
 const registerEnd = (state, action) => {
-	const message = action.data ? action.data.message : action.error ? action.error.message : null;
+	const message = action.data.message;
 
 	const op = {
 		loading: false,
@@ -120,7 +120,7 @@ const registerEnd = (state, action) => {
 };
 
 const registerError = (state, action) => {
-	const message = action.data ? action.data.message : action.error ? action.error.message : null;
+	const message = action.data.message;
 
 	const op = {
 		loading: false,
@@ -147,15 +147,6 @@ const logoutEnd = state => {
 
 // MISC
 
-const clearMessage = state => {
-	const op = {
-		error: null,
-		message: null,
-	};
-
-	return updateAuth(state, op);
-};
-
 const setAuthRedirect = (state, action) => {
 	return updateAuth(state, {
 		redirect: action.data,
@@ -178,6 +169,5 @@ export default {
 
 	[TYPES.LOGOUT_START]: logoutStart,
 	[TYPES.LOGOUT_END]: logoutEnd,
-	[TYPES.AUTH_CLEAR_MESSAGE]: clearMessage,
 	[TYPES.AUTH_SET_REDIRECT]: setAuthRedirect,
 };

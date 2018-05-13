@@ -36,7 +36,7 @@ const styles = theme => ({
 		flexDirection: 'column',
 	},
 	floatButton: {
-		position: 'absolute',
+		position: 'fixed',
 		bottom: 24,
 		right: 24,
 		zIndex: 999,
@@ -88,6 +88,7 @@ const styles = theme => ({
 		justifyContent: 'center',
 	},
 	card_action_button_wrapper: {
+		backgroundColor: 'rgba(0,0,0,0.5)',
 		position: 'absolute',
 		top: 0,
 		right: 0,
@@ -100,6 +101,9 @@ const styles = theme => ({
 	card_wrapper: {
 		position: 'relative',
 	},
+	is_favourite: {
+		color: theme.palette.secondary.main,
+	}
 });
 
 export default styles;
