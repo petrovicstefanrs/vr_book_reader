@@ -4,10 +4,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
-import lodash from 'lodash';
 
-import Snackbar from 'material-ui/Snackbar';
-import Button from 'material-ui/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import Button from '@material-ui/core/Button';
 
 // Enviroment settings
 
@@ -39,7 +38,7 @@ class Toast extends Component {
 				action={snackbarAction}
 				onClose={() => this.handleToastDismiss(toast.id)}
 				message={toast.message}
-				autoHideDuration={toast.duration}
+				autoHideDuration={/*toast.duration*/null}
 			/>
 		);
 	}

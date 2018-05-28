@@ -1,3 +1,4 @@
+import ENV from "../env";
 /**
  * Standard action generating method
  * @param type
@@ -11,6 +12,16 @@ export function withType(type, ...args) {
 		Object.assign(result, arg);
 	});
 	return result;
+}
+
+
+/**
+ * Create url for static assts served by api
+ * @param {any} url
+ * @returns {string}
+ */
+export function makeAssetUrl(url) {
+	return `${ENV.api.base_url}${url}`;
 }
 
 /**

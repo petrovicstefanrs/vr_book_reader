@@ -26,7 +26,7 @@ const ImageWithFallback = ({image, alt, width, height}) => {
 		const src = image;
 		return (
 			<div style={style} className={`${CLASS} ${CLASS}-image-wrapper`}>
-				<img src={src} alt={alt} title={alt} />
+				<img style={{...style, objectFit: 'cover'}} src={src} alt={alt} title={alt} />
 			</div>
 		);
 	}

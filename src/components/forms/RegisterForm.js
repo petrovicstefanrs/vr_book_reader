@@ -5,10 +5,13 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Card, {CardActions, CardContent, CardHeader} from 'material-ui/Card';
-import {withStyles} from 'material-ui/styles';
-import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 // Enviroment settings
 

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
 import PropTypes from 'prop-types';
 
-import '../../styles/WithDropZone.css';
+import '../styles/WithDropZone.css';
 
 const CLASS = 'DropZone';
 
@@ -69,15 +69,21 @@ class WithDropZone extends Component {
 		return;
 	}
 
-	onDrop(acceptedFiles) {
+	onDrop(acceptedFiles, rejectedFiles) {
+		this.setState({
+			isFileDragged: false,
+		});
 		if (this.props.onDrop) {
-			this.props.onDrop(acceptedFiles);
+			this.props.onDrop(acceptedFiles, rejectedFiles);
 		}
 
 		return;
 	}
 
 	onDropAccepted() {
+		this.setState({
+			isFileDragged: false,
+		});
 		if (this.props.onDropAccepted) {
 			this.props.onDropAccepted();
 		}
@@ -86,6 +92,9 @@ class WithDropZone extends Component {
 	}
 
 	onDropRejected() {
+		this.setState({
+			isFileDragged: false,
+		});
 		if (this.props.onDropRejected) {
 			this.props.onDropRejected();
 		}
@@ -94,6 +103,9 @@ class WithDropZone extends Component {
 	}
 
 	onDragStart() {
+		this.setState({
+			isFileDragged: true,
+		});
 		if (this.props.onDragStart) {
 			this.props.onDragStart();
 		}
@@ -102,6 +114,9 @@ class WithDropZone extends Component {
 	}
 
 	onDragEnter() {
+		this.setState({
+			isFileDragged: true,
+		});
 		if (this.props.onDragEnter) {
 			this.props.onDragEnter();
 		}
@@ -110,6 +125,9 @@ class WithDropZone extends Component {
 	}
 
 	onDragOver() {
+		this.setState({
+			isFileDragged: false,
+		});
 		if (this.props.onDragOver) {
 			this.props.onDragOver();
 		}
@@ -118,6 +136,9 @@ class WithDropZone extends Component {
 	}
 
 	onDragLeave() {
+		this.setState({
+			isFileDragged: false,
+		});
 		if (this.props.onDragLeave) {
 			this.props.onDragLeave();
 		}
@@ -150,10 +171,10 @@ class WithDropZone extends Component {
 				maxSize={this.props.maxSize}
 				minSize={this.props.minSize}
 				className={CLASS + ' ' + this.props.className}
-				activeClassName={this.props.activeClassName}
-				acceptClassName={this.props.acceptClassName}
-				rejectClassName={this.props.rejectClassName}
-				disabledClassName={this.props.disabledClassName}
+				activeClassName={this.props.activeClassName || `${CLASS}-active`}
+				acceptClassName={this.props.acceptClassName || `${CLASS}-accepted`}
+				rejectClassName={this.props.rejectClassName || `${CLASS}-rejected`}
+				disabledClassName={this.props.disabledClassName || `${CLASS}-disabled`}
 				onClick={this.props.onClick}
 				onDrop={this.props.onDrop}
 				onDropAccepted={this.props.onDropAccepted}

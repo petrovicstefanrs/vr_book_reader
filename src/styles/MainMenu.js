@@ -45,7 +45,11 @@ const styles = theme => ({
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
-		marginLeft: theme.spacing.unit * 2,
+		width: 56,
+		margin: 0,
+	},
+	menuItemText: {
+		paddingLeft: 0
 	},
 	drawerPaper: {
 		position: 'relative',

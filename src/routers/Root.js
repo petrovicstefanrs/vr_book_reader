@@ -3,7 +3,8 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
 import {Router} from 'react-router-dom';
-import {MuiThemeProvider, createMuiTheme} from 'material-ui/styles';
+import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
+import indigo from '@material-ui/core/colors/indigo';
 // Enviroment settings
 
 // Containers
@@ -25,7 +26,7 @@ const muiTheme = createMuiTheme({
 			// Name of the styleSheet
 			root: {
 				// Name of the rule
-				backgroundColor: '#3f51b5',
+				backgroundColor: indigo[500],
 				color: 'white',
 			},
 		},

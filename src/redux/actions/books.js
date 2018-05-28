@@ -22,6 +22,24 @@ export const getBooks = () => (dispatch, getState, container) => {
 		});
 };
 
+export const getBook = bookId => (dispatch, getState, container) => {
+	dispatch(withType(TYPES.GET_BOOK_BY_ID_START));
+
+	return api
+		.getBookById(container.http, bookId)
+		.then(data => {
+			dispatch(
+				withType(TYPES.GET_BOOK_BY_ID_END, {
+					error: null,
+					data: data,
+				})
+			);
+		})
+		.catch(error => {
+			dispatch(withType(TYPES.GET_BOOK_BY_ID_ERROR, {error: error, data: null}));
+		});
+};
+
 export const toggleFavouriteBook = bookId => (dispatch, getState, container) => {
 	dispatch(withType(TYPES.FAVOURITE_BOOKS_START));
 
@@ -63,5 +81,51 @@ export const deleteBook = bookId => (dispatch, getState, container) => {
 		})
 		.catch(error => {
 			dispatch(withType(TYPES.DELETE_BOOKS_ERROR, {error: error, data: null}));
+		});
+};
+
+export const uploadBook = file => (dispatch, getState, container) => {
+	dispatch(withType(TYPES.UPLOAD_BOOKS_START));
+
+	return api
+		.uploadBook(container.http, file)
+		.then(data => {
+			dispatch(
+				withType(TYPES.UPLOAD_BOOKS_END, {
+					error: null,
+					data: data,
+				})
+			);
+			dispatch(getBooks());
+			const message = `${data.name} successfully uploaded.`;
+			dispatch(addToast(new Toast(message)));
+		})
+		.catch(error => {
+			const message = `Error: ${error && error.message || 'Undefined'}`;
+			dispatch(addToast(new Toast(message)));
+			dispatch(withType(TYPES.UPLOAD_BOOKS_ERROR, {error: error, data: null}));
+		});
+};
+
+export const updateBookThumbnail = (file, bookId) => (dispatch, getState, container) => {
+	dispatch(withType(TYPES.UPDATE_BOOK_THUMBNAIL_START));
+
+	return api
+		.updateBookThumbnail(container.http, file, bookId)
+		.then(data => {
+			dispatch(
+				withType(TYPES.UPDATE_BOOK_THUMBNAIL_END, {
+					error: null,
+					data: data,
+				})
+			);
+			dispatch(getBook(bookId));
+			const message = `${data.name} cover successfully updated.`;
+			dispatch(addToast(new Toast(message)));
+		})
+		.catch(error => {
+			const message = `Error: ${error && error.message || 'Undefined'}`;
+			dispatch(addToast(new Toast(message)));
+			dispatch(withType(TYPES.UPDATE_BOOK_THUMBNAIL_ERROR, {error: error, data: null}));
 		});
 };

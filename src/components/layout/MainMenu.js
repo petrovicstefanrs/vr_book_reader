@@ -8,13 +8,16 @@ import lodash from 'lodash';
 import FontAwesome from 'react-fontawesome';
 import classNames from 'classnames';
 
-import Drawer from 'material-ui/Drawer';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import List, {ListItem, ListItemIcon, ListItemText} from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import IconButton from 'material-ui/IconButton';
-import {withStyles} from 'material-ui/styles';
+import Drawer from '@material-ui/core/Drawer';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 // Enviroment Settings
 
@@ -42,6 +45,18 @@ const MENU_ITEMS = {
 		route: routes.DASHBOARD_FAVOURITES,
 		title: pages.FAVOURITES,
 		icon: FA.heart,
+	},
+	store: {
+		route: routes.DASHBOARD_STORE,
+		title: pages.STORE,
+		icon: FA.shopping_cart,
+		coming_soon: true,
+	},
+	editor: {
+		route: routes.DASHBOARD_EDITOR,
+		title: pages.EDITOR,
+		icon: FA.tree,
+		coming_soon: true,
 	},
 	profile: {
 		route: routes.DASHBOARD_SETTINGS,
@@ -101,7 +116,8 @@ class MainMenu extends Component {
 	renderMenuItems() {
 		const classes = this.props.classes;
 		return lodash.map(MENU_ITEMS, item => {
-			let active = this.props.selected === item.title ? 'active' : null;
+			const active = this.props.selected === item.title ? 'active' : null;
+			const title = item.coming_soon ? item.title+' (Coming Soon)' : item.title;
 			return (
 				<Link to={item.route} key={item.title}>
 					<ListItem
@@ -113,7 +129,7 @@ class MainMenu extends Component {
 						<ListItemIcon className={classes.menuIcon}>
 							<FontAwesome icon={item.icon} name={item.icon} />
 						</ListItemIcon>
-						<ListItemText primary={item.title} />
+						<ListItemText className={classes.menuItemText} primary={title} />
 					</ListItem>
 				</Link>
 			);
@@ -159,7 +175,7 @@ class MainMenu extends Component {
 								<ListItemIcon className={classes.menuIcon}>
 									<FontAwesome icon={FA.sign_out} name={FA.sign_out} />
 								</ListItemIcon>
-								<ListItemText primary="Log out" />
+								<ListItemText className={classes.menuItemText} primary="Log out" />
 							</ListItem>
 						</List>
 					</div>

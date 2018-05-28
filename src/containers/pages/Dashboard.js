@@ -7,11 +7,11 @@ import {Link} from 'react-router-dom';
 import lodash from 'lodash';
 import FontAwesome from 'react-fontawesome';
 
-import Divider from 'material-ui/Divider';
-import Typography from 'material-ui/Typography';
-import {withStyles} from 'material-ui/styles';
-import Card, {CardActions, CardContent} from 'material-ui/Card';
-import Button from 'material-ui/Button';
+import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 // Enviroment Settings
 
@@ -19,9 +19,11 @@ import FA from '../../lib/font_awesome';
 import * as routes from '../../lib/routes';
 import {setMenuActive} from '../../redux/actions/menu';
 import * as pages from '../../consts/pages';
+
 // Components
 
 import AsPageContent from '../../hoc/AsPageContent';
+import ComingSoonSign from '../../components/graphics/ComingSoonSign';
 
 // Component Code
 
@@ -33,19 +35,33 @@ const CARDS = {
 		route: routes.DASHBOARD_LIBRARY,
 		title: pages.LIBRARY,
 		icon: FA.book,
-		description: 'All your eBooks and Comics in one place.',
+		description: 'Read, Edit, Manage... All your books in one place.',
 	},
 	favourites: {
 		route: routes.DASHBOARD_FAVOURITES,
 		title: pages.FAVOURITES,
 		icon: FA.heart,
-		description: 'Read your favourite eBooks and Comics again!',
+		description: 'Want to read your favourite books again? This is the place.',
+	},
+	store: {
+		route: routes.DASHBOARD_STORE,
+		title: pages.STORE,
+		icon: FA.shopping_cart,
+		description: 'Buy comics, books or enviroments.',
+		coming_soon: true,
+	},
+	editor: {
+		route: routes.DASHBOARD_EDITOR,
+		title: pages.EDITOR,
+		icon: FA.tree,
+		description: 'Create and publish your environments.',
+		coming_soon: true,
 	},
 	profile: {
 		route: routes.DASHBOARD_SETTINGS,
 		title: pages.PROFILE,
 		icon: FA.cog,
-		description: 'Full control over your profile!',
+		description: 'Manage your profile!',
 	},
 };
 
@@ -84,6 +100,7 @@ class Dashboard extends Component {
 				>
 					<Card className={classes.card}>
 						<CardContent className={classes.withmedia}>
+							{card.coming_soon && <ComingSoonSign className={classes.coming_soon}/>}
 							<FontAwesome icon={card.icon} name={card.icon} />
 						</CardContent>
 						<CardContent className={classes.content}>

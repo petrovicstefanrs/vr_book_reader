@@ -28,22 +28,38 @@ export const register = (http, email, password, username) => {
 //**********************************************************************************************************************
 // Books
 
-export const getBooks = (http) => {
+export const getBooks = http => {
 	return http.get('/api/books', null, null);
+};
+
+export const getBookById = (http, bookId) => {
+	return http.get('/api/books/'+bookId, null, null);
 };
 
 export const toggleFavouriteBook = (http, bookId) => {
 	return http.put('/api/books/favourite', null, {
-		bookId
+		bookId,
 	});
 };
 
 export const deleteBook = (http, bookId) => {
 	return http.del('/api/books/delete', null, {
-		bookId
+		bookId,
 	});
 };
 
+export const uploadBook = (http, file) => {
+	const data = new FormData();
+	data.append(file.name, file);
+	return http.post('/api/books/upload', null, data);
+};
+
+export const updateBookThumbnail = (http, file, bookId) => {
+	const data = new FormData();
+	data.append(file.name, file);
+	data.append('bookId', bookId);
+	return http.post('/api/books/upload/thumbnail', null, data);
+};
 
 //**********************************************************************************************************************
 // Users

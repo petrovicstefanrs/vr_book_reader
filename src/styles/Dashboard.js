@@ -12,6 +12,14 @@ const styles = theme => ({
 			duration: theme.transitions.duration.enteringScreen,
 		}),
 	},
+	coming_soon: {
+		bottom: 20,
+		right: -95,
+		position: 'absolute',
+		width: 300,
+		height: 35,
+        transform: 'rotate(-30deg)',
+	},
 	withmedia: {
 		height: 200,
 		backgroundColor: theme.palette.primary.main,
@@ -20,12 +28,14 @@ const styles = theme => ({
 		justifyContent: 'center',
 		alignItems: 'center',
 		fontSize: '5em',
+		position: 'relative',
+		overflow: 'hidden',
 	},
 	content: {
 		maxHeight: 124,
 		minHeight: 124,
 		overflow: 'hidden',
-		padding: 16
+		padding: 16,
 	},
 	container: {
 		width: 'calc(100% + 16px)',

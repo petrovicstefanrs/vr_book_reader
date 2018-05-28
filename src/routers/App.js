@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Switch} from 'react-router-dom';
 import {withRouter} from 'react-router';
-import CssBaseline from 'material-ui/CssBaseline';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 // Enviroment settings
 
@@ -21,13 +21,14 @@ import LogIn from '../containers/LogIn';
 import Register from '../containers/Register';
 import MainMenu from '../components/layout/MainMenu';
 import Dashboard from '../containers/pages/Dashboard';
-import Library from '../containers/pages/Library';
+import Favourites from '../containers/pages/Favourites';
 
 // Components
 
 import AuthRoute from '../hoc/AuthRoute';
 import StretchableSpinner from '../containers/StretchableSpinner';
 import Toast from '../components/notifications/Toast';
+import LibraryRoot from './LibraryRoot';
 
 const CLASS = 'top-App';
 
@@ -68,10 +69,16 @@ class App extends Component {
 					isPrivate={true}
 				/>
 				<AuthRoute
-					exact
 					name="DashboardLibrary"
 					path={routes.DASHBOARD_LIBRARY}
-					component={Library}
+					component={LibraryRoot}
+					isPrivate={true}
+				/>
+				<AuthRoute
+					exact
+					name="DashboardFavourites"
+					path={routes.DASHBOARD_FAVOURITES}
+					component={Favourites}
 					isPrivate={true}
 				/>
 				<AuthRoute name="Not found" path="*" component={NotFound} isPrivate={true} />
