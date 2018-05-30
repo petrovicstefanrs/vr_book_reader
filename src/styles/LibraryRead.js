@@ -32,6 +32,7 @@ const styles = theme => ({
 	player: {
 		width: '100%',
 		height: 'calc(100vh - 160px)',
+		zIndex: '99999'
 	},
 });
 

@@ -35,7 +35,7 @@ class Button extends Component {
 		return (
 			<Entity width={width} height={height} primitive= "a-plane"
 			material="shader: flat; color: white;" events={{click: this.onClick}} position={position}>
-				{text && <Entity primitive="a-text" value={text} align="center" color="black" anchor="center" />}
+				{text && <Entity primitive="a-text" width="3" value={text} align="center" color="black" anchor="center" baseline="center" />}
 			</Entity>
 		);
 	}

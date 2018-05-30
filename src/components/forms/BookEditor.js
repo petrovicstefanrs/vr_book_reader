@@ -30,7 +30,7 @@ import {
 	FILE_SIZE_LABEL,
 } from '../../consts/uploads';
 import {makeAssetUrl} from '../../lib/util';
-import {updateBookThumbnail} from '../../redux/actions/books';
+import {updateBookThumbnail, updateBookDetails} from '../../redux/actions/books';
 import {addToast} from '../../redux/actions/application';
 import {Toast} from '../../consts/toasts';
 
@@ -57,7 +57,7 @@ class BookEditor extends Component {
 
 		this.state = {
 			name: props.book.name,
-			description: props.book.description,
+			description: props.book.description || '',
 			thumbnail: props.book.thumbnail,
 		};
 
@@ -80,6 +80,29 @@ class BookEditor extends Component {
 		}
 		const file = files[0];
 		updateThumbnail && updateThumbnail(file, book.id);
+	};
+
+	canUpdateDetails = () => {
+		const {name, description} = this.state;
+		const {book} = this.props;
+
+		const nameChanged = name && book.name !== name;
+		const descriptionChanged = description && book.description !== description;
+		return nameChanged || descriptionChanged;
+	};
+
+	handleDetails = () => {
+		const {updateBookDetails, book} = this.props;
+		const {name, description} = this.state;
+		const payload = {
+			name: name || '',
+			description: description || '',
+			bookId: book.id
+		};
+
+		if (this.canUpdateDetails()) {
+			updateBookDetails && updateBookDetails(payload);
+		}
 	};
 
 	handleRejected = rejected => {
@@ -164,7 +187,13 @@ class BookEditor extends Component {
 				</CardContent>
 				<CardActions>
 					CardContent
-					<Button className={classes.card_button} size="medium" color="primary">
+					<Button
+						disabled={!this.canUpdateDetails()}
+						onClick={this.handleDetails}
+						className={classes.card_button}
+						size="medium"
+						color="primary"
+					>
 						Save Changes
 					</Button>
 				</CardActions>
@@ -172,9 +201,9 @@ class BookEditor extends Component {
 		);
 	};
 
-	renderVrEditor = () => {
-		return <VrScene book={this.props.book}/>;
-	}
+	// renderVrEditor = () => {
+	// 	return <VrScene book={this.props.book}/>;
+	// }
 
 	render() {
 		const {classes} = this.props;
@@ -182,7 +211,6 @@ class BookEditor extends Component {
 			<div className={classes.editor_content}>
 				{this.renderCoverEditor()}
 				{this.renderDetailsEditor()}
-				{this.renderVrEditor()}
 			</div>
 		);
 	}
@@ -194,6 +222,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
 	updateThumbnail: (file, bookId) => dispatch(updateBookThumbnail(file, bookId)),
+	updateBookDetails: (payload) => dispatch(updateBookDetails(payload)),
 	addToast: message => dispatch(addToast(message)),
 	register: (username, email, password) => dispatch(register(username, email, password)),
 });

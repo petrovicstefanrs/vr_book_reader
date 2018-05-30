@@ -61,6 +61,10 @@ export const updateBookThumbnail = (http, file, bookId) => {
 	return http.post('/api/books/upload/thumbnail', null, data);
 };
 
+export const updateBookDetails = (http, payload) => {
+	return http.put('/api/books/details', null, payload);
+};
+
 //**********************************************************************************************************************
 // Users
 

@@ -101,7 +101,7 @@ export const uploadBook = file => (dispatch, getState, container) => {
 			dispatch(addToast(new Toast(message)));
 		})
 		.catch(error => {
-			const message = `Error: ${error && error.message || 'Undefined'}`;
+			const message = `Error: ${error ? error.message : 'Undefined'}`;
 			dispatch(addToast(new Toast(message)));
 			dispatch(withType(TYPES.UPLOAD_BOOKS_ERROR, {error: error, data: null}));
 		});
@@ -124,8 +124,30 @@ export const updateBookThumbnail = (file, bookId) => (dispatch, getState, contai
 			dispatch(addToast(new Toast(message)));
 		})
 		.catch(error => {
-			const message = `Error: ${error && error.message || 'Undefined'}`;
+			const message = `Error: ${error ? error.message : 'Undefined'}`;
 			dispatch(addToast(new Toast(message)));
 			dispatch(withType(TYPES.UPDATE_BOOK_THUMBNAIL_ERROR, {error: error, data: null}));
+		});
+};
+
+export const updateBookDetails = (payload) => (dispatch, getState, container) => {
+	dispatch(withType(TYPES.UPDATE_BOOK_DETAILS_START));
+	return api
+		.updateBookDetails(container.http, payload)
+		.then(data => {
+			dispatch(
+				withType(TYPES.UPDATE_BOOK_DETAILS_END, {
+					error: null,
+					data: data,
+				})
+			);
+			dispatch(getBook(payload.bookId));
+			const message = `${data.name} details were successfully updated.`;
+			dispatch(addToast(new Toast(message)));
+		})
+		.catch(error => {
+			const message = `Error: ${error ? error.message : 'Undefined'}`;
+			dispatch(addToast(new Toast(message)));
+			dispatch(withType(TYPES.UPDATE_BOOK_DETAILS_ERROR, {error: error, data: null}));
 		});
 };

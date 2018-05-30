@@ -132,6 +132,7 @@ const mapStateToProps = state => ({
 							camera: true,
 							position: '0 1.6 0',
 							'wasd-controls': 'true',
+							'acceleration': '40',
 							'look-controls': 'pointerLockEnabled: true',
 						},
 						children: [
@@ -139,6 +140,7 @@ const mapStateToProps = state => ({
 								type: 'entity',
 								props: {
 									primitive: 'a-cursor',
+									position: '0 0 -0.5'
 								},
 							},
 						],

@@ -6,7 +6,6 @@ import {Entity} from 'aframe-react';
 import {BOOK_MODES} from '../../../consts/aframe';
 import Page from './Page';
 import Button from './Button';
-import { makeAssetUrl } from '../../../lib/util';
 
 const CYCLE_DIRECTIONS = {
 	previous: 'previous',
@@ -22,16 +21,18 @@ class Book extends Component {
 		pageWidth: PropTypes.number,
 		buttonHeight: PropTypes.number,
 		buttonWidth: PropTypes.number,
+		borderSize: PropTypes.number,
 	};
 
 	static defaultProps = {
 		pages: [],
 		position: {x: 0, y: 0, z: 0},
-		mode: BOOK_MODES.double,
-		pageHeight: 1.5,
-		pageWidth: 1,
-		buttonHeight: null,
-		buttonWidth: 0.2,
+		mode: BOOK_MODES.single,
+		pageHeight: 1,
+		pageWidth: 0.65,
+		buttonHeight: 0.15,
+		buttonWidth: 0.15,
+		borderSize: 0.05,
 	};
 
 	constructor(props) {
@@ -81,30 +82,44 @@ class Book extends Component {
 	};
 
 	renderPages = () => {
-		const {mode, pageHeight, pageWidth, pages} = this.props;
+		const {mode, pageHeight, pageWidth, pages, borderSize} = this.props;
 		const {currentPage} = this.state;
 		const numOfPages = pages.length - 1;
 
 		let content;
 		if (mode === BOOK_MODES.single) {
 			const src = currentPage > numOfPages ? null : pages[currentPage];
-			content = <Page height={pageHeight} width={pageWidth} src={src} />;
+			content = (
+				<Entity
+					primitive="a-plane"
+					material="shader: flat; color: black;"
+					width={pageWidth + borderSize}
+					height={pageHeight + borderSize}
+				>
+					<Page height={pageHeight} width={pageWidth} src={src} position={{x: 0, y: 0, z: 0.001}} />
+				</Entity>
+			);
 		} else {
 			const pageOneSrc = currentPage > numOfPages ? null : pages[currentPage];
 			const pageTwoSrc = currentPage + 1 > numOfPages ? null : pages[currentPage + 1];
 			content = (
-				<Entity>
+				<Entity
+					primitive="a-plane"
+					material="shader: flat; color: black;"
+					width={pageWidth * 2 + borderSize}
+					height={pageHeight + borderSize}
+				>
 					<Page
 						src={pageOneSrc}
 						height={pageHeight}
 						width={pageWidth}
-						position={{x: -pageWidth / 2, y: 0, z: 0}}
+						position={{x: -pageWidth / 2, y: 0, z: 0.001}}
 					/>
 					<Page
 						src={pageTwoSrc}
 						height={pageHeight}
 						width={pageWidth}
-						position={{x: pageWidth / 2, y: 0, z: 0}}
+						position={{x: pageWidth / 2, y: 0, z: 0.001}}
 					/>
 				</Entity>
 			);
@@ -113,49 +128,70 @@ class Book extends Component {
 		return content;
 	};
 
-	render() {
-		const {pages, pageHeight, pageWidth, buttonHeight, buttonWidth, mode} = this.props;
-		const {currentPage, position} = this.state;
+	renderControls = () => {
+		const {pages, pageWidth, buttonHeight, buttonWidth, mode, borderSize} = this.props;
+		const {currentPage} = this.state;
 
 		const numOfPages = pages.length - 1;
 		const nextDisabled = currentPage + 1 > numOfPages;
 		const previousDisabled = currentPage - 1 < 0;
 
-		let previousButtonPosition, nextButtonPosition;
+		let previousButtonPosition, nextButtonPosition, controlsWidth;
+		let controlsHeight = buttonHeight + borderSize;
+
 		if (mode === BOOK_MODES.single) {
+			const ButtonXAxisOffset = pageWidth / 2 + buttonWidth / 2 + borderSize / 2;
 			previousButtonPosition = {
-				x: -(pageWidth / 2 + buttonWidth / 2),
-				y: position.y,
-				z: position.z,
+				x: -ButtonXAxisOffset,
+				y: 0,
+				z: 0.001,
 			};
-			nextButtonPosition = {x: pageWidth / 2 + buttonWidth / 2, y: position.y, z: position.z};
+			nextButtonPosition = {x: ButtonXAxisOffset, y: 0, z: 0.001};
+			controlsWidth = pageWidth + buttonWidth * 2 + borderSize * 2;
 		} else {
-			previousButtonPosition = {x: -(pageWidth + buttonWidth / 2), y: position.y, z: position.z};
-			nextButtonPosition = {x: pageWidth + buttonWidth / 2, y: position.y, z: position.z};
+			const ButtonXAxisOffset = pageWidth + buttonWidth / 2 + borderSize / 2;
+			previousButtonPosition = {x: -ButtonXAxisOffset, y: 0, z: 0.001};
+			nextButtonPosition = {x: ButtonXAxisOffset, y: 0, z: 0.001};
+			controlsWidth = pageWidth * 2 + buttonWidth * 2 + borderSize * 2;
 		}
+
+		return (
+			<Entity
+				primitive="a-plane"
+				material="shader: flat; color: black;"
+				height={controlsHeight}
+				width={controlsWidth}
+			>
+				<Button
+					id="button"
+					position={previousButtonPosition}
+					height={buttonHeight}
+					width={buttonWidth}
+					disabled={previousDisabled}
+					text="<"
+					onClick={() => this.cyclePage(CYCLE_DIRECTIONS.previous)}
+				/>
+				<Button
+					id="button"
+					position={nextButtonPosition}
+					height={buttonHeight}
+					width={buttonWidth}
+					disabled={nextDisabled}
+					text=">"
+					onClick={() => this.cyclePage(CYCLE_DIRECTIONS.next)}
+				/>
+			</Entity>
+		);
+	};
+
+	render() {
+		const {position} = this.state;
 
 		return (
 			<Entity bring-to-front position={position}>
 				<Entity look-at="[camera]">
-					<Button
-						id="button"
-						position={previousButtonPosition}
-						height={buttonHeight || pageHeight}
-						width={buttonWidth}
-						disabled={previousDisabled}
-						text="<"
-						onClick={() => this.cyclePage(CYCLE_DIRECTIONS.previous)}
-					/>
 					{this.renderPages()}
-					<Button
-						id="button"
-						position={nextButtonPosition}
-						height={buttonHeight || pageHeight}
-						width={buttonWidth}
-						disabled={nextDisabled}
-						text=">"
-						onClick={() => this.cyclePage(CYCLE_DIRECTIONS.next)}
-					/>
+					{this.renderControls()}
 				</Entity>
 			</Entity>
 		);

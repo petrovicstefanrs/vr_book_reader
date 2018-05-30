@@ -118,6 +118,23 @@ const updateThumbnailError = (state, action) => {
 	return updateBooks(state, data);
 };
 
+// Update Details ---------------------------------------------------
+
+const updateDetailsStart = (state, action) => {
+	const data = {error: null};
+	return updateBooks(state, data);
+};
+
+const updateDetailsEnd = (state, action) => {
+	const data = {error: null};
+	return updateBooks(state, data);
+};
+
+const updateDetailsError = (state, action) => {
+	const data = {error: action.error};
+	return updateBooks(state, data);
+};
+
 // Exports ------------------------------------------------------------
 
 export default {
@@ -140,4 +157,7 @@ export default {
 	[TYPES.UPDATE_BOOK_THUMBNAIL_START]: updateThumbnailStart,
 	[TYPES.UPDATE_BOOK_THUMBNAIL_END]: updateThumbnailEnd,
 	[TYPES.UPDATE_BOOK_THUMBNAIL_ERROR]: updateThumbnailError,
+	[TYPES.UPDATE_BOOK_DETAILS_START]: updateDetailsStart,
+	[TYPES.UPDATE_BOOK_DETAILS_END]: updateDetailsEnd,
+	[TYPES.UPDATE_BOOK_DETAILS_ERROR]: updateDetailsError,
 };
