@@ -6,6 +6,7 @@ class Page extends Component {
 	static propTypes = {
 		src: PropTypes.string,
 		position: PropTypes.object,
+		rotation: PropTypes.object,
 		width: PropTypes.number,
 		height: PropTypes.number,
 	};
@@ -13,12 +14,13 @@ class Page extends Component {
 	static defaultProps = {
 		src: null,
         position: {x: 0, y: 0, z: 0},
+        rotation: {x: 0, y: 0, z: 0},
         width: 1,
         height: 1.5,
 	};
 
 	render() {
-		const {src, width, height, position} = this.props;
+		const {src, width, height, position, rotation} = this.props;
 		return (
 			<Entity
 				primitive="a-image"
@@ -28,6 +30,7 @@ class Page extends Component {
 				}}
                 src={src}
 				position={position}
+				rotation={rotation}
 			/>
 		);
 	}

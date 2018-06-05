@@ -4,20 +4,17 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import lodash from 'lodash';
-import FontAwesome from 'react-fontawesome';
 
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import Button from '@material-ui/core/Button';
 
 // Enviroment Settings
 
 import * as routes from '../../lib/routes';
-import FA from '../../lib/font_awesome';
 import {getBook} from '../../redux/actions/books';
 import {getBookById} from '../../redux/selectors/books';
+import {getEnvironments} from '../../redux/actions/vrenvironments';
 
 // Components
 
@@ -36,6 +33,8 @@ class LibraryEdit extends Component {
 		book: PropTypes.object,
 		getBook: PropTypes.func.isRequired,
 		match: PropTypes.object.isRequired,
+		environments: PropTypes.array.isRequired,
+		getEnvironments: PropTypes.func.isRequired,
 	};
 
 	static defaultProps = {};
@@ -44,16 +43,17 @@ class LibraryEdit extends Component {
 		super(props);
 	}
 
-	componentDidMount() {
-		const {getBook, book, bookId} = this.props;
+	componentWillMount() {
+		const {getBook, book, bookId, getEnvironments} = this.props;
 		if (!book && bookId) {
 			getBook && getBook(bookId);
 		}
+		getEnvironments && getEnvironments();
 	}
 
 	renderEditor() {
-		const {book} = this.props;
-		return <BookEditor book={book} />;
+		const {book, environments} = this.props;
+		return <BookEditor book={book} environments={environments}/>;
 	}
 
 	renderBookNotFound = () => {
@@ -114,12 +114,14 @@ const mapStateToProps = (state, props) => {
 	return {
 		bookId,
 		book: getBookById(state, bookId),
-		loading: state.books.loading,
+		loading: state.books.loading || state.vrenvironments.loading,
+		environments: state.vrenvironments.all_environments,
 	};
 };
 
 const mapDispatchToProps = dispatch => ({
 	getBook: id => dispatch(getBook(id)),
+	getEnvironments: () => dispatch(getEnvironments()),
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(LibraryEdit));

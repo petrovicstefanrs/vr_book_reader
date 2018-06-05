@@ -15,6 +15,8 @@ const ENV = {
 			store: false,
 		},
 	},
+
+	isDevEnv: false
 };
 
 export default ENV;

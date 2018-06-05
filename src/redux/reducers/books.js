@@ -5,6 +5,7 @@ const INITIAL_STATE = {
 		all_books: [],
 		loading: false,
 		uploading: false,
+		setting_env: false,
 		active_book: null,
 		error: null,
 	},
@@ -135,6 +136,23 @@ const updateDetailsError = (state, action) => {
 	return updateBooks(state, data);
 };
 
+// Update Environment ---------------------------------------------------
+
+const updateEnvironmentStart = (state, action) => {
+	const data = {error: null, setting_env: true};
+	return updateBooks(state, data);
+};
+
+const updateEnvironmentEnd = (state, action) => {
+	const data = {error: null, setting_env: false};
+	return updateBooks(state, data);
+};
+
+const updateEnvironmentError = (state, action) => {
+	const data = {error: action.error, setting_env: false};
+	return updateBooks(state, data);
+};
+
 // Exports ------------------------------------------------------------
 
 export default {
@@ -160,4 +178,7 @@ export default {
 	[TYPES.UPDATE_BOOK_DETAILS_START]: updateDetailsStart,
 	[TYPES.UPDATE_BOOK_DETAILS_END]: updateDetailsEnd,
 	[TYPES.UPDATE_BOOK_DETAILS_ERROR]: updateDetailsError,
+	[TYPES.UPDATE_BOOK_ENVIRONMENT_START]: updateEnvironmentStart,
+	[TYPES.UPDATE_BOOK_ENVIRONMENT_END]: updateEnvironmentEnd,
+	[TYPES.UPDATE_BOOK_ENVIRONMENT_ERROR]: updateEnvironmentError,
 };

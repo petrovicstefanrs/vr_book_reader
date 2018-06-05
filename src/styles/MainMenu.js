@@ -75,7 +75,7 @@ const styles = theme => ({
 		width: drawerWidth,
 	},
 	activeItem: {
-		backgroundColor: theme.palette.grey[300],
+		backgroundColor: theme.palette.action.selected
 	},
 });
 

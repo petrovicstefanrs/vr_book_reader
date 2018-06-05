@@ -6,6 +6,6 @@ export const BOOK_THUMBNAIL = {
 };
 
 export const BOOK_BIG_THUMBNAIL = {
-	width: 200,
-	height: 256,
+	width: 240,
+	height: 320,
 };

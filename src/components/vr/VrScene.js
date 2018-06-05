@@ -1,12 +1,16 @@
 // Node Modules
 import 'aframe';
 import 'aframe-extras';
+import 'aframe-environment-component';
 import 'aframe-effects';
 import 'aframe-particle-system-component';
 import 'aframe-look-at-component';
+import 'aframe-fps-counter-component';
+import './a_components/disable-inspector';
 import {Entity, Scene, Camera} from 'aframe-react';
 
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -16,9 +20,11 @@ import lodash from 'lodash';
 // Enviroment settings
 
 import {makeAssetUrl} from '../../lib/util';
-import Book from './components/Book';
+import ENV from '../../env';
 
 // Components
+
+import Book from './components/Book';
 
 // Component Code
 
@@ -44,9 +50,12 @@ class VrScene extends Component {
 	static propTypes = {
 		scene: PropTypes.object.isRequired,
 		book: PropTypes.object,
+		settingEnv: PropTypes.bool,
 	};
 
-	static defaultProps = {};
+	static defaultProps = {
+		book: null,
+	};
 
 	constructor(props) {
 		super(props);
@@ -67,14 +76,36 @@ class VrScene extends Component {
 		const Type = AframeComponents[obj.type];
 		const children = obj.children ? obj.children.map(this.JSONtoAFRAME) : [];
 		const props = obj.props;
+		const shouldRenderDevStats =
+			obj.type === ComponentTypes.camera || (props && props.camera && ENV.isDevEnv);
 
 		if (props && props.src) {
 			props.src = makeAssetUrl(props.src);
 		}
 
+		if (obj.type === ComponentTypes.scene) {
+			if (!ENV.isDevEnv) {
+				props['disable-inspector'] = true;
+			}
+		}
+
 		if (obj.type === ComponentTypes.book) {
+			// Early return if we don;t want to render the book, just the enviroment
+			if (!this.props.book) {
+				return;
+			}
+
 			const pages = this.prepareBookPages();
 			return <Type key={key} {...props} pages={pages} look-at="#camera" />;
+		}
+
+		if (shouldRenderDevStats) {
+			return (
+				<Type key={key} {...props}>
+					<Entity fps-counter />
+					{children}
+				</Type>
+			);
 		}
 
 		return (
@@ -91,114 +122,17 @@ class VrScene extends Component {
 	};
 
 	render() {
-		return this.renderVrEditor();
+		const {settingEnv} = this.props;
+		if (settingEnv) {
+			return null;
+		}
+		const scene = this.renderVrEditor();
+		return scene;
 	}
 }
 
 const mapStateToProps = state => ({
-	scene: {
-		type: 'scene',
-		props: {
-			embedded: true,
-			environment:
-				'ground: noise; preset: forest; skyType: gradient; groundTexture: none; flatShading: true; groundColor: #24531C; shadow: true; fog: 0.3; playArea: 1',
-		},
-		children: [
-			{
-				type: 'assets',
-				props: {},
-				children: [
-					{
-						type: 'asset_item',
-						props: {
-							id: 'trees-gltf',
-							src: 'trees/scene.gltf',
-						},
-					},
-				],
-			},
-			{
-				type: 'entity',
-				props: {
-					id: 'rig',
-					position: '0.5 0 -4',
-					rotation: '0 0 0',
-				},
-				children: [
-					{
-						type: 'entity',
-						props: {
-							id: 'camera',
-							camera: true,
-							position: '0 1.6 0',
-							'wasd-controls': 'true',
-							'acceleration': '40',
-							'look-controls': 'pointerLockEnabled: true',
-						},
-						children: [
-							{
-								type: 'entity',
-								props: {
-									primitive: 'a-cursor',
-									position: '0 0 -0.5'
-								},
-							},
-						],
-					},
-				],
-			},
-			{
-				type: 'book',
-				props: {
-					position: '0.5 1.6 -5'
-				}
-			},
-			{
-				type: 'entity',
-				props: {
-					position: '0.0 0.0 -3.0',
-				},
-				children: [
-					{
-						type: 'entity',
-						props: {
-							light: 'type: point; intensity: 5; distance: 10; decay: 2',
-							position: '0.0 0.0 0.0',
-						},
-					},
-					{
-						type: 'entity',
-						children: [
-							{
-								type: 'entity',
-								props: {
-									position: '0.0 1.5 0.0',
-								},
-							},
-						],
-					},
-				],
-			},
-			{
-				type: 'entity',
-				props: {
-					position: '0.0 0.0 -3.0',
-				},
-				children: [
-					{
-						type: 'entity',
-						props: {
-							'gltf-model': '#trees-gltf',
-							scale: '0.5 0.5 0.5',
-							position: '0.0 -0.5 0',
-							rotation: '0 35 0',
-							shadow: 'receive: false; cast: true',
-						},
-					},
-				],
-			},
-		],
-	},
+	settingEnv: state.books.setting_env,
 });
 
 const mapDispatchToProps = dispatch => ({});

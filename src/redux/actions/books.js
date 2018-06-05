@@ -151,3 +151,22 @@ export const updateBookDetails = (payload) => (dispatch, getState, container) =>
 			dispatch(withType(TYPES.UPDATE_BOOK_DETAILS_ERROR, {error: error, data: null}));
 		});
 };
+
+export const updateBookEnvironment = (payload) => (dispatch, getState, container) => {
+	dispatch(withType(TYPES.UPDATE_BOOK_ENVIRONMENT_START));
+	return api
+		.updateBookEnvironment(container.http, payload)
+		.then(data => {
+			dispatch(
+				withType(TYPES.UPDATE_BOOK_ENVIRONMENT_END, {
+					error: null,
+					data: data,
+				})
+			);
+		})
+		.catch(error => {
+			const message = `Error: ${error ? error.message : 'Undefined'}`;
+			dispatch(addToast(new Toast(message)));
+			dispatch(withType(TYPES.UPDATE_BOOK_ENVIRONMENT_ERROR, {error: error, data: null}));
+		});
+};

@@ -1,0 +1,6 @@
+.rs-base {
+    right: 20px !important;
+    top: 80px !important;
+    left: unset !important;
+    z-index: 99999;
+}

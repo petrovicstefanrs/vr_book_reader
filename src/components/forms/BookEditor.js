@@ -1,27 +1,19 @@
-// Node Modules
-import 'aframe';
-import 'aframe-environment-component';
-import {Entity, Scene, Camera} from 'aframe-react';
-
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
+import lodash from 'lodash';
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardHeader from '@material-ui/core/CardHeader';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Divider, {Paper} from '@material-ui/core';
+import {GridList, GridListTileBar, GridListTile, IconButton, Typography} from '@material-ui/core';
 
 // Enviroment settings
 
 import FA from '../../lib/font_awesome';
-import {register} from '../../redux/actions/auth';
 import {BOOK_BIG_THUMBNAIL} from '../../consts/images';
 import {
 	ACCEPTED_IMAGE_FORMATS,
@@ -30,7 +22,11 @@ import {
 	FILE_SIZE_LABEL,
 } from '../../consts/uploads';
 import {makeAssetUrl} from '../../lib/util';
-import {updateBookThumbnail, updateBookDetails} from '../../redux/actions/books';
+import {
+	updateBookThumbnail,
+	updateBookDetails,
+	updateBookEnvironment,
+} from '../../redux/actions/books';
 import {addToast} from '../../redux/actions/application';
 import {Toast} from '../../consts/toasts';
 
@@ -48,8 +44,12 @@ const CLASS = 'top-BookEditor';
 
 class BookEditor extends Component {
 	static propTypes = {
-		register: PropTypes.func.isRequired,
 		book: PropTypes.object.isRequired,
+		environments: PropTypes.array.isRequired,
+		updateBookThumbnail: PropTypes.func,
+		updateBookDetails: PropTypes.func,
+		updateBookEnvironment: PropTypes.func,
+		settingEnv: PropTypes.bool,
 	};
 
 	constructor(props) {
@@ -59,19 +59,22 @@ class BookEditor extends Component {
 			name: props.book.name,
 			description: props.book.description || '',
 			thumbnail: props.book.thumbnail,
+			selectedSceneId: null,
 		};
-
-		this.submit = this.submit.bind(this);
-		this.canSubmit = this.canSubmit.bind(this);
 	}
 
-	canSubmit() {
-		return !!this.state.email && !!this.state.password && !!this.state.username;
+	componentDidMount() {
+		this.setCorrectSceneId();
 	}
 
-	submit() {
-		this.props.register(this.state.username, this.state.email, this.state.password);
-	}
+	setCorrectSceneId = () => {
+		const {book} = this.props;
+		const selectedSceneId = book.vrEnviromentId || 1;
+
+		this.setState({
+			selectedSceneId: selectedSceneId,
+		});
+	};
 
 	handleThumbnail = files => {
 		const {updateThumbnail, book} = this.props;
@@ -97,12 +100,26 @@ class BookEditor extends Component {
 		const payload = {
 			name: name || '',
 			description: description || '',
-			bookId: book.id
+			bookId: book.id,
 		};
 
 		if (this.canUpdateDetails()) {
 			updateBookDetails && updateBookDetails(payload);
 		}
+	};
+
+	handleEnvChange = envId => {
+		this.setState({
+			selectedSceneId: envId
+		});
+
+		const {book, updateBookEnvironment} = this.props;
+		const payload = {
+			envId: envId,
+			bookId: book.id,
+		};
+
+		updateBookEnvironment && updateBookEnvironment(payload);
 	};
 
 	handleRejected = rejected => {
@@ -201,9 +218,80 @@ class BookEditor extends Component {
 		);
 	};
 
-	// renderVrEditor = () => {
-	// 	return <VrScene book={this.props.book}/>;
-	// }
+	renderSceneGrid = () => {
+		const {classes, environments} = this.props;
+		const {selectedSceneId} = this.state;
+
+		const list = lodash.map(environments, env => {
+			const titleClassName =
+				env.id === selectedSceneId
+					? `${classes.scene_list_title} ${classes.scene_list_item_active}`
+					: `${classes.scene_list_title}`;
+
+			const envId = env.id;
+
+			return (
+				<GridListTile key={envId} classes={{root: classes.scene_list_item}}>
+					<img src={makeAssetUrl(env.thumbnail)} />
+					<GridListTileBar
+						title={env.name}
+						classes={{
+							root: classes.scene_list_tile_bar,
+							title: titleClassName,
+						}}
+						actionIcon={
+							<IconButton onClick={() => this.handleEnvChange(envId)}>
+								<FontAwesome
+									icon={FA.check_circle_o}
+									name={FA.check_circle_o}
+									className={titleClassName}
+								/>
+							</IconButton>
+						}
+					/>
+				</GridListTile>
+			);
+		});
+
+		return (
+			<GridList className={classes.scene_list_grid} cols={2.5}>
+				{list}
+			</GridList>
+		);
+	};
+
+	renderScenePicker = () => {
+		const {classes, environments, settingEnv} = this.props;
+		const {selectedSceneId} = this.state;
+		const shouldRenderSceneEditor = environments && environments.length && selectedSceneId;
+
+		if (!shouldRenderSceneEditor) {
+			return null;
+		}
+
+		const rawScene = lodash.find(environments, {id: selectedSceneId});
+		const scene = JSON.parse(rawScene.enviromentDefinition);
+
+		const loadingEnv = (
+			<React.Fragment>
+				<FontAwesome icon={FA.cog} name={FA.cog} spin className={classes.env_loader} />
+				<Typography className={classes.upload_label} type="subheading">
+					Please wait while the enviroment loads...
+				</Typography>
+			</React.Fragment>
+		);
+
+		return (
+			<Card className={classes.scene_card}>
+				<CardContent className={classes.scene_card_content}>
+					{settingEnv ? loadingEnv : <VrScene scene={scene} />}
+				</CardContent>
+				<CardActions className={classes.scene_list_root}>{this.renderSceneGrid()}</CardActions>
+			</Card>
+		);
+
+		// return <VrScene book={this.props.book}/>;
+	};
 
 	render() {
 		const {classes} = this.props;
@@ -211,20 +299,25 @@ class BookEditor extends Component {
 			<div className={classes.editor_content}>
 				{this.renderCoverEditor()}
 				{this.renderDetailsEditor()}
+				{this.renderScenePicker()}
 			</div>
 		);
 	}
 }
 
-const mapStateToProps = state => ({
-	uploading: state.books.uploading,
-});
+const mapStateToProps = (state, props) => {
+	return {
+		uploading: state.books.uploading,
+		environments: state.vrenvironments.all_environments,
+		settingEnv: state.books.setting_env,
+	};
+};
 
 const mapDispatchToProps = dispatch => ({
 	updateThumbnail: (file, bookId) => dispatch(updateBookThumbnail(file, bookId)),
-	updateBookDetails: (payload) => dispatch(updateBookDetails(payload)),
+	updateBookDetails: payload => dispatch(updateBookDetails(payload)),
+	updateBookEnvironment: payload => dispatch(updateBookEnvironment(payload)),
 	addToast: message => dispatch(addToast(message)),
-	register: (username, email, password) => dispatch(register(username, email, password)),
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(BookEditor));

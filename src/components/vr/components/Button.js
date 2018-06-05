@@ -15,7 +15,7 @@ class Button extends Component {
 
 	static defaultProps = {
 		position: {x: 0, y: 0, z: 0},
-		color: 'white',
+		color: 'black',
 		text: null,
 		disabled: false,
 	};
@@ -34,8 +34,8 @@ class Button extends Component {
 		const {position, text, width, height} = this.props;
 		return (
 			<Entity width={width} height={height} primitive= "a-plane"
-			material="shader: flat; color: white;" events={{click: this.onClick}} position={position}>
-				{text && <Entity primitive="a-text" width="3" value={text} align="center" color="black" anchor="center" baseline="center" />}
+			material="shader: flat; color: black;" events={{click: this.onClick}} position={position}>
+				{text && <Entity primitive="a-text" width="1" value={text} align="center" color="white" anchor="center" baseline="center" />}
 			</Entity>
 		);
 	}

@@ -30,8 +30,8 @@ import StretchableSpinner from '../containers/StretchableSpinner';
 import Toast from '../components/notifications/Toast';
 import LibraryRoot from './LibraryRoot';
 
+import '../styles/Global.css';
 const CLASS = 'top-App';
-
 class App extends Component {
 	constructor(props) {
 		super(props);

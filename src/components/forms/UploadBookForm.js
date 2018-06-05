@@ -24,7 +24,6 @@ import {uploadBook} from '../../redux/actions/books';
 // Components
 
 import WithDropZone from '../../hoc/WithDropZone';
-import StretchableSpinner from '../../containers/StretchableSpinner';
 
 // Component Code
 

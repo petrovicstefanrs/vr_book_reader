@@ -65,6 +65,21 @@ export const updateBookDetails = (http, payload) => {
 	return http.put('/api/books/details', null, payload);
 };
 
+export const updateBookEnvironment = (http, payload) => {
+	return http.put('/api/books/environment', null, payload);
+};
+
+//**********************************************************************************************************************
+// Environments
+
+export const getEnvironments = http => {
+	return http.get('/api/environments', null, null);
+};
+
+export const getEnvironmentById = (http, envId) => {
+	return http.get('/api/environments/'+envId, null, null);
+};
+
 //**********************************************************************************************************************
 // Users
 
