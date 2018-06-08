@@ -21,9 +21,24 @@ export const libraryEdit = bookId => '/dashboard/library/edit/' + bookId;
 export const LIBRARY_READ = '/dashboard/library/read/:bookId';
 export const libraryRead = bookId => '/dashboard/library/read/' + bookId;
 
-export const DASHBOARD_HOME = '/dashboard/home';
 export const DASHBOARD_FAVOURITES = '/dashboard/favourites';
+
+//**********************************************************************************************************************
+// PRIVATE ROUTES | HOME ROUTES
+//**********************************************************************************************************************
+
+export const DASHBOARD_HOME = '/dashboard/home';
+
+//**********************************************************************************************************************
+// PRIVATE ROUTES | SETTINGS ROUTES
+//**********************************************************************************************************************
+
 export const DASHBOARD_SETTINGS = '/dashboard/settings';
+
+//**********************************************************************************************************************
+// PRIVATE ROUTES | TODO: ROUTES
+//**********************************************************************************************************************
+
 export const DASHBOARD_STORE = '/dashboard/store';
 export const DASHBOARD_EDITOR = '/dashboard/editor';
 

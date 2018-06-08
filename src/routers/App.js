@@ -29,6 +29,7 @@ import AuthRoute from '../hoc/AuthRoute';
 import StretchableSpinner from '../containers/StretchableSpinner';
 import Toast from '../components/notifications/Toast';
 import LibraryRoot from './LibraryRoot';
+import ProfileSettings from '../containers/pages/ProfileSettings';
 
 import '../styles/Global.css';
 const CLASS = 'top-App';
@@ -81,6 +82,14 @@ class App extends Component {
 					component={Favourites}
 					isPrivate={true}
 				/>
+				<AuthRoute
+					exact
+					name="DashboardSettings"
+					path={routes.DASHBOARD_SETTINGS}
+					component={ProfileSettings}
+					isPrivate={true}
+				/>
+
 				<AuthRoute name="Not found" path="*" component={NotFound} isPrivate={true} />
 			</Switch>
 		) : (

@@ -15,6 +15,7 @@ import * as routes from '../lib/routes';
 import MoveableBackground from '../components/layout/MoveableBackground';
 import MoveableLogo from '../components/graphics/MoveableLogo';
 import FullPageOverlay from '../components/graphics/FullPageOverlay';
+import PresentationObject from '../components/vr/PresentationObject';
 
 // Component Code
 
@@ -41,6 +42,7 @@ class Home extends Component {
 					<FullPageOverlay />
 					<MoveableLogo />
 					<MoveableBackground />
+					<PresentationObject src={'../assets/AFrame/book/scene.gltf'} />
 				</div>
 			</div>
 		);

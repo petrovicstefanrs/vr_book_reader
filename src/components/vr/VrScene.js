@@ -10,11 +10,8 @@ import './a_components/disable-inspector';
 import {Entity, Scene, Camera} from 'aframe-react';
 
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import FontAwesome from 'react-fontawesome';
 import lodash from 'lodash';
 
 // Enviroment settings

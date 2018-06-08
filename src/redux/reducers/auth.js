@@ -9,6 +9,7 @@ const INITIAL_STATE = {
 		message: null,
 		loged_in: false,
 		redirect: null,
+		updating: false,
 	},
 };
 
