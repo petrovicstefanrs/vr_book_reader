@@ -33,3 +33,7 @@
 	align-items: center;
 	flex-direction: column;
 }
+
+.top-Home .interactive-Home .presentation-text span:first-of-type {
+	font-size: 20px;
+}
