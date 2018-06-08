@@ -1,7 +1,7 @@
 .top-Home .background-Home {
 	z-index: -1;
 	width: 100vw;
-    height: 100vh;
+    	height: 100vh;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -10,7 +10,7 @@
 .top-Home .interactive-Home {
 	z-index: 0;
 	width: 100vw;
-    height: 100vh;
+    	height: 100vh;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -32,4 +32,8 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+}
+
+.top-Home .interactive-Home .presentation-text span:first-of-type {
+	font-size: 20px;
 }
