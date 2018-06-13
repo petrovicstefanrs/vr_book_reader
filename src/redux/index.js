@@ -1,3 +1,5 @@
+import {routerReducer} from 'react-router-redux';
+
 // REDUCERS
 
 import application from './reducers/application';
@@ -5,7 +7,8 @@ import auth from './reducers/auth';
 import menu from './reducers/menu';
 import books from './reducers/books';
 import vrenvironments from './reducers/vrenvironments';
-import {routerReducer} from 'react-router-redux';
+import profile from './reducers/profile';
+import themes from './reducers/themes';
 /**
  * Create Reducer Handlers
  * This is going to create a root reducer to apply to createStore function
@@ -14,7 +17,7 @@ import {routerReducer} from 'react-router-redux';
 const INITIAL_STATE = {};
 const HANDLERS = {};
 
-[routerReducer, application, auth, menu, books, vrenvironments].forEach(handlers => {
+[routerReducer, application, auth, menu, books, vrenvironments, profile, themes].forEach(handlers => {
 	if (handlers.INITIAL_STATE) {
 		Object.assign(INITIAL_STATE, handlers.INITIAL_STATE);
 		delete handlers.INITIAL_STATE;

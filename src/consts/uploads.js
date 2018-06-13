@@ -4,6 +4,7 @@ export const ACCEPTED_FILE_FORMATS = {
 	cbt: '.cbt',
 	cba: '.cba',
 	cb7: '.cb7',
+	pdf: '.pdf',
 };
 
 export const ACCEPTED_IMAGE_FORMATS = {

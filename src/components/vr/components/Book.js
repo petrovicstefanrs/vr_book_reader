@@ -29,7 +29,7 @@ class Book extends Component {
 	static defaultProps = {
 		pages: [],
 		position: {x: 0, y: 0, z: 0},
-		mode: BOOK_MODES.single,
+		mode: BOOK_MODES.double,
 		pageHeight: 0.8,
 		pageWidth: 0.65,
 		buttonHeight: 0.1,
@@ -146,7 +146,7 @@ class Book extends Component {
 	};
 
 	renderControls = () => {
-		const {pages, pageWidth, pageHeight, buttonHeight, buttonWidth, mode, borderSize} = this.props;
+		const {pages, pageWidth, pageHeight, buttonHeight, buttonWidth, borderSize} = this.props;
 		const {currentPage} = this.state;
 
 		const numOfPages = pages.length - 1;

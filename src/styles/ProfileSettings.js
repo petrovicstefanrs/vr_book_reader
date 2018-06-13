@@ -27,7 +27,8 @@ const styles = theme => ({
 			justifyContent: 'center',
 		},
 		flexWrap: 'wrap',
-		paddingTop: 24,
+		paddingTop: 8,
+		marginLeft: -16,
 	},
 });
 

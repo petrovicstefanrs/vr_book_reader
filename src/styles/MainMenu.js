@@ -4,6 +4,10 @@ const styles = theme => ({
 	drawerInner: {
 		width: drawerWidth,
 	},
+	toolbar: {
+		height: '56px !improtant',
+		minHeight: '56px',
+	},
 	drawerHeader: {
 		display: 'flex',
 		alignItems: 'center',
@@ -19,8 +23,8 @@ const styles = theme => ({
 	},
 	appBar: {
 		height: 56,
+		zIndex: 9999999,
 		position: 'absolute',
-		zIndex: theme.zIndex.drawer + 1,
 		transition: theme.transitions.create(['width', 'margin'], {
 			easing: theme.transitions.easing.sharp,
 			duration: theme.transitions.duration.leavingScreen,
@@ -47,11 +51,13 @@ const styles = theme => ({
 		alignItems: 'center',
 		width: 56,
 		margin: 0,
+		color: theme.palette.text.secondary,
 	},
 	menuItemText: {
-		paddingLeft: 0
+		paddingLeft: 0,
 	},
 	drawerPaper: {
+		zIndex: 999999,
 		position: 'relative',
 		overflowX: 'hidden',
 		minHeight: '100%',
@@ -75,7 +81,27 @@ const styles = theme => ({
 		width: drawerWidth,
 	},
 	activeItem: {
-		backgroundColor: theme.palette.action.selected
+		backgroundColor: theme.palette.action.selected,
+	},
+	avatarBlock: {
+		color: theme.palette.primary.contrastText,
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		margin: '0px 0px 0px auto',
+		padding: '0 16px',
+		height: '56px',
+		'&:hover': {
+			backgroundColor: 'rgba(0, 0, 0, 0.05)',
+			cursor: 'pointer',
+			color: theme.palette.primary.contrastText,
+		},
+	},
+	avatarText: {
+		marginRight: 8,
+		textAlign: 'right',
+		fontSize: 12,
+		maxWidth: 80,
 	},
 });
 

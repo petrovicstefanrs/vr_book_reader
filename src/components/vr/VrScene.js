@@ -54,10 +54,6 @@ class VrScene extends Component {
 		book: null,
 	};
 
-	constructor(props) {
-		super(props);
-	}
-
 	prepareBookPages = () => {
 		const {book} = this.props;
 		const {pages} = book;

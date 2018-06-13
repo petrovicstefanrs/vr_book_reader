@@ -12,9 +12,11 @@ import Button from '@material-ui/core/Button';
 
 import FA from '../../lib/font_awesome';
 import {dismissToast} from '../../redux/actions/application';
+import { withStyles } from '@material-ui/core';
 
 // Component Code
 
+import styles from '../../styles/Toast';
 class Toast extends Component {
 	static propTypes = {
 		toast: PropTypes.object,
@@ -25,7 +27,7 @@ class Toast extends Component {
 	}
 
 	renderToast() {
-		const {toast} = this.props;
+		const {toast, classes} = this.props;
 		const snackbarAction = (
 			<Button color="inherit" onClick={() => this.handleToastDismiss(toast.id)}>
 				<FontAwesome icon={FA.times} name={FA.times} />
@@ -33,6 +35,7 @@ class Toast extends Component {
 		);
 		return (
 			<Snackbar
+				className={classes.snackbar_root}
 				anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
 				open={true}
 				action={snackbarAction}
@@ -61,4 +64,4 @@ const mapDispatchToProps = dispatch => ({
 	},
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Toast);
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Toast));

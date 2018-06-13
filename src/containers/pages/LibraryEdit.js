@@ -39,10 +39,6 @@ class LibraryEdit extends Component {
 
 	static defaultProps = {};
 
-	constructor(props) {
-		super(props);
-	}
-
 	componentWillMount() {
 		const {getBook, book, bookId, getEnvironments} = this.props;
 		if (!book && bookId) {

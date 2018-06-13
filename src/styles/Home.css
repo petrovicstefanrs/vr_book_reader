@@ -25,7 +25,7 @@
 	text-align: center;
 	text-transform: uppercase;
 	font-weight: 700;
-	font-size: 12px;
+	font-size: 11px;
 	transform: translateX(-50%);
 	bottom: 96px;
 	display: flex;
@@ -35,5 +35,5 @@
 }
 
 .top-Home .interactive-Home .presentation-text span:first-of-type {
-	font-size: 20px;
+	font-size: 16px;
 }

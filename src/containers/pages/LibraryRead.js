@@ -41,10 +41,6 @@ class LibraryRead extends Component {
 
 	static defaultProps = {};
 
-	constructor(props) {
-		super(props);
-	}
-
 	componentDidMount() {
 		const {getBook, getEnvironments, book, bookId} = this.props;
 		if (!book && bookId) {

@@ -9,7 +9,14 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
-import {GridList, GridListTileBar, GridListTile, IconButton, Typography} from '@material-ui/core';
+import {
+	GridList,
+	GridListTileBar,
+	GridListTile,
+	IconButton,
+	Typography,
+	Divider,
+} from '@material-ui/core';
 
 // Enviroment settings
 
@@ -110,7 +117,7 @@ class BookEditor extends Component {
 
 	handleEnvChange = envId => {
 		this.setState({
-			selectedSceneId: envId
+			selectedSceneId: envId,
 		});
 
 		const {book, updateBookEnvironment} = this.props;
@@ -182,6 +189,8 @@ class BookEditor extends Component {
 		return (
 			<Card className={classes.details_card}>
 				<CardContent className={classes.details_card_content}>
+					<Typography type="subheading">BOOK DETAILS</Typography>
+					<Divider style={{margin: '0 0 16px 0'}} />
 					<InputField
 						id="bookName"
 						type="text"
@@ -232,7 +241,7 @@ class BookEditor extends Component {
 
 			return (
 				<GridListTile key={envId} classes={{root: classes.scene_list_item}}>
-					<img src={makeAssetUrl(env.thumbnail)} />
+					<img src={makeAssetUrl(env.thumbnail)} alt="Book Thumbnail" />
 					<GridListTileBar
 						title={env.name}
 						classes={{
@@ -284,19 +293,19 @@ class BookEditor extends Component {
 		return (
 			<Card className={classes.scene_card}>
 				<CardContent className={classes.scene_card_content}>
+					<Typography style={{'alignSelf': 'flex-start'}} type="subheading">SELECT ENVIROMENT</Typography>
+					<Divider style={{margin: '0 0 16px 0', width: '100%'}} />
 					{settingEnv ? loadingEnv : <VrScene scene={scene} />}
 				</CardContent>
 				<CardActions className={classes.scene_list_root}>{this.renderSceneGrid()}</CardActions>
 			</Card>
 		);
-
-		// return <VrScene book={this.props.book}/>;
 	};
 
 	render() {
 		const {classes} = this.props;
 		return (
-			<div className={classes.editor_content}>
+			<div className={`${CLASS} ${classes.editor_content}`}>
 				{this.renderCoverEditor()}
 				{this.renderDetailsEditor()}
 				{this.renderScenePicker()}

@@ -1,10 +1,12 @@
-import lodash from "lodash";
+import lodash from 'lodash';
 
 import ENV from '../../env';
 import * as TYPES from '../types';
 import {withType} from '../../lib/util';
 import {loginWithToken} from './auth';
 import {Toast} from '../../consts/toasts';
+import {getThemes} from './themes';
+import { getUser } from './profile';
 
 export const initialize = () => (dispatch, getState, container) => {
 	dispatch(withType(TYPES.INITIALIZE_START));
@@ -14,7 +16,9 @@ export const initialize = () => (dispatch, getState, container) => {
 		return Promise.resolve();
 	}
 
-	return dispatch(loginWithToken(token));
+	dispatch(loginWithToken(token));
+	dispatch(getUser(token));
+	dispatch(getThemes(token));
 };
 
 export const dismissToast = id => {

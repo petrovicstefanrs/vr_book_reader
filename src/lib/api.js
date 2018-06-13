@@ -81,30 +81,38 @@ export const getEnvironmentById = (http, envId) => {
 };
 
 //**********************************************************************************************************************
-// Users
+// Profile
 
-/**
- * @param http
- * @param {OrderCriteria} criteria
- * @param {PaginationInfo} fromPage
- */
-// export const getUsers = (http, criteria, fromPage = null) => {
-// 	const query = criteria.toQuery(fromPage);
-// 	return http.get('/users', query);
-// };
+export const getUser = (http) => {
+	return http.get('/api/users/me', null, null);
+};
 
-// export const getUser = (http, userId) => {
-// 	return http.get('/users/' + userId);
-// };
+export const updateUserAvatar = (http, file, userId) => {
+	const data = new FormData();
+	data.append(file.name, file);
+	data.append('userId', userId);
+	return http.post('/api/users/upload/avatar', null, data);
+};
 
-// export const createUser = (http, payload) => {
-// 	return http.post('/users', null, payload);
-// };
+export const updateProfileDetails = (http, payload) => {
+	return http.put('/api/users/me/details', null, payload);
+};
 
-// export const updateUser = (http, userId, payload) => {
-// 	return http.put('/users/' + userId, null, payload);
-// };
+export const updateProfilePassword = (http, password) => {
+	return http.post('/api/users/me/changepass', null, {password});
+};
 
-// export const deleteUser = (http, userId) => {
-// 	return http.del('/users/' + userId);
-// };
+export const updateProfileDeactivate = (http) => {
+	return http.put('/api/users/me/deactivate', null, null);
+};
+
+export const updateProfileTheme = (http, themeId) => {
+	return http.put('/api/users/me/uitheme', null, {themeId});
+};
+
+//**********************************************************************************************************************
+// Themes
+
+export const getThemes = (http) => {
+	return http.get('/api/themes', null, null);
+};

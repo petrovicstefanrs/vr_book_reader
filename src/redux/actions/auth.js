@@ -2,8 +2,10 @@ import ENV from '../../env';
 import * as api from '../../lib/api';
 import * as TYPES from '../types';
 import {withType} from '../../lib/util';
-import { addToast } from './application';
-import { Toast } from '../../consts/toasts';
+import {addToast} from './application';
+import {Toast} from '../../consts/toasts';
+import {getUser} from './profile';
+import { getThemes } from './themes';
 
 export const loginWithToken = token => (dispatch, getState, container) => {
 	dispatch(withType(TYPES.LOGIN_TOKEN_START, {error: null, data: {token: token}}));
@@ -26,6 +28,7 @@ export const loginWithToken = token => (dispatch, getState, container) => {
 				dispatch(clearAuthRedirect());
 				container.history.push(authRedirect);
 			}
+			dispatch(getUser());
 		})
 		.catch(error => {
 			const message = error.message || null;
@@ -49,6 +52,8 @@ export const login = (email, password) => (dispatch, getState, container) => {
 				})
 			);
 			container.cookie.set(ENV.api.session_cookie, data.token);
+			dispatch(getUser());
+			dispatch(getThemes());
 		})
 		.catch(error => {
 			const message = error.message || null;

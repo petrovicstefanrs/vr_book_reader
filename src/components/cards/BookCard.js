@@ -82,24 +82,26 @@ class BookCard extends Component {
 					</Tooltip>
 				</div>
 				<Link to={routes.libraryRead(book.id)}>
-					<Card className={classes.book_card}>
-						<CardContent className={classes.withmedia}>
-							<ImageWithFallback
-								image={makeAssetUrl(book.thumbnail)}
-								width={BOOK_THUMBNAIL.width}
-								height={BOOK_THUMBNAIL.height}
-							/>
-						</CardContent>
-						<CardContent className={classes.content}>
-							<Typography className={classes.card_title} variant="title" component="h6">
-								{book.name}
-							</Typography>
-							<Divider />
-							<Typography className={classes.description} variant="body1" component="div">
-								<LinesEllipsis text={description} maxLine="3" ellipsis=" ..." trimRight />
-							</Typography>
-						</CardContent>
-					</Card>
+					<Tooltip id="tooltip-bookName" title={book.name} placement="bottom">
+						<Card className={classes.book_card}>
+							<CardContent className={classes.withmedia}>
+								<ImageWithFallback
+									image={makeAssetUrl(book.thumbnail)}
+									width={BOOK_THUMBNAIL.width}
+									height={BOOK_THUMBNAIL.height}
+								/>
+							</CardContent>
+							<CardContent className={classes.content}>
+								<Typography className={classes.card_title} variant="title" component="h6">
+									{book.name}
+								</Typography>
+								<Divider />
+								<Typography className={classes.description} variant="body1" component="div">
+									<LinesEllipsis text={description} maxLine="3" ellipsis=" ..." trimRight />
+								</Typography>
+							</CardContent>
+						</Card>
+					</Tooltip>
 				</Link>
 			</div>
 		);
@@ -125,4 +127,9 @@ const mapDispatchToProps = dispatch => ({
 	deleteBook: id => dispatch(deleteBook(id)),
 });
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(BookCard));
+export default withStyles(styles)(
+	connect(
+		mapStateToProps,
+		mapDispatchToProps
+	)(BookCard)
+);

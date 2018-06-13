@@ -4,25 +4,27 @@ const styles = theme => ({
 	editor_content: {
 		display: 'flex',
 		width: '100%',
-		[theme.breakpoints.down(1016)]: {
-			flexWrap: 'wrap',
-		},
+		flexWrap: 'wrap',
 		[theme.breakpoints.down(700)]: {
 			flexDirection: 'column',
 			alignItems: 'center',
 		},
 	},
-	cover_card: {
+	avatar_card: {
 		width: BOOK_BIG_THUMBNAIL.width + 32,
 		minWidth: BOOK_BIG_THUMBNAIL.width + 32,
-		[theme.breakpoints.down(1016)]: {
-			flexGrow: 1,
-		},
+		maxWidth: 272,
+		marginLeft: 16,
+		marginTop: 16,
 		[theme.breakpoints.down(700)]: {
+			flexGrow: 1,
+			maxWidth: 'unset',
 			width: '100%',
 		},
 	},
-	cover_card_content: {
+	avatar_card_content: {
+		color: 'white',
+		fontSize: '64px',
 		padding: '16px 16px 0 16px',
 		justifyContent: 'center',
 		display: 'flex',
@@ -36,15 +38,14 @@ const styles = theme => ({
 		marginBottom: 8,
 	},
 	details_card: {
-		minWidth: 288,
-		width: 320,
+		width: BOOK_BIG_THUMBNAIL.width + 32,
+		minWidth: BOOK_BIG_THUMBNAIL.width + 32,
 		marginLeft: 16,
-		[theme.breakpoints.down(1016)]: {
-			flexGrow: 1,
-		},
+		marginTop: 16,
+		maxWidth: 272,
 		[theme.breakpoints.down(700)]: {
-			marginLeft: 0,
-			marginTop: 24,
+			flexGrow: 1,
+			maxWidth: 'unset',
 			width: '100%',
 		},
 	},
@@ -59,56 +60,78 @@ const styles = theme => ({
 		display: 'flex',
 		flexDirection: 'column',
 	},
+	details_card_content_item: {
+		marginTop: 16,
+	},
 	details_description: {
 		marginTop: 24,
 	},
-	scene_card: {
-		minWidth: 288,
+	theme_card: {
 		marginLeft: 16,
+		marginTop: 16,
 		flexGrow: 1,
-		[theme.breakpoints.down(1016)]: {
-			marginLeft: 0,
-			marginTop: 24,
+		maxWidth: 272,
+		[theme.breakpoints.down(700)]: {
+			flexGrow: 1,
+			maxWidth: 'unset',
 			width: '100%',
 		},
 	},
-	scene_card_content: {
+	theme_card_content: {
 		padding: '16px 16px 0 16px',
-		height: 256,
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
 		flexDirection: 'column',
+		maxHeight: '377px',
 	},
-	scene_list_root: {
-		display: 'flex',
-		flexWrap: 'wrap',
-		justifyContent: 'space-around',
-		overflow: 'hidden',
-		backgroundColor: theme.palette.background.paper,
-		padding: 16,
-	},
-	scene_list_grid: {
-		flexWrap: 'nowrap',
+	theme_list_grid: {
 		transform: 'translateZ(0)',
 		width: '100%',
+		height: '100%',
 	},
-	scene_list_title: {
+	theme_list_title: {
 		color: theme.palette.primary.contrastText,
 	},
-	scene_list_tile_bar: {
+	theme_list_tile_bar: {
 		background:
 			'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
 	},
-	scene_list_item: {
+	theme_list_item: {
 		height: '128px !important',
 	},
-	scene_list_item_active: {
+	theme_list_item_active: {
 		color: theme.palette.secondary.main,
 	},
 	env_loader: {
 		fontSize: '4em',
 		marginBottom: theme.spacing.unit * 2,
+	},
+	vertical_card_actions: {
+		display: 'flex',
+		flexDirection: 'column',
+	},
+	security_card_content: {
+		padding: '16px 16px 0 16px',
+		height: 'calc(100% - 136px)',
+		minHeight: 256,
+		display: 'flex',
+		flexDirection: 'column',
+	},
+	full_width: {
+		width: '100%',
+	},
+	security_card: {
+		width: BOOK_BIG_THUMBNAIL.width + 32,
+		minWidth: BOOK_BIG_THUMBNAIL.width + 32,
+		marginLeft: 16,
+		marginTop: 16,
+		maxWidth: 272,
+		[theme.breakpoints.down(700)]: {
+			flexGrow: 1,
+			maxWidth: 'unset',
+			width: '100%',
+		},
 	},
 });
 

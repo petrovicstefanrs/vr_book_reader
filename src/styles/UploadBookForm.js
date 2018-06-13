@@ -31,6 +31,7 @@ const styles = theme => ({
 	upload_icon: {
 		fontSize: '4em',
 		marginBottom: theme.spacing.unit * 2,
+		color: theme.palette.secondary.main,
 	},
 	upload_label: {
 		textAlign: 'center',

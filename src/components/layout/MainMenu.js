@@ -19,6 +19,8 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import UserAvatar from 'react-user-avatar';
+
 // Enviroment Settings
 
 import FA from '../../lib/font_awesome';
@@ -26,6 +28,7 @@ import * as routes from '../../lib/routes';
 import {logout} from '../../redux/actions/auth';
 import {setMenuActive} from '../../redux/actions/menu';
 import * as pages from '../../consts/pages';
+import {makeAssetUrl} from '../../lib/util';
 
 // Components
 
@@ -117,7 +120,7 @@ class MainMenu extends Component {
 		const classes = this.props.classes;
 		return lodash.map(MENU_ITEMS, item => {
 			const active = this.props.selected === item.title ? 'active' : null;
-			const title = item.coming_soon ? item.title+' (Coming Soon)' : item.title;
+			const title = item.coming_soon ? item.title + ' (Coming Soon)' : item.title;
 			return (
 				<Link to={item.route} key={item.title}>
 					<ListItem
@@ -136,6 +139,24 @@ class MainMenu extends Component {
 		});
 	}
 
+	renderUserAvatar = () => {
+		const {user, classes} = this.props;
+		if (!user) {
+			return null;
+		}
+
+		const {firstname, lastname, username, avatar} = user;
+		const avatarUrl = avatar ? makeAssetUrl(avatar) : null;
+		const displayName = firstname || lastname ? `${firstname} ${lastname}` : username;
+
+		return (
+			<Link to={routes.DASHBOARD_SETTINGS} className={classes.avatarBlock}>
+				<span className={classes.avatarText}>{displayName}</span>
+				<UserAvatar size="40" name={displayName} src={avatarUrl} />
+			</Link>
+		);
+	};
+
 	render() {
 		const classes = this.props.classes;
 		return (
@@ -144,13 +165,15 @@ class MainMenu extends Component {
 					elevation={3}
 					className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
 				>
-					<Toolbar disableGutters={!this.state.open}>
+					<Toolbar classes={{root: classes.toolbar}} disableGutters={true}>
 						<IconButton
 							className={classNames(classes.menuButton, this.state.open && classes.hide)}
 							onClick={this.handleDrawerOpen}
 						>
 							<FontAwesome icon={FA.bars} name={FA.bars} />
 						</IconButton>
+
+						{this.renderUserAvatar()}
 					</Toolbar>
 				</AppBar>
 				<Drawer
@@ -187,6 +210,7 @@ class MainMenu extends Component {
 
 const mapStateToProps = state => ({
 	selected: state.menu.selected,
+	user: state.profile.user,
 });
 
 const mapDispatchToProps = dispatch => ({
