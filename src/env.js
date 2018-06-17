@@ -1,8 +1,8 @@
 const ENV = {
 	api: {
 		// base_url: 'http://localhost:8090/',
-		base_url: process.env.NODE_ENV === 'production'
-			? 'https://vrbookreaderapi.herokuapp.com/'
+		base_url: process.env.API_URL
+			? process.env.API_URL
 			: 'http://api.stefan-mac.office.c-code.com/',
 		session_cookie: 'session',
 		auth_header: 'Bearer',
