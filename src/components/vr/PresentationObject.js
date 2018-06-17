@@ -11,7 +11,7 @@ import { makeAssetUrl } from '../../lib/util';
 
 class PresentationObject extends Component {
 	render() {
-        const model = makeAssetUrl('models/Planet/scene.gltf');
+        const model = makeAssetUrl('models/Planet/scene-e8cb9c015c.gltf');
 
 		return (
 			<Scene disable-inspector vr-mode-ui="false">
