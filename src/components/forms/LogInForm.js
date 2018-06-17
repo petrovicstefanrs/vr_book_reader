@@ -60,12 +60,18 @@ class LogInForm extends Component {
 		this.props.clearAuthMessage();
 	}
 
+	onEnterPress = (e) => {
+		if(e.keyCode === 13 && this.canSubmit()) {
+			this.submit();
+		}
+	}
+
 	render() {
 		const classes = this.props.classes;
 		const disabled = !this.canSubmit();
 
 		return (
-			<div className={CLASS}>
+			<div className={CLASS} onKeyDown={this.onEnterPress}>
 				<Card className={classes.card}>
 					<CardHeader
 						className={classes.cardHeader}
