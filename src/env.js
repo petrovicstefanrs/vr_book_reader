@@ -18,7 +18,7 @@ const ENV = {
 		},
 	},
 
-	isDevEnv: process.env.NODE_ENV === 'development'
+	isDevEnv: false
 };
 
 export default ENV;
