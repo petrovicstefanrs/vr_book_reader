@@ -57,16 +57,19 @@ class LibraryRead extends Component {
 		}
 
 		const rawScene = envId ? lodash.find(environments, {id: envId}) : environments[0];
-		const scene = JSON.parse(rawScene.enviromentDefinition);
+		// Postress returns a valid object insted of json string
+		const scene = lodash.isObject(rawScene.enviromentDefinition)
+			? rawScene.enviromentDefinition
+			: JSON.parse(rawScene.enviromentDefinition);
 
 		return (
 			<Paper className={classes.player}>
-				<VrScene book={book} scene={scene}/>
+				<VrScene book={book} scene={scene} />
 			</Paper>
 		);
 	}
 
-	renderError = (type) => {
+	renderError = type => {
 		const classes = this.props.classes;
 		const libraryLink = (
 			<Link to={routes.DASHBOARD_LIBRARY}>
@@ -76,7 +79,10 @@ class LibraryRead extends Component {
 			</Link>
 		);
 
-		const message = type === 'book' ? 'We are very sorry, there is nothing here.' : 'We are very sorry, something went wrong with initializing vr enviroment';
+		const message =
+			type === 'book'
+				? 'We are very sorry, there is nothing here.'
+				: 'We are very sorry, something went wrong with initializing vr enviroment';
 		return (
 			<div className={classes.emptyPage}>
 				<Typography className={classes.headline} type="headline">
@@ -135,4 +141,9 @@ const mapDispatchToProps = dispatch => ({
 	getEnvironments: () => dispatch(getEnvironments()),
 });
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(LibraryRead));
+export default withStyles(styles)(
+	connect(
+		mapStateToProps,
+		mapDispatchToProps
+	)(LibraryRead)
+);

@@ -279,7 +279,11 @@ class BookEditor extends Component {
 		}
 
 		const rawScene = lodash.find(environments, {id: selectedSceneId});
-		const scene = JSON.parse(rawScene.enviromentDefinition);
+
+		// Postres returns a valid object insted of json string
+		const scene = lodash.isObject(rawScene.enviromentDefinition)
+			? rawScene.enviromentDefinition
+			: JSON.parse(rawScene.enviromentDefinition);
 
 		const loadingEnv = (
 			<React.Fragment>
@@ -293,7 +297,9 @@ class BookEditor extends Component {
 		return (
 			<Card className={classes.scene_card}>
 				<CardContent className={classes.scene_card_content}>
-					<Typography style={{'alignSelf': 'flex-start'}} type="subheading">SELECT ENVIROMENT</Typography>
+					<Typography style={{alignSelf: 'flex-start'}} type="subheading">
+						SELECT ENVIROMENT
+					</Typography>
 					<Divider style={{margin: '0 0 16px 0', width: '100%'}} />
 					{settingEnv ? loadingEnv : <VrScene scene={scene} />}
 				</CardContent>
@@ -329,4 +335,9 @@ const mapDispatchToProps = dispatch => ({
 	addToast: message => dispatch(addToast(message)),
 });
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(BookEditor));
+export default withStyles(styles)(
+	connect(
+		mapStateToProps,
+		mapDispatchToProps
+	)(BookEditor)
+);
