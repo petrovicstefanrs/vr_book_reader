@@ -79,4 +79,31 @@ a:hover {
 	color: white;
 }
 
+.authButton {
+	position: absolute !important;
+	width: 256px;
+	bottom: 32px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.authButton:focus {
+	outline: 0;
+}
+
+.authButton a {
+	color: white;
+}
+
+@media only screen and (max-width: 1024px) {
+	.authButton {
+		position: relative !important;
+		width: 256px;
+		margin-top: 50px !important;
+		bottom: unset !important;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+
 

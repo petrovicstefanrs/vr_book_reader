@@ -12,6 +12,17 @@
 	width: 100%;
 }
 
+.top-MoveableLogo .versionTag {
+    color: white;
+    padding: 5px;
+    font-size: 14px;
+    position: absolute;
+    font-weight: 900;
+    border-radius: 5px;
+    right: 0;
+    bottom: -25px;
+}
+
 .top-MoveableLogo .floating {
 	animation-name: floating;
     animation-duration: 6s;

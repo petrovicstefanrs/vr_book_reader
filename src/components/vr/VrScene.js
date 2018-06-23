@@ -57,7 +57,11 @@ class VrScene extends Component {
 	prepareBookPages = () => {
 		const {book} = this.props;
 		const {pages} = book;
-		const preparedPages = lodash.map(pages, page => {
+
+		// Sort pages by pageIndex before processing pages
+		const sortedPages = lodash.sortBy(pages, 'pageIndex');
+
+		const preparedPages = lodash.map(sortedPages, page => {
 			const pageUrl = makeAssetUrl(page.path);
 			return pageUrl;
 		});
