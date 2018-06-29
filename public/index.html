@@ -1,20 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>VR Library</title>
-  </head>
-  <body>
-    <noscript>
-      This website depends on Javascript and WebVR to run.
-      Enable Javascript and make sure you are using WebVR compatible browser!
-    </noscript>
-    <div id="root"></div>
-  </body>
+	<link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+	<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+
+	<title>VR Book Reader</title>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121643390-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'UA-121643390-1');
+	</script>
+
+	<!-- FB meta tags -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://vrbookreader.io" />
+	<meta property="og:title" content="VR Book Reader - Enjoy reading digital books in beautifull VR Environments" />
+	<meta property="og:description" content="Enjoy reading digital books in beautifull VR Environments."
+	/>
+	<meta property="og:image" content="socialpreview.jpeg" />
+	<meta property="og:image:width" content="1486" />
+	<meta property="og:image:height" content="1130" />
+
+	<!-- Twiter meta tags -->
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:site" content="@stefanpetr_dpi" />
+	<meta name="twitter:title" content="VR Book Reader - Enjoy reading digital books in beautifull VR Environments" />
+	<meta name="twitter:description" content="Enjoy reading digital books in beautifull VR Environments"
+	/>
+	<meta name="twitter:image" content="socialpreview.jpeg" />
+</head>
+
+<body>
+	<noscript>
+		This website depends on Javascript and WebVR to run. Enable Javascript and make sure you are using WebVR compatible browser!
+	</noscript>
+	<div id="root"></div>
+</body>
+
 </html>
