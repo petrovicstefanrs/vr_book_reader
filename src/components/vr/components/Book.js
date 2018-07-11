@@ -98,7 +98,7 @@ class Book extends Component {
 			content = (
 				<Entity
 					primitive="a-plane"
-					material="shader: flat; color: black;"
+
 					width={pageWidth + borderSize}
 					height={pageHeight + borderSize}
 				>
@@ -112,7 +112,7 @@ class Book extends Component {
 				<Entity>
 					<Entity
 						primitive="a-plane"
-						material="shader: flat; color: black;"
+
 						width={pageWidth * 2 + borderSize}
 						height={pageHeight + borderSize}
 						rotation={{x: 0, y: 30, z: 0}}
@@ -126,7 +126,7 @@ class Book extends Component {
 					</Entity>
 					<Entity
 						primitive="a-plane"
-						material="shader: flat; color: black;"
+
 						width={pageWidth * 2 + borderSize}
 						height={pageHeight + borderSize}
 						rotation={{x: 0, y: -30, z: 0}}
@@ -173,7 +173,7 @@ class Book extends Component {
 			<Entity
 				look-at="[camera]"
 				primitive="a-plane"
-				material="shader: flat; color: black;"
+
 				height={controlsHeight}
 				width={controlsWidth}
 				position={controlsPosition}

@@ -22,8 +22,7 @@ class Page extends Component {
 	render() {
 		const {src, width, height, position, rotation} = this.props;
 		return src ? (
-			<Entity
-				primitive="a-image"
+			<a-image
 				geometry={{
 					width: width,
 					height: height,
@@ -33,7 +32,7 @@ class Page extends Component {
 				rotation={rotation}
 			/>
 		) : (
-			<Entity
+			<a-entity
 				primitive="a-plane"
 				geometry={{
 					width: width,
