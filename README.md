@@ -1,16 +1,22 @@
-<img src="-src/assets/Home/logo.png" width=400/>
+<p align="center"><img src="/src/assets/Home/logo.png" width=400 style="text-align: center"/> </p>
 
 ------
 
-<center>Made with: <img src="https://aframe.io/images/blog/registry.svg" height=20 /> <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" height=22 /> <img src="https://seeklogo.com/images/N/nodejs-logo-FBE122E377-seeklogo.com.png" height=20/></center>
+<span align="center">
+  Made with: 
+  <img src="https://aframe.io/images/blog/registry.svg" height=20 /> 
+  <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" height=22 /> 
+  <img src="https://seeklogo.com/images/N/nodejs-logo-FBE122E377-seeklogo.com.png" height=20/>
+</span>
 
 ------
 
 # VR Book Reader
 
-<sup> **alpha v0.1.0**</sup>
+<sup>**alpha v0.1.0**</sup>
 
 You can checkout the ***live version*** of this project [here](http://www.vrbookreader.io).
+
 <sub>***Note:*** The app is hosted on **heroku**, if it can't load the first time, the dyno is probably down and you will have to reload the page.</sub>
 
 ------
