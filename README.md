@@ -2,12 +2,12 @@
 
 ------
 
-<span align="center">
+<p align="center">
   Made with: 
   <img src="https://aframe.io/images/blog/registry.svg" height=20 /> 
   <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" height=22 /> 
   <img src="https://seeklogo.com/images/N/nodejs-logo-FBE122E377-seeklogo.com.png" height=20/>
-</span>
+</p>
 
 ------
 
