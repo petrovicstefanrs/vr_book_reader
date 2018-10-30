@@ -11,6 +11,10 @@
 
 ------
 
+<p align="center">Check the video:</br><a href="https://www.youtube.com/watch?v=rE4x1XCQsVo" target="_blank"><img src="https://img.youtube.com/vi/rE4x1XCQsVo/0.jpg"/></a></p>
+
+------
+
 # VR Book Reader
 
 <sup>**alpha v0.1.0**</sup>
